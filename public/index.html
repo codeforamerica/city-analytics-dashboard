@@ -1,0 +1,59 @@
+<!doctype html>
+
+<title>Data Screen</title>
+<link rel="stylesheet" href="./stylesheets/base.css">
+<link href="https://assets.digital.cabinet-office.gov.uk/static/fonts-0fb6b917e34e45c93a44eec72dcc21de.css" media="all" rel="stylesheet" type="text/css">
+
+<div class="box small-box traffic"><div class="box-inner">
+  <div id="traffic">
+    <h1 id="traffic-count"></h1>
+    <p>People currently on GOV.UK</p>
+  </div>
+</div></div>
+
+<div class="box searches"><div class="box-inner">
+  <h1>Live searches on GOV.UK:</h1>
+  <ul id="search"></ul>
+</div></div>
+
+<div class="box content"><div class="box-inner">
+  <h1>Popular content on GOV.UK:</h1>
+  <ul id="content"></ul>
+</div></div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="javascripts/vendor/mustache.js"></script>
+
+<script src="javascripts/auth.js"></script>
+<script src="javascripts/cache.js"></script>
+<script src="javascripts/template.js"></script>
+<script src="javascripts/user.js"></script>
+<script src="javascripts/search.js"></script>
+<script src="javascripts/traffic.js"></script>
+<script src="javascripts/content.js"></script>
+
+<script src="javascripts/manager.js"></script>
+<script>
+  if(typeof window.matrix === 'undefined'){ window.matrix = {}; }
+
+  matrix.settings = {
+    authServer: '/token',
+    profileId: '53872948'
+  };
+
+  $(function(){
+    matrix.manager.init();
+  });
+</script>
+<script type="text/mustache" id="select-options">
+  <option value="">Select {{object}}</option>
+  {{#options}}
+    <option value="{{id}}">{{name}}</option>
+  {{/options}}
+</script>
+<script type="text/mustache" id="content-results">
+  {{#pages}}
+    <li>{{ title }}</li>
+  {{/pages}}
+</script>
