@@ -6,6 +6,7 @@
 
   var traffic = {
     $el: false,
+    counts: [],
 
     endpoint: function(profileId){
       return "https://www.googleapis.com/analytics/v3alpha/data/realtime?"
@@ -14,13 +15,23 @@
         + "time=" + Date.now();
     },
     parseResponse: function(data){
-      traffic.$el.html('<h1>' + data.rows[0][0] + '</h1>');
+      var points = 180;
+      traffic.$el.html('<h1>' + root.matrix.numberWithCommas(data.rows[0][0]) + '</h1>');
+      traffic.counts.push(parseInt(data.rows[0][0],10));
+      if(traffic.counts.length > points){
+        traffic.counts = traffic.counts.slice(traffic.counts.length - points);
+      }
+      if(typeof traffic.sparkline === 'undefined'){
+        traffic.sparkline = root.matrix.sparkline('#traffic-count-graph', { data: traffic.counts, points: points, height: 120, width: 600 });
+      } else {
+        traffic.sparkline.update(traffic.counts);
+      }
     },
     init: function(){
       traffic.$el = $('#traffic-count');
 
       traffic.reload();
-      window.setInterval(traffic.reload, 60e3);
+      window.setInterval(traffic.reload, 20e3);
     },
     reload: function(){
       var endpoint = traffic.endpoint(root.matrix.settings.profileId);

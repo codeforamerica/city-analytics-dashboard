@@ -72,7 +72,7 @@
     displayResults: function(){
       var term = search.newTerms.pop();
       if(term){
-        search.$el.prepend('<li>'+$('<div>').text(search.newTerms.pop()).html()+'</li>');
+        search.$el.prepend('<li>'+$('<div>').text(term).html()+'</li>');
         search.$el.find('li:gt(20)').remove();
         root.setTimeout(search.displayResults, (search.nextRefresh - Date.now())/search.newTerms.length);
       } else {

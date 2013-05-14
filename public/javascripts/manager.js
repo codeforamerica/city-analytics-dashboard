@@ -10,7 +10,12 @@
       matrix.traffic.init();
       matrix.search.init();
       matrix.content.init();
+      matrix.insideGov.init();
     },
   };
   root.matrix.manager = manager;
+
+  root.matrix.numberWithCommas = function(x){
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
 }).call(this);

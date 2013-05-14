@@ -1,5 +1,8 @@
 require 'rubygems'
 require 'sinatra'
+require 'json'
+require 'net/http'
+require 'active_support/core_ext/hash'
 
 set :public_folder, 'public'
 
@@ -14,6 +17,18 @@ get '/token' do
     'refresh_token' => ENV['REFRESH_TOKEN'],
     'grant_type' => 'refresh_token'
   }
-  
-  `curl 'https://accounts.google.com/o/oauth2/token' --data '#{params.map {|key, value| "#{key}=#{URI.encode_www_form_component(value)}"}.join('&')}' --compressed`
+  http = Net::HTTP.new('accounts.google.com', 443)
+  http.use_ssl = true
+  req = Net::HTTP::Post.new('/o/oauth2/token')
+  req.form_data = params
+  response = http.request(req)
+  response.body
+end
+
+get '/feed' do
+  http = Net::HTTP.new('www.gov.uk', 443)
+  http.use_ssl = true
+  req = Net::HTTP::Get.new('/government/feed.atom')
+  response = http.request(req)
+  Hash.from_xml(response.body).to_json
 end

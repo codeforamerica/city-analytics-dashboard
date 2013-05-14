@@ -31,6 +31,7 @@
           page.n = page.n + 1;
           page.stdDev = Math.sqrt((page.sumSquares - ((page.sum * page.sum)/page.n))/(page.n - 1));
           page.currentHits = count;
+          page.displayHits = root.matrix.numberWithCommas(count);
           return true;
         }
       }
@@ -41,7 +42,8 @@
         sum: count,
         n: 1,
         stdDev: 100, // high enough to not let pages apear on the second hit
-        currentHits: count
+        currentHits: count,
+        displayHits: root.matrix.numberWithCommas(count)
       });
     },
     zeroDifferences: function(){
@@ -69,9 +71,9 @@
         if(b.currentHits < 10){
           return -1;
         }
-        return b.difference - a.difference;
+        return b.currentHits - a.currentHits;
       });
-      matrix.template(content.$el, 'content-results', { pages: content.pages.slice(0,15) });
+      matrix.template(content.$el, 'content-results', { pages: content.pages.slice(0,10) });
     },
     init: function(){
       content.$el = $('#content');
