@@ -11,14 +11,13 @@
     nextRefresh: 0,
 
     endpoint: function(profileId){
-      return "https://www.googleapis.com/analytics/v3alpha/data/realtime?"
+      return "/realtime?"
         + "ids=ga:"+ profileId +"&"
         + "metrics=ga:activeVisitors&"
         + "dimensions=ga:pageTitle,ga:pagePath&"
         + "filters="+ encodeURIComponent("ga:pagePath==/search") +"&"
         + "sort=-ga:activeVisitors&"
-        + "max-results=10000&"
-        + "time=" + Date.now();
+        + "max-results=10000";
     },
     addTerm: function(term, count){
       var i, _i;
@@ -90,7 +89,7 @@
       var endpoint = search.endpoint(root.matrix.settings.profileId);
 
       search.nextRefresh = Date.now() + 60e3;
-      matrix.user.apiRequest(endpoint, search.parseResponse);
+      $.ajax({ dataType: 'json', url: endpoint, success: search.parseResponse});
     }
   };
 

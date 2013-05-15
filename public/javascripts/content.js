@@ -9,13 +9,12 @@
     $el: false,
 
     endpoint: function(profileId){
-      return "https://www.googleapis.com/analytics/v3alpha/data/realtime?"
+      return "/realtime?"
         + "ids=ga:"+ profileId +"&"
         + "metrics=ga:activeVisitors&"
         + "dimensions=ga:pageTitle&"
         + "sort=-ga:activeVisitors&"
-        + "max-results=1000&"
-        + "time=" + Date.now();
+        + "max-results=1000";
     },
     addPage: function(title, count){
       var i, _i, page;
@@ -84,7 +83,7 @@
     reload: function(){
       var endpoint = content.endpoint(root.matrix.settings.profileId);
 
-      matrix.user.apiRequest(endpoint, content.parseResponse);
+      $.ajax({ dataType: 'json', url: endpoint, success: content.parseResponse});
     }
   };
 

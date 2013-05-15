@@ -9,10 +9,9 @@
     counts: [],
 
     endpoint: function(profileId){
-      return "https://www.googleapis.com/analytics/v3alpha/data/realtime?"
+      return "/realtime?"
         + "ids=ga:"+ profileId +"&"
-        + "metrics=ga:activeVisitors&"
-        + "time=" + Date.now();
+        + "metrics=ga:activeVisitors";
     },
     parseResponse: function(data){
       var points = 180;
@@ -36,7 +35,7 @@
     reload: function(){
       var endpoint = traffic.endpoint(root.matrix.settings.profileId);
 
-      matrix.user.apiRequest(endpoint, traffic.parseResponse);
+      $.ajax({ dataType: 'json', url: endpoint, success: traffic.parseResponse});
     }
   };
 
