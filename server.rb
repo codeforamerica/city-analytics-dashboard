@@ -3,6 +3,7 @@ require 'sinatra'
 require 'json'
 require 'rack-cache'
 require 'net/http'
+require 'net/https'
 require 'active_support/core_ext/hash'
 require 'active_support/core_ext/object'
 
@@ -15,7 +16,7 @@ end
 
 get '/realtime' do
   cache_control :public, :max_age => 20
-  query = { access_token: get_token }.merge(params)
+  query = { :access_token => get_token }.merge(params)
 
   http = Net::HTTP.new('www.googleapis.com', 443)
   http.use_ssl = true
