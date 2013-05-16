@@ -19,6 +19,25 @@
         + "sort=-ga:activeVisitors&"
         + "max-results=10000";
     },
+    safeTerm: function(term){
+      // Nothing that looks like an email address
+      if(term.indexOf('@') > -1){
+        return false;
+      }
+      // Nothing that is just a numeber
+      if(term.match(/^[0-9\s]+$/)){
+        return false;
+      }
+      // Nothing that is like a NI number
+      if(term.match(/^[A-Za-z]{2}\s+?[0-9]{2}\s+?[0-9]{2}\s+?[0-9]{2}\s+?[A-Za-z]$/)){
+        return false;
+      }
+      // No 503 requests
+      if(term === "Sorry, we are experiencing technical difficulties (503 error)"){
+        return false;
+      }
+      return true;
+    },
     addTerm: function(term, count){
       var i, _i;
       for(i=0, _i=search.terms.length; i<_i;  i++){
@@ -35,31 +54,38 @@
       });
     },
     zeroNextTicks: function(){
-      var i, _i;
+      var i, _i, newTerms = [];
       for(i=0, _i=search.terms.length; i<_i;  i++){
-        search.terms.nextTick = 0;
+        search.terms[i].nextTick = 0;
       }
     },
     addNextTickValues: function(data){
       var i, _i, term;
       for(i=0,_i=data.rows.length; i<_i; i++){
         term = data.rows[i][0].split(' - ');
-        if(term[0] !== 'Search'){
+        if(term[0] !== 'Search' && search.safeTerm(term[0])){
           search.addTerm(term[0], root.parseInt(data.rows[i][2], 10));
         }
       }
     },
     addTimeIndexValues: function(){
-      var i, _i, term, time, newPeople;
+      var i, _i, j, _j, term, time, newPeople, nonZeroTerms = [];
       for(i=0, _i=search.terms.length; i<_i;  i++){
         term = search.terms[i];
         newPeople = term.currentTick < term.nextTick ? term.nextTick - term.currentTick : 0;
         term.total = term.total + newPeople;
         term.currentTick = term.nextTick;
         if(newPeople > 0){
-          search.newTerms.push(term.term);
+          for(j=0,_j=newPeople; j<_j; j++){
+            search.newTerms.push(term.term);
+          }
+        }
+        if(term.currentTick > 0){
+          nonZeroTerms.push(term);
         }
       }
+      search.newTerms.sort(function(){ return Math.floor((Math.random() * 3) - 1) });
+      search.terms = nonZeroTerms;
     },
     parseResponse: function(data){
       var term, i, _i;
