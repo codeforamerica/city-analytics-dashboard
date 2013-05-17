@@ -51,5 +51,72 @@
     };
   };
 
+  var sparklineGraph = function(el, options){
+    var width = options.width || 600,
+        height = options.height || 120,
+        padding = options.padding || 20,
+        data = options.data || [],
+        slOptions = {
+          width: width - padding,
+          height: height - padding,
+          data: data
+        },
+        svg = d3.select(el).append('svg:svg')
+          .attr('width', width)
+          .attr('height', height),
+        sl = svg.append('svg:svg')
+          .attr('x', padding)
+          .attr('clip-path', 'url(#clip)'),
+        slObj = sparkline(sl[0][0], slOptions);
+
+    svg.append('svg:clipPath')
+      .attr('id', 'clip')
+    .append('svg:rect')
+      .attr('x', padding)
+      .attr('y', '0')
+      .attr('width', width - padding)
+      .attr('height', height - padding);
+
+    var scale = makeScales(data, width - padding, height - padding);
+
+    // Not sure I really understand why the range of the x-axis is set as it is
+    // by makeScales, but modifying it to something more sensible here.
+    scale.x.range([0, width]);
+
+    var xAxis = d3.svg.axis().scale(scale.x).ticks(0).tickSize(0),
+        yAxis = d3.svg.axis().scale(scale.y).ticks(0).tickSize(0).orient('left');
+
+    svg.append('svg:g')
+      .attr('class', 'x axis')
+      .attr('transform', 'translate(' + padding + ',' + (height - padding) + ')')
+      .call(xAxis);
+
+    svg.append('svg:g')
+      .attr('class', 'y axis')
+      .attr('transform', 'translate(' + padding + ',0)')
+      .call(yAxis);
+
+    var xLab = svg.append('text')
+          .attr('class', 'x label')
+          .attr('text-anchor', 'end')
+          .attr('x', width)
+          .attr('y', height)
+          .text('last 1h'),
+        yLab = svg.append('text')
+          .attr('class', 'y label')
+          .attr('x', 0)
+          .attr('y', 0)
+          .attr('transform', 'rotate(90)')
+          .text(d3.format(',')(d3.max(data)));
+
+    return {
+      update: function(newData){
+        slObj.update(newData);
+        yLab.text(d3.format(',')(d3.max(data)));
+      }
+    };
+  };
+
   root.matrix.sparkline = sparkline;
+  root.matrix.sparklineGraph = sparklineGraph;
 }).call(this);

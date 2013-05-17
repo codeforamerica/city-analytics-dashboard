@@ -105,15 +105,13 @@ body {
     width: 66.66%; }
     .tall .traffic .graph {
       width: 50%; }
-  .traffic svg {
-    display: block;
-    margin: 0;
-    border-bottom: 2px solid #fff;
-    border-left: 2px solid #fff; }
-  .traffic path {
+  .traffic path, .traffic line.axis {
     stroke: #fff;
     stroke-width: 2;
     fill: none; }
+  .traffic .label {
+    fill: #fff;
+    font-size: 16px; }
 
 .content h1 {
   margin: 0;

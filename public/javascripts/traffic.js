@@ -21,12 +21,7 @@
         traffic.counts = traffic.counts.slice(traffic.counts.length - points);
       }
       if(typeof traffic.sparkline === 'undefined'){
-        traffic.sparkline = root.matrix.sparkline('#traffic-count-graph', {
-          data: traffic.counts,
-          points: points,
-          height: 118,
-          width: traffic.$graphEl.width()
-        });
+        traffic.sparkline = root.matrix.sparklineGraph('#traffic-count-graph', { data: traffic.counts, points: points, height: 120, width: 600 });
       } else {
         traffic.sparkline.update(traffic.counts);
       }
