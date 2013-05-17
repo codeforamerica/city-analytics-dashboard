@@ -9,6 +9,7 @@ require 'active_support/core_ext/object'
 
 use Rack::Cache
 set :public_folder, 'public'
+set :bind, '0.0.0.0'
 
 get '/' do
   File.read(File.join('public', 'index.html'))

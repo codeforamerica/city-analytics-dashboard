@@ -5,8 +5,12 @@
   if(typeof root.matrix === 'undefined'){ root.matrix = {} }
 
   var manager = {
-    selects: {},
     init: function(){
+      var $body = $('body');
+
+      if($body.width() < $body.height()){
+        $body.addClass('tall');
+      }
       matrix.traffic.init();
       matrix.search.init();
       matrix.content.init();
