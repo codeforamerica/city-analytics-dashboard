@@ -102,16 +102,9 @@ body {
       width: 50%; }
   .traffic .graph {
     float: left;
-    width: 66.66%;
-    position: relative; }
+    width: 66.66%; }
     .tall .traffic .graph {
       width: 50%; }
-    .traffic .graph p {
-      position: absolute;
-      right: 20px;
-      bottom: 25px;
-      font-weight: normal;
-      font-size: 16px; }
   .traffic svg {
     display: block;
     margin: 0;

@@ -131,17 +131,8 @@ body {
   .graph {
     float: left;
     width: 66.66%;
-    position: relative;
-
     .tall & {
       width: 50%;
-    }
-    p {
-      position: absolute;
-      right: 20px;
-      bottom: 25px;
-      font-weight: normal;
-      font-size: 16px;
     }
   }
   svg {
