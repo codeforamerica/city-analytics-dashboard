@@ -114,3 +114,43 @@ stamp.fromISOString = function(formattedString){
 
   return result; // Date or null
 };
+stamp.toISOString = function(/*Date*/ dateObject, /*__Options?*/ options){
+  // summary:
+  //    Format a Date object as a string according a subset of the ISO-8601 standard
+  //
+  // description:
+  //    When options.selector is omitted, output follows [RFC3339](http://www.ietf.org/rfc/rfc3339.txt)
+  //    The local time zone is included as an offset from GMT, except when selector=='time' (time without a date)
+  //    Does not check bounds.  Only years between 100 and 9999 are supported.
+  //
+  // dateObject:
+  //    A Date object
+
+  var _ = function(n){ return (n < 10) ? "0" + n : n; };
+  options = options || {};
+  var formattedDate = [],
+    getter = options.zulu ? "getUTC" : "get",
+    date = "";
+  if(options.selector != "time"){
+    var year = dateObject[getter+"FullYear"]();
+    date = ["0000".substr((year+"").length)+year, _(dateObject[getter+"Month"]()+1), _(dateObject[getter+"Date"]())].join('-');
+  }
+  formattedDate.push(date);
+  if(options.selector != "date"){
+    var time = [_(dateObject[getter+"Hours"]()), _(dateObject[getter+"Minutes"]()), _(dateObject[getter+"Seconds"]())].join(':');
+    var millis = dateObject[getter+"Milliseconds"]();
+    if(options.milliseconds){
+      time += "."+ (millis < 100 ? "0" : "") + _(millis);
+    }
+    if(options.zulu){
+      time += "Z";
+    }else if(options.selector != "time"){
+      var timezoneOffset = dateObject.getTimezoneOffset();
+      var absOffset = Math.abs(timezoneOffset);
+      time += (timezoneOffset > 0 ? "-" : "+") +
+        _(Math.floor(absOffset/60)) + ":" + _(absOffset%60);
+    }
+    formattedDate.push(time);
+  }
+  return formattedDate.join('T'); // String
+};
