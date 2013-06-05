@@ -111,7 +111,7 @@
     return {
       update: function(newData, xLabel){
         slObj.update(newData);
-        yLab.text(d3.format(',')(d3.max(data)));
+        yLab.text(d3.format(',')(d3.max(newData)));
         xLab.text(xLabel);
       }
     };
