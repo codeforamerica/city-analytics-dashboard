@@ -72,7 +72,7 @@
     svg.append('svg:clipPath')
       .attr('id', 'clip')
     .append('svg:rect')
-      .attr('x', padding)
+      .attr('x', '0')
       .attr('y', '0')
       .attr('width', width - padding)
       .attr('height', height - padding);
@@ -100,19 +100,19 @@
           .attr('class', 'x label')
           .attr('text-anchor', 'end')
           .attr('x', width)
-          .attr('y', height)
-          .text('last 1h'),
+          .attr('y', height - 3),
         yLab = svg.append('text')
           .attr('class', 'y label')
           .attr('x', 0)
-          .attr('y', 0)
+          .attr('y', -3)
           .attr('transform', 'rotate(90)')
           .text(d3.format(',')(d3.max(data)));
 
     return {
-      update: function(newData){
+      update: function(newData, xLabel){
         slObj.update(newData);
         yLab.text(d3.format(',')(d3.max(data)));
+        xLab.text(xLabel);
       }
     };
   };

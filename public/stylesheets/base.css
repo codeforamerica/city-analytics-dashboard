@@ -153,6 +153,7 @@ body {
   .tweets .tweet {
     width: 350px;
     float: left;
+    margin-right: 20px;
     display: block;
     font-size: 14px; }
     .tweets .tweet img {
