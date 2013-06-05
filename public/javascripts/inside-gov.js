@@ -9,18 +9,22 @@
     posts: [],
 
     addNewPage: function(page){
-      var i, _i;
+      var i, _i, time;
       for(i=0,_i=insideGov.posts.length; i<_i; i++){
         if(page.id === insideGov.posts[i].id){
           return;
         }
+      }
+      time = stamp.fromISOString(page.updated);
+      if(time.getTime() > Date.now()){
+        return;
       }
       insideGov.posts.push({
         id: page.id,
         type: page.title.split(': ')[0],
         title: page.title.split(': ').slice(1).join(': '),
         published: page.updated,
-        date: stamp.fromISOString(page.updated)
+        date: time
       });
     },
     addNewPosts: function(data){
