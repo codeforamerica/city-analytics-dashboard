@@ -6,24 +6,23 @@
 
   var traffic = {
     $el: false,
-    counts: [],
+    points: 720,
 
-    endpoint: function(profileId){
-      return "/realtime?"
-        + "ids=ga:"+ profileId +"&"
-        + "metrics=ga:activeVisitors";
+    endpoint: function(){
+      return "https://www.performance.service.gov.uk/data/government/realtime?sort_by=_timestamp%3Adescending&limit="+traffic.points;
     },
     parseResponse: function(data){
-      var points = 180;
-      traffic.$el.html('<h1>' + root.matrix.numberWithCommas(data.rows[0][0]) + '</h1>');
-      traffic.counts.push(parseInt(data.rows[0][0],10));
-      if(traffic.counts.length > points){
-        traffic.counts = traffic.counts.slice(traffic.counts.length - points);
+      var counts = [],
+          i, _i;
+      traffic.$el.html('<h1>' + root.matrix.numberWithCommas(data.data[0].unique_visitors) + '</h1>');
+      for(i=0,_i=data.data.length; i<_i; i++){
+        counts.push(parseInt(data.data[i].unique_visitors, 10));
       }
       if(typeof traffic.sparkline === 'undefined'){
-        traffic.sparkline = root.matrix.sparklineGraph('#traffic-count-graph', { data: traffic.counts, points: points, height: 120, width: traffic.$graphEl.width() });
+        traffic.sparkline = root.matrix.sparklineGraph('#traffic-count-graph', { data: counts, points: traffic.points, height: 120, width: traffic.$graphEl.width() });
+        traffic.sparkline.update(counts, "Traffic over the past " + (Math.round(traffic.points / 30)) + " hours");
       } else {
-        traffic.sparkline.update(traffic.counts, "Traffic over the past " + (Math.floor((traffic.counts.length / 3)) + " minutes"));
+        traffic.sparkline.update(counts, "Traffic over the past " + (Math.round(traffic.points / 30)) + " hours");
       }
     },
     init: function(){
@@ -34,7 +33,7 @@
       window.setInterval(traffic.reload, 20e3);
     },
     reload: function(){
-      var endpoint = traffic.endpoint(root.matrix.settings.profileId);
+      var endpoint = traffic.endpoint();
 
       $.ajax({ dataType: 'json', url: endpoint, success: traffic.parseResponse});
     }
