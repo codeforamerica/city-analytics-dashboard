@@ -40,17 +40,6 @@ get '/feed' do
   Hash.from_xml(response.body).to_json
 end
 
-get '/twitter' do
-  cache_control :public, :max_age => 20
-  query = { :access_token => get_token }.merge(params)
-
-  http = Net::HTTP.new('search.twitter.com', 443)
-  http.use_ssl = true
-  req = Net::HTTP::Get.new("/search.json?q=%40gdsteam%20OR%20%40govuk%20-RT")
-  response = http.request(req)
-  response.body
-end
-
 def get_token
   if @token.nil? || @token_timeout < Time.now
     params = {
