@@ -35,7 +35,7 @@ body {
   }
 }
 .box {
-  height: calc(100% - 350px);
+  height: calc(100% - 210px);
   width: 33.33%;
   float: left;
   overflow: hidden;
@@ -170,49 +170,6 @@ body {
     }
   }
   li:nth-child(1){ font-size: 160%; }
-}
-.tweets {
-  float: left;
-  height: 130px;
-  width: 100%;
-  font-weight: 500;
-
-  h1 {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1;
-    margin-top: 0;
-    color: #999;
-  }
-  ul {
-    width: 2000%;
-    margin: 0;
-    padding: 0;
-  }
-
-  .tweet {
-    width: 350px;
-    float: left;
-    margin-right: 20px;
-    display: block;
-    font-size: 14px;
-
-    img {
-      float: left;
-      margin-right: 10px;
-    }
-    p {
-      margin: 0;
-      padding: 0;
-    }
-    .user {
-      color: #999;
-
-      strong {
-        color: #000;
-      }
-    }
-  }
 }
 @-webkit-keyframes fade-in {
   0%   { margin-top: -35px; opacity: 0;}

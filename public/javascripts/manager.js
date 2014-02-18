@@ -15,7 +15,6 @@
       matrix.search.init();
       matrix.content.init();
       matrix.insideGov.init();
-      matrix.twitter.init();
     },
   };
   root.matrix.manager = manager;

@@ -32,7 +32,7 @@ body {
       height: 300%; }
 
 .box {
-  height: calc(100% - 350px);
+  height: calc(100% - 210px);
   width: 33.33%;
   float: left;
   overflow: hidden; }
@@ -134,38 +134,6 @@ body {
     color: #6f777b; }
 .content li:nth-child(1) {
   font-size: 160%; }
-
-.tweets {
-  float: left;
-  height: 130px;
-  width: 100%;
-  font-weight: 500; }
-  .tweets h1 {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1;
-    margin-top: 0;
-    color: #999; }
-  .tweets ul {
-    width: 2000%;
-    margin: 0;
-    padding: 0; }
-  .tweets .tweet {
-    width: 350px;
-    float: left;
-    margin-right: 20px;
-    display: block;
-    font-size: 14px; }
-    .tweets .tweet img {
-      float: left;
-      margin-right: 10px; }
-    .tweets .tweet p {
-      margin: 0;
-      padding: 0; }
-    .tweets .tweet .user {
-      color: #999; }
-      .tweets .tweet .user strong {
-        color: #000; }
 
 @-webkit-keyframes fade-in {
   0% {
