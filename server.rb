@@ -11,6 +11,12 @@ use Rack::Cache
 set :public_folder, 'public'
 set :bind, '0.0.0.0'
 
+if ENV['USERNAME'] && ENV['PASSWORD']
+  use Rack::Auth::Basic, 'Demo area' do |user, pass|
+    user == ENV['USERNAME'] && pass = ENV['PASSWORD']
+  end
+end
+
 get '/' do
   File.read(File.join('public', 'index.html'))
 end
