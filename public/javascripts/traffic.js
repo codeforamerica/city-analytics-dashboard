@@ -16,7 +16,7 @@
           i, _i;
       traffic.$el.html('<h1>' + root.matrix.numberWithCommas(data.data[0].unique_visitors) + '</h1>');
       for(i=0,_i=data.data.length; i<_i; i++){
-        counts.push(parseInt(data.data[i].unique_visitors, 10));
+        counts.unshift(parseInt(data.data[i].unique_visitors, 10));
       }
       if(typeof traffic.sparkline === 'undefined'){
         traffic.sparkline = root.matrix.sparklineGraph('#traffic-count-graph', { data: counts, points: traffic.points, height: 120, width: traffic.$graphEl.width() });
