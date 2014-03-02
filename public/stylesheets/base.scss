@@ -167,6 +167,17 @@ body {
       font-size: 0.8em;
       font-weight: normal;
       color: #6f777b;
+      span {
+        font-size: 0.8em;
+
+        &.triangle {
+          font-size: 0.6em;
+        }
+        &.triangle,
+        &.percent {
+          color: #006435;
+        }
+      }
     }
   }
   li:nth-child(1){ font-size: 160%; }

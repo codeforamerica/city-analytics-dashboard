@@ -8,44 +8,34 @@
     pages: [],
     $el: false,
 
-    endpoint: function(profileId){
-      return "/realtime?"
-        + "ids=ga:"+ profileId +"&"
-        + "metrics=ga:activeVisitors&"
-        + "dimensions=ga:pageTitle&"
-        + "sort=-ga:activeVisitors&"
-        + "max-results=1000";
-    },
-    addNewPages: function(data){
-      var i, _i, page, newPages = [];
-      for(i=0,_i=data.rows.length; i<_i; i++){
-        page = data.rows[i][0].split(' - ');
-        newPages.push({
-          title: page[0],
-          currentHits: root.parseInt(data.rows[i][1], 10),
-          displayHits: root.matrix.numberWithCommas(root.parseInt(data.rows[i][1], 10))
-        });
-      }
-      content.pages = newPages;
+    endpoint: function(){
+      return "https://www.performance.service.gov.uk/data/govuk/trending?limit=10&sort_by=percent_change:descending";
     },
     parseResponse: function(data){
-      var term, i, _i;
+      var i, _i;
 
-      content.addNewPages(data);
+      content.pages = [];
+      for(i=0,_i=data.data.length; i<_i; i++){
+        content.pages.push({
+          title: data.data[i].pageTitle.split(' - ').slice(0,-1).join(' - '),
+          displayHits: root.matrix.numberWithCommas(data.data[i].week2),
+          percentageUp: root.matrix.numberWithCommas(Math.round(data.data[i].percent_change)) + "%"
+        });
+      }
+
       content.displayResults();
     },
     displayResults: function(){
-      content.pages.sort(function(a,b){ return b.currentHits - a.currentHits; });
       matrix.template(content.$el, 'content-results', { pages: content.pages.slice(0,10) });
     },
     init: function(){
       content.$el = $('#content');
 
       content.reload();
-      window.setInterval(content.reload, 60e3);
+      window.setInterval(content.reload, 60e3 * 60 * 12); // refresh every 12 hours
     },
     reload: function(){
-      var endpoint = content.endpoint(root.matrix.settings.profileId);
+      var endpoint = content.endpoint();
 
       $.ajax({ dataType: 'json', url: endpoint, success: content.parseResponse});
     }

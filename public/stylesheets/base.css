@@ -66,9 +66,9 @@ body {
     list-style: none;
     font-size: 25px;
     line-height: 1;
-    -webkit-transition: font-size .5s; }
+    -webkit-transition: font-size 0.5s; }
   .searches ul li:nth-child(1) {
-    -webkit-animation: fade-in .5s; }
+    -webkit-animation: fade-in 0.5s; }
   .searches ul li:nth-child(1) {
     font-size: 160%; }
   .searches ul .not li {
@@ -132,6 +132,12 @@ body {
     font-size: 0.8em;
     font-weight: normal;
     color: #6f777b; }
+    .content li em span {
+      font-size: 0.8em; }
+      .content li em span.triangle {
+        font-size: 0.6em; }
+      .content li em span.triangle, .content li em span.percent {
+        color: #006435; }
 .content li:nth-child(1) {
   font-size: 160%; }
 
