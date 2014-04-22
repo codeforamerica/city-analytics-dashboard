@@ -1,3 +1,4 @@
+/* This gets the data for the total people currently online and the sparkline */
 (function(){
   "use strict"
   var root = this,
