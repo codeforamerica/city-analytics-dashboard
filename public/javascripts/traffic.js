@@ -10,7 +10,8 @@
     points: 720,
 
     endpoint: function(){
-      return "https://www.performance.service.gov.uk/data/government/realtime?sort_by=_timestamp%3Adescending&limit="+traffic.points;
+      console.log("here")
+      return "/realtime?ids=ga:41226190&metrics=rt:activeUsers&max-results=50"
     },
     parseResponse: function(data){
       var counts = [],

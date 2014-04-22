@@ -10,13 +10,7 @@
 
     /* this is GDS specific. It's pulling from their API */
     endpoint: function(){
-      return "/realtime?"
-        + "ids=ga:"+ profileId +"&"
-        + "metrics=ga:activeVisitors&"
-        + "dimensions=ga:pageTitle,ga:pagePath&"
-        /*+ "filters="+ encodeURIComponent("ga:pagePath==/search") +"&"*/
-        + "sort=-ga:activeVisitors&"
-        + "max-results=10000";
+      return "https://www.performance.service.gov.uk/data/govuk/trending?limit=10&sort_by=percent_change:descending";
     },
     parseResponse: function(data){
       var i, _i;
