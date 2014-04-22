@@ -6,7 +6,9 @@
 
   var search = {
     terms: [],
+    urls: [],
     newTerms: [],
+    newURLs: [],
     $el: false,
     nextRefresh: 0,
 
@@ -15,7 +17,7 @@
         + "ids=ga:"+ profileId +"&"
         + "metrics=ga:activeVisitors&"
         + "dimensions=ga:pageTitle,ga:pagePath&"
-        + "filters="+ encodeURIComponent("ga:pagePath==/search") +"&"
+        /*+ "filters="+ encodeURIComponent("ga:pagePath==/search") +"&"*/
         + "sort=-ga:activeVisitors&"
         + "max-results=10000";
     },
@@ -38,7 +40,8 @@
       }
       return true;
     },
-    addTerm: function(term, count){
+    addTerm: function(term, count, url){
+
       var i, _i;
       for(i=0, _i=search.terms.length; i<_i;  i++){
         if(search.terms[i].term === term){
@@ -51,6 +54,7 @@
         total: 0,
         nextTick: count,
         currentTick: 0,
+        url: url
       });
     },
     zeroNextTicks: function(){
@@ -60,12 +64,14 @@
       }
     },
     addNextTickValues: function(data){
-      var i, _i, term;
+      var i, _i, term, url;
       for(i=0,_i=data.rows.length; i<_i; i++){
-        term = data.rows[i][0].split(' - ');
+        term = data.rows[i][0].split(' — ');
+        url = data.rows[i][1];
         if(term[0] !== 'Search' && search.safeTerm(term[0])){
-          search.addTerm(term[0], root.parseInt(data.rows[i][2], 10));
+          search.addTerm(term[0], root.parseInt(data.rows[i][2], 10), url);
         }
+       
       }
     },
     addTimeIndexValues: function(){
@@ -78,6 +84,7 @@
         if(newPeople > 0){
           for(j=0,_j=newPeople; j<_j; j++){
             search.newTerms.push(term.term);
+            search.newURLs.push(term.url);
           }
         }
         if(term.currentTick > 0){
@@ -96,6 +103,7 @@
     },
     displayResults: function(){
       var term = search.newTerms.pop();
+      var url = search.newURLs.pop();
       if(term){
         search.$el.prepend('<li>'+$('<div>').text(term).html()+'</li>');
         search.$el.find('li:gt(20)').remove();
@@ -106,14 +114,12 @@
     },
     init: function(){
       search.$el = $('#search');
-
       search.reload();
       search.displayResults();
       window.setInterval(search.reload, 60e3);
     },
     reload: function(){
       var endpoint = search.endpoint(root.matrix.settings.profileId);
-
       search.nextRefresh = Date.now() + 60e3;
       $.ajax({ dataType: 'json', url: endpoint, success: search.parseResponse});
     }

@@ -25,15 +25,12 @@ body {
     overflow: hidden; }
     .top-bar .inner img {
       position: absolute;
-      left: -166px;
-      top: 0;
-      border: none;
-      width: 200%;
-      height: 300%; }
+      top: -14px;
+      border: none; }
 
 .box {
   height: calc(100% - 210px);
-  width: 33.33%;
+  /*width: 33.33%;*/
   float: left;
   overflow: hidden; }
   .tall .box {

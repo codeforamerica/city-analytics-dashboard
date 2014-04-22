@@ -8,6 +8,7 @@
     pages: [],
     $el: false,
 
+    /* this is GDS specific. It's pulling from their API */
     endpoint: function(){
       return "https://www.performance.service.gov.uk/data/govuk/trending?limit=10&sort_by=percent_change:descending";
     },

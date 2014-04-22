@@ -2,14 +2,13 @@
 
 <title>Data Screen</title>
 <link rel="stylesheet" href="./stylesheets/base.css">
-<link href="https://assets.digital.cabinet-office.gov.uk/static/fonts-0fb6b917e34e45c93a44eec72dcc21de.css" media="all" rel="stylesheet" type="text/css">
 
 <div class="top-bar">
   <div class="inner">
-    <img src="https://assets.digital.cabinet-office.gov.uk/static/gov.uk_logotype-2x-24145374d271079f08d96c618cc8d4a5.png" alt="GOV.UK">
+    <img src="http://style.codeforamerica.org/style/favicons/60x60/flag-black.png" alt="Code for America"> 
   </div>
 </div>
-<div class="small-box traffic">
+<!--div class="small-box traffic">
   <div id="traffic" class="count">
     <div class="box-inner">
       <h1 id="traffic-count"></h1>
@@ -20,22 +19,22 @@
     <div id="traffic-count-graph" class="box-inner">
     </div>
   </div>
-</div>
+</div-->
 
 <div class="box searches"><div class="box-inner">
-  <h1>Live searches on GOV.UK:</h1>
+  <h1>People are currently landing on...</h1>
   <ul id="search"></ul>
 </div></div>
 
-<div class="box popular content"><div class="box-inner">
+<!--div class="box popular content"><div class="box-inner">
   <h1>Trending content from last 7 days traffic on GOV.UK:</h1>
   <ul id="content"></ul>
-</div></div>
+</div></div-->
 
-<div class="box recent content"><div class="box-inner">
+<!--div class="box recent content"><div class="box-inner">
   <h1>Recent content from departments:</h1>
   <ul id="inside-gov"></ul>
-</div></div>
+</div></div-->
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="http://d3js.org/d3.v3.min.js"></script>
@@ -55,7 +54,7 @@
 
   matrix.settings = {
     authServer: '/token',
-    profileId: '67465768'
+    profileId: '41226190'
   };
 
   $(function(){
@@ -79,12 +78,12 @@
     </li>
   {{/pages}}
 </script>
-<script type="text/mustache" id="inside-gov-posts">
+<!--script type="text/mustache" id="inside-gov-posts">
   {{#posts}}
     <li>{{ title }}<em>{{type}} - <span title="{{published}}">{{published}}</span></em></li>
   {{/posts}}
-</script>
-<script type="text/mustache" id="tweets">
+</script-->
+<!--script type="text/mustache" id="tweets">
   {{#tweets}}
     <li class="tweet">
       <img src="{{img}}">
@@ -94,4 +93,4 @@
       </div>
     </li>
   {{/tweets}}
-</script>
+</script-->
