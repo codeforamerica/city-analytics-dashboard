@@ -10,7 +10,6 @@
     points: 720,
 
     endpoint: function(){
-      console.log("here")
       return "/realtime?ids=ga:41226190&metrics=rt:activeUsers&max-results=50"
     },
     parseResponse: function(data){
