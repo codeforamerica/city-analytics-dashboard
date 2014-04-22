@@ -13,20 +13,18 @@
       return "/realtime?ids=ga:41226190&metrics=rt:activeUsers&max-results=50"
     },
     parseResponse: function(data){
-      console.log(data)
-      console.log(data.totalsForAllResults['rt:activeUsers'])
       var counts = [],
           i, _i;
       traffic.$el.html('<h1>' + data.totalsForAllResults['rt:activeUsers'] + '</h1>');
-      /*for(i=0,_i=data.data.length; i<_i; i++){
-        counts.unshift(parseInt(data.data[i].unique_visitors, 10));
+      for(i=0,_i=data.length; i<_i; i++){
+        counts.unshift(parseInt(data.totalsForAllResults['rt:activeUsers'], 10));
       }
       if(typeof traffic.sparkline === 'undefined'){
         traffic.sparkline = root.matrix.sparklineGraph('#traffic-count-graph', { data: counts, points: traffic.points, height: 120, width: traffic.$graphEl.width() });
         traffic.sparkline.update(counts, "Traffic over the past " + (Math.round(traffic.points / 30)) + " hours");
       } else {
         traffic.sparkline.update(counts, "Traffic over the past " + (Math.round(traffic.points / 30)) + " hours");
-      }*/
+      }
     },
     init: function(){
       traffic.$el = $('#traffic-count');
