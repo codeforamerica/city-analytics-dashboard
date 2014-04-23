@@ -11,10 +11,10 @@
     /* this is GDS specific. It's pulling from their API */
     endpoint: function(){
       //return "https://www.performance.service.gov.uk/data/govuk/trending?limit=10&sort_by=percent_change:descending";
-      return "/realtime?ids=ga%3A41226190&metrics=rt%3Apageviews&dimensions=rt%3ApageTitle&max-results=10"
+      return "/realtime?ids=ga%3A41226190&metrics=rt%3Apageviews&dimensions=rt%3ApageTitle&max-results=50&sort=-rt%3Apageviews"
     },
     parseResponse: function(data){
-     // console.log(data.rows.length);
+      console.log(data.rows.length);
      // console.log(data.rows[0][0])
      // console.log(data.rows[0])
       var i, _i;
