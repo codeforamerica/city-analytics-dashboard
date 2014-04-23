@@ -10,17 +10,23 @@
 
     /* this is GDS specific. It's pulling from their API */
     endpoint: function(){
-      return "https://www.performance.service.gov.uk/data/govuk/trending?limit=10&sort_by=percent_change:descending";
+      console.log("content")
+      //return "https://www.performance.service.gov.uk/data/govuk/trending?limit=10&sort_by=percent_change:descending";
+      return "/realtime?ids=ga%3A41226190&metrics=rt%3Apageviews&dimensions=rt%3ApageTitle&max-results=10"
     },
     parseResponse: function(data){
+     // console.log(data.rows.length);
+     // console.log(data.rows[0][0])
+     // console.log(data.rows[0])
       var i, _i;
 
       content.pages = [];
-      for(i=0,_i=data.data.length; i<_i; i++){
+      for(i=0,_i=data.rows.length; i<_i; i++){
+        //console.log(data.rows[i][0])
         content.pages.push({
-          title: data.data[i].pageTitle.split(' - ').slice(0,-1).join(' - '),
-          displayHits: root.matrix.numberWithCommas(data.data[i].week2),
-          percentageUp: root.matrix.numberWithCommas(Math.round(data.data[i].percent_change)) + "%"
+          title: data.rows[i][0]//.split(' - ').slice(0,-1).join(' - '),
+          //displayHits: root.matrix.numberWithCommas(data.rows[i].week2),
+          //percentageUp: root.matrix.numberWithCommas(Math.round(data.rows[i].percent_change)) + "%"
         });
       }
 

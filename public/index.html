@@ -26,10 +26,10 @@
   <ul id="search"></ul>
 </div></div>
 
-<!--div class="box popular content"><div class="box-inner">
+<div class="box popular content"><div class="box-inner">
   <h1>Trending content from last 7 days traffic on GOV.UK:</h1>
   <ul id="content"></ul>
-</div></div-->
+</div></div>
 
 <!--div class="box recent content"><div class="box-inner">
   <h1>Recent content from departments:</h1>
@@ -45,8 +45,8 @@
 <script src="javascripts/sparkline.js"></script>
 <script src="javascripts/search.js"></script>
 <script src="javascripts/traffic.js"></script>
-<!--script src="javascripts/content.js"></script>
-<script src="javascripts/inside-gov.js"></script-->
+<script src="javascripts/content.js"></script>
+<!--script src="javascripts/inside-gov.js"></script-->
 
 <script src="javascripts/manager.js"></script>
 <script>
@@ -62,22 +62,23 @@
   });
 </script>
 <script type="text/mustache" id="select-options">
+
   <option value="">Select {{object}}</option>
   {{#options}}
     <option value="{{id}}">{{name}}</option>
   {{/options}}
 </script>
-<!--script type="text/mustache" id="content-results">
+<script type="text/mustache" id="content-results">
   {{#pages}}
     <li>
       {{ title }}
-      <em>
-        visits: {{displayHits}}
-        <span class="triangle">&#x25b2;</span>&nbsp;<span class="percent">{{percentageUp}}</span>
-      </em>
     </li>
   {{/pages}}
-</script-->
+</script>
+<!--//<em>
+      //  visits: {{displayHits}}
+      //  <span class="triangle">&#x25b2;</span>&nbsp;<span class="percent">{{percentageUp}}</span>
+      //</em>-->
 <!--script type="text/mustache" id="inside-gov-posts">
   {{#posts}}
     <li>{{ title }}<em>{{type}} - <span title="{{published}}">{{published}}</span></em></li>
