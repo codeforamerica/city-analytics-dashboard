@@ -30,7 +30,7 @@ body {
 
 .box {
   height: calc(100% - 210px);
-  /*width: 33.33%;*/
+  width: 33.33%;
   float: left;
   overflow: hidden; }
   .tall .box {
