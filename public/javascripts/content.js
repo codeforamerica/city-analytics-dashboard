@@ -10,7 +10,6 @@
 
     /* this is GDS specific. It's pulling from their API */
     endpoint: function(){
-      console.log("content")
       //return "https://www.performance.service.gov.uk/data/govuk/trending?limit=10&sort_by=percent_change:descending";
       return "/realtime?ids=ga%3A41226190&metrics=rt%3Apageviews&dimensions=rt%3ApageTitle&max-results=10"
     },
