@@ -9,7 +9,7 @@
     $el: false,
 
     endpoint: function(){
-      return "/realtime?ids=ga%3A41226190&metrics=rt%3Apageviews&dimensions=rt%3ApageTitle&max-results=20&sort=-rt%3Apageviews"
+      return "/realtime?ids=ga%3A41226190&metrics=rt%3Apageviews&dimensions=rt%3ApageTitle&max-results=10&sort=-rt%3Apageviews"
     },
     parseResponse: function(data){
       var i, _i;
@@ -27,7 +27,7 @@
       content.displayResults();
     },
     displayResults: function(){
-      matrix.template(content.$el, 'content-results', { pages: content.pages.slice(0,20) });
+      matrix.template(content.$el, 'content-results', { pages: content.pages.slice(0,10) });
     },
     init: function(){
       content.$el = $('#content');
