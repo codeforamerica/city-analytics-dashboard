@@ -17,6 +17,9 @@ html {
 h1{
   font-size:2em !important;
 }
+.brick.badge-heading{
+  background-image:none;
+}
 .top-bar {
   background: #f1f1f1;
   padding: 10px 20px; }
