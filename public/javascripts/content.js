@@ -16,7 +16,6 @@
 
       content.pages = [];
       for(i=0,_i=data.rows.length; i<_i; i++){
-        console.log(data.rows[i][0])
         content.pages.push({
           title: data.rows[i][0]//.split(' — ').slice(0,-1).join(' - '),
           //displayHits: root.matrix.numberWithCommas(data.rows[i].week2),
