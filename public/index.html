@@ -45,6 +45,16 @@
               <h3 class="brick-heading">Search</h3>
               <h4 class="brick-text">Real-time search terms</h4>
           </a>
+          <div class="box">
+            <div class="box-inner">
+              <ul id="search-content">
+                <li class="icon-quotes-left">Code for America</li>
+                <li class="icon-quotes-left">2015 Fellowship application</li>
+                <li class="icon-quotes-left">Civic hacking for good</li>
+                <li class="icon-quotes-left">Code for America</li>
+              </ul>
+            </div>
+          </div>
       </li>
       
       <li class="brick badge-heading badge-dark-blue">
@@ -97,13 +107,19 @@
   });
 </script>
 <script type="text/mustache" id="select-options">
-
   <option value="">Select {{object}}</option>
   {{#options}}
     <option value="{{id}}">{{name}}</option>
   {{/options}}
 </script>
 <script type="text/mustache" id="content-results">
+  {{#pages}}
+    <li class="icon-star2">
+      {{ title }}
+    </li>
+  {{/pages}}
+</script>
+<script type="text/mustache" id="search-results">
   {{#pages}}
     <li class="icon-star2">
       {{ title }}
