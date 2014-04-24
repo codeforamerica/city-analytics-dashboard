@@ -15,7 +15,7 @@
     parseResponse: function(data){
       var counts = [],
           i, _i;
-      traffic.$el.html('<h1>' + data.totalsForAllResults['rt:activeUsers'] + '</h1>');
+      traffic.$el.html(data.totalsForAllResults['rt:activeUsers']);
       /*for(i=0,_i=data.length; i<_i; i++){
         counts.unshift(parseInt(data.totalsForAllResults['rt:activeUsers'], 10));
       }

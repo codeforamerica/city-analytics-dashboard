@@ -14,7 +14,9 @@ html {
   line-height: 1;
   padding: 0;
   margin: 0; }*/
-
+h1{
+  font-size:2em !important;
+}
 .top-bar {
   background: #f1f1f1;
   padding: 10px 20px; }
