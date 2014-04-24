@@ -16,17 +16,18 @@ body {
   margin: 0; }
 
 .top-bar {
-  background: #0b0c0c;
+  background: #f1f1f1;
   padding: 10px 20px; }
   .top-bar .inner {
     position: relative;
-    width: 166px;
-    height: 30px;
+    width: 105px;
+    height: 42px;
     overflow: hidden; }
     .top-bar .inner img {
       position: absolute;
-      top: -14px;
-      border: none; }
+      border: none; 
+      width: 70%;
+  }
 
 .box {
   height: calc(100% - 210px);
