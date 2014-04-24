@@ -8,7 +8,6 @@
     pages: [],
     $el: false,
 
-    /* this is GDS specific. It's pulling from their API */
     endpoint: function(){
       return "/realtime?ids=ga%3A41226190&metrics=rt%3Apageviews&dimensions=rt%3ApageTitle&max-results=20&sort=-rt%3Apageviews"
     },
