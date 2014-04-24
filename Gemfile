@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'active_support'
+gem 'activesupport'
 gem 'json'
 gem 'rack-cache'
 gem 'sass'
