@@ -1,35 +1,56 @@
 <!doctype html>
-
-<title>Data Screen</title>
-<link rel="stylesheet" href="./stylesheets/base.css">
-
-<div class="top-bar">
-  <div class="inner">
-    <img src="http://style.codeforamerica.org/_assets/logo-colored.png" alt="Code for America"> 
-  </div>
-</div>
-<div class="small-box traffic">
-  <div id="traffic" class="count">
-    <div class="box-inner">
-      <h1 id="traffic-count"></h1>
-      <p>People currently on codeforamerica.org</p>
+<head>
+  <title>Data Screen</title>
+  <!--link rel="stylesheet" href="./stylesheets/base.css"-->
+  <link rel="stylesheet" href="http://style.codeforamerica.org/0/style/css/main.css">
+  <link rel="stylesheet" href="http://style.codeforamerica.org/0/style/css/layout.css" media="all and (min-width: 40em)">
+  <link href="http://style.codeforamerica.org/0/style/css/prism.css" rel="stylesheet" />
+</head>
+<body>
+<div class="js-container">
+  <div class="top-bar">
+    <div class="inner">
+      <img src="http://style.codeforamerica.org/_assets/logo-colored.png" alt="Code for America"> 
     </div>
   </div>
-  <div class="graph box-in">
-    <div id="traffic-count-graph" class="box-inner">
+  <div class="layout-breve">
+    <p>layout-breve</p>
+    <div class="layout-crotchet">
+      <div class="small-box traffic">
+        <div id="traffic" class="count">
+          <div class="box-inner">
+            <h1 id="traffic-count"></h1>
+            <p>People currently on codeforamerica.org</p>
+          </div>
+        </div>
+        <div class="graph box-in">
+          <div id="traffic-count-graph" class="box-inner">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="layout-crotchet">
+      <div class="box searches">
+        <div class="box-inner">
+          <h1>People are currently landing on...</h1>
+          <ul id="search"></ul>
+        </div>
+      </div>
+    </div>
+    <div class="layout-crotchet">
+      <div class="box popular content">
+        <div class="box-inner">
+          <h1>Trending content from last 7 days traffic:</h1>
+          <ul id="content"></ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<div class="box searches"><div class="box-inner">
-  <h1>People are currently landing on...</h1>
-  <ul id="search"></ul>
-</div></div>
 
-<div class="box popular content"><div class="box-inner">
-  <h1>Trending content from last 7 days traffic:</h1>
-  <ul id="content"></ul>
-</div></div>
+
+
 
 <!--div class="box recent content"><div class="box-inner">
   <h1>Recent content from departments:</h1>
@@ -94,3 +115,5 @@
     </li>
   {{/tweets}}
 </script-->
+</body>
+</html>
