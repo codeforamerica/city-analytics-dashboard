@@ -61,7 +61,6 @@ h1{
 .box {
   height: calc(100% - 210px);
   text-align:left;
-  padding-left:2em;
   /*width: 33.33%;
   float: left;*/
   /*overflow: hidden;*/ }
