@@ -10,7 +10,7 @@
     points: 720,
 
     endpoint: function(){
-      return "/realtime?ids=ga:41226190&metrics=rt:activeUsers&max-results=50"
+      return "/realtime?ids=ga:56899021&metrics=rt:activeUsers&max-results=20"
     },
     parseResponse: function(data){
       var counts = [],

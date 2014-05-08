@@ -1,3 +1,4 @@
+/* This one gets which pages are being hit right now */
 (function(){
   "use strict"
   var root = this,
@@ -14,7 +15,7 @@
 
     endpoint: function(profileId){
       return "/realtime?"
-        + "ids=ga:"+ profileId +"&"
+        + "ids=ga:56899021&"
         + "metrics=ga:activeVisitors&"
         + "dimensions=ga:pageTitle,ga:pagePath&"
         /*+ "filters="+ encodeURIComponent("ga:pagePath==/search") +"&"*/
