@@ -115,6 +115,8 @@ h1{
     color: #867990; }
   .searches ul .not li:nth-child(6) {
     color: #6683a9; }
+  .searches ul .not li:nth-child(6) {
+    color: #6683a9; }
 /*
 .traffic {
   background: #2b8cc4;
@@ -142,7 +144,7 @@ h1{
   .traffic .label {
     fill: #fff;
     font-size: 16px; }
-
+*/
 .content h1 {
   margin: 0;
   font-size: 15px;
@@ -169,7 +171,7 @@ h1{
       .content li em span.triangle, .content li em span.percent {
         color: #006435; }
 .content li:nth-child(1) {
-  font-size: 160%; }*/
+  font-size: 160%; }
 
 @-webkit-keyframes fade-in {
   0% {
