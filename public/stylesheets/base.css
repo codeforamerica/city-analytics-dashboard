@@ -98,24 +98,33 @@ h1{
   .searches ul li:nth-child(1) {
     -webkit-animation: fade-in 0.5s; }
   .searches ul li:nth-child(1) {
-    background-color:red;
+    /*background-color:#cf1b41;*/
     font-size: 160%; }
-  .searches ul .not li {
+  .searches ul li {
     color: #2b8cc4; }
-  .searches ul .not li:nth-child(1) {
+  .searches ul li:nth-child(1) {
     color: #df3133; }
-  .searches ul .not li:nth-child(2) {
+  .searches ul li:nth-child(2) {
     color: #cc4c4a; }
-  .searches ul .not li:nth-child(3) {
+  .searches ul li:nth-child(3) {
     color: #b75f61; }
-  .searches ul .not li:nth-child(4) {
+  .searches ul li:nth-child(4) {
     color: #a06e77; }
-  .searches ul .not li:nth-child(5) {
+  .searches ul li:nth-child(5) {
     color: #867990; }
-  .searches ul .not li:nth-child(6) {
+  .searches ul li:nth-child(6) {
     color: #6683a9; }
-  .searches ul .not li:nth-child(6) {
-    color: #6683a9; }
+    .searches ul li:nth-child(7) {
+    opacity: 0.9; }
+      .searches ul li:nth-child(8) {
+    opacity: 0.7; }
+      .searches ul li:nth-child(9) {
+    opacity: 0.5; }
+          .searches ul li:nth-child(10) {
+    opacity: 0.25; }
+              .searches ul li:nth-child(n+11) {
+    display:none; }
+
 /*
 .traffic {
   background: #2b8cc4;
