@@ -277,3 +277,8 @@ h1{
   100% {
     margin-top: 0;
     opacity: 1; } }
+
+#traffic-count{
+  color:red;
+  font-weight:bold;
+}
