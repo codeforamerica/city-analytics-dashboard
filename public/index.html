@@ -42,11 +42,7 @@
               <h3 class="brick-heading">Real-time search terms</h3>
           <div class="box search-terms">
             <div class="box-inner">
-              <ul id="search-content">
-                <li class="icon-quotes-left">Code for America</li>
-                <li class="icon-quotes-left">2015 Fellowship application</li>
-                <li class="icon-quotes-left">Civic hacking for good</li>
-                <li class="icon-quotes-left">Code for America</li>
+              <ul id="search-terms">
               </ul>
             </div>
           </div>
@@ -82,6 +78,7 @@
 <script src="javascripts/template.js"></script>
 <script src="javascripts/sparkline.js"></script>
 <script src="javascripts/landing-pages.js"></script>
+<script src="javascripts/search.js"></script>
 <script src="javascripts/traffic.js"></script>
 <script src="javascripts/content.js"></script>
 
@@ -112,6 +109,13 @@
   {{/pages}}
 </script>
 <script type="text/mustache" id="search-results">
+  {{#pages}}
+    <li class="icon-star2">
+      {{ title }}
+    </li>
+  {{/pages}}
+</script>
+<script type="text/mustache" id="search-term-results">
   {{#pages}}
     <li class="icon-star2">
       {{ title }}

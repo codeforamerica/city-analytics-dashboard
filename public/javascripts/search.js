@@ -1,5 +1,6 @@
 /* Inbound search terms */
 (function(){
+  console.log("serach terms")
   "use strict"
   var root = this,
       $ = root.jQuery;
@@ -16,13 +17,13 @@
     endpoint: function(profileId){
       return "/realtime?"
         + "ids=ga:56899021&"
-        + "metrics=ga:activeVisitors&"
-        + "dimensions=ga:pageTitle,ga:pagePath&"
-        /*+ "filters="+ encodeURIComponent("ga:pagePath==/search") +"&"*/
-        + "sort=-ga:activeVisitors&"
+        + "metrics=rt:activeVisitors&"
+        + "dimensions=rt:pageTitle,rt:keyword&"
+        //+ "sort=-rt:activeVisitors&"
         + "max-results=10000";
     },
     safeTerm: function(term){
+    //  console.log(term)
       // Nothing that looks like an email address
       if(term.indexOf('@') > -1){
         return false;
@@ -35,6 +36,13 @@
       if(term.match(/^[A-Za-z]{2}\s+?[0-9]{2}\s+?[0-9]{2}\s+?[0-9]{2}\s+?[A-Za-z]$/)){
         return false;
       }
+      // filter out pages that don't have associated search terms
+      if(term.match("(not set)")){
+        return false;
+      }
+      if(term.match("(not provided)")){
+        return false;
+      }
       // No 503 requests
       if(term === "Sorry, we are experiencing technical difficulties (503 error)"){
         return false;
@@ -42,7 +50,7 @@
       return true;
     },
     addTerm: function(term, count, url){
-
+     // console.log("term: "+term+" count: "+count+" url: "+url) 
       var i, _i;
       for(i=0, _i=search.terms.length; i<_i;  i++){
         if(search.terms[i].term === term){
@@ -57,6 +65,7 @@
         currentTick: 0,
         url: url
       });
+      //console.log(search.terms)
     },
     zeroNextTicks: function(){
       var i, _i, newTerms = [];
@@ -65,11 +74,14 @@
       }
     },
     addNextTickValues: function(data){
+      //console.log(data)
       var i, _i, term, url;
       for(i=0,_i=data.rows.length; i<_i; i++){
-        term = data.rows[i][0].split(' — ');
-        url = data.rows[i][1];
+        term = data.rows[i][1].split(' — ');
+       // console.log(data.rows[i][0])
+        url = data.rows[i][2];
         if(term[0] !== 'Search' && search.safeTerm(term[0])){
+         // console.log(term[0])
           search.addTerm(term[0], root.parseInt(data.rows[i][2], 10), url);
         }
        
@@ -114,7 +126,7 @@
       }
     },
     init: function(){
-      search.$el = $('#search');
+      search.$el = $('#search-terms');
       search.reload();
       search.displayResults();
       window.setInterval(search.reload, 60e3);
