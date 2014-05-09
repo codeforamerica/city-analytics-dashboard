@@ -12,7 +12,7 @@
         $body.addClass('tall');
       }
       matrix.traffic.init();
-      matrix.search.init();
+      matrix.landing.init();
       matrix.content.init();
       //matrix.insideGov.init();
     },
