@@ -1,6 +1,11 @@
 # Display Dashboard
 
-TODO: write something here
+This is a display screen to show real time analytics of a given website. 
+
+It's a bit shonky right now.
+
+This project is a fork of Edd Sowden's dashboard built for the Government Digital Service.  
+His project can be found [https://github.com/edds/display-screen|here], with the licence below.
 
 # Licence
 
