@@ -17,10 +17,12 @@
       content.pages = [];
       for(i=0,_i=data.rows.length; i<_i; i++){
         content.pages.push({
-          title: data.rows[i][0]//.split(' — ').slice(0,-1).join(' - '),
+          title: data.rows[i][0],//.split(' — ').slice(0,-1).join(' - '),
+          visits: data.rows[i][1]
           //displayHits: root.matrix.numberWithCommas(data.rows[i].week2),
           //percentageUp: root.matrix.numberWithCommas(Math.round(data.rows[i].percent_change)) + "%"
         });
+        console.log(content.pages)
       }
 
       content.displayResults();
