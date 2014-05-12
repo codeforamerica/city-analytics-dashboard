@@ -2,6 +2,10 @@
 (function(){
   "use strict"
   var debug = 0;
+  var debugCountLimit = 1000;
+  var debugRand = function() {
+    return (Math.random() * debugCountLimit) | 0;
+  };
   var root = this,
       $ = root.jQuery;
   if(typeof root.matrix === 'undefined'){ root.matrix = {} }
@@ -48,7 +52,7 @@
       for (var i = 0; i < traffic.points; i++) {
         traffic.counts[i] = 0;
         // Dummy data in debug mode
-        if (debug) { traffic.counts[i] = (Math.random() * 1000) | 0; }
+        if (debug) { traffic.counts[i] = debugRand(); }
       }
 
       traffic.reload();
@@ -57,6 +61,15 @@
     },
     reload: function(){
       var endpoint = traffic.endpoint();
+
+      if (debug) {
+        traffic.parseResponse({
+          totalsForAllResults: {
+            'rt:activeUsers': debugRand()
+          }
+        });
+        return;
+      }
 
       // FIXME(slightlyoff): it's nuts that this isn't using D3's methods
       $.ajax({
