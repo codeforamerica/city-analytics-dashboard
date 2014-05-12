@@ -1,6 +1,5 @@
 /* Inbound search terms */
 (function(){
-  console.log("serach terms")
   "use strict"
   var root = this,
       $ = root.jQuery;
