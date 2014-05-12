@@ -23,14 +23,20 @@ h2 {
   margin: 0;
   padding: 0;
   display: flex;
+  display: -webkit-flex;
   flex-flow: row nowrap;
+  -webkit-flex-flow: row nowrap;
   flex-grow: 1;
-  justify-content: space-between; }
+  -webkit-flex-grow: 1;
+  justify-content: space-between;
+  -webkit-justify-content: space-between; }
   .bricks .brick {
     order: auto;
     width: 32%;
     flex: 1 1 auto;
+    -webkit-flex: 1 1 auto;
     align-self: auto;
+    -webkit-align-self: auto;
     min-height: 100%;
     background-color: #212126;
     border-radius: 3px;
