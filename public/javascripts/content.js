@@ -22,7 +22,6 @@
           //displayHits: root.matrix.numberWithCommas(data.rows[i].week2),
           //percentageUp: root.matrix.numberWithCommas(Math.round(data.rows[i].percent_change)) + "%"
         });
-        console.log(content.pages)
       }
 
       content.displayResults();

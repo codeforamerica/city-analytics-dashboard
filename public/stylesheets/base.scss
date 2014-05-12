@@ -4,6 +4,7 @@ $tertiary: #2C403C;
 $secondary: #2A594C;
 $primary: #2F7360;
 $main-font: #fff;
+$animation-time: 0.5s;
 
 html {
   width: 100%;
@@ -65,16 +66,23 @@ h2{
       margin: 0;
       padding:0.5em 0;
       list-style: none;
+      /*
       font-size: 25px;
+      */
       line-height: 1;
+      /*
+      transition: font-size 0.5s;
       -webkit-transition: font-size 0.5s;
+      */
+      animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
 
-      ul li {
-        &:nth-child(1) {
-          -webkit-animation: fade-in 0.5s;
-          font-size: 160%;
-          color:$tertiary;
-        }
+      &:nth-child(1) {
+        animation: fade-in $animation-time;
+        -webkit-animation: fade-in $animation-time;
+        /*
+        font-size: 160%;
+        color:$tertiary;
+        */
       }
     }
 
@@ -84,16 +92,30 @@ h2{
       list-style: none;
       font-size: 25px;
       line-height: 1;
-      -webkit-transition: font-size 0.5s;
+
+      /* promote to a GPU layer */
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      -webkit-transition-timing-function: ease-out;
+      /*
       color: $tertiary;
 
       &:nth-child(1) {
-        -webkit-animation: fade-in 0.5s;
-        font-size: 160%;
+        animation: fade-in $animation-time;
+        -webkit-animation: fade-in $animation-time;
         color: $primary;
       }
       &:nth-child(2)    { color: $secondary; }
-      &:nth-child(3)    { color: $tertiary; }
+      */
+      color: $primary;
+      opacity: 0.5;
+
+      &:nth-child(1) {
+        opacity: 1.0;
+        animation: fade-in $animation-time;
+        -webkit-animation: fade-in $animation-time;
+      }
+      &:nth-child(2) { opacity: 0.7; }
     }
 
   }
@@ -104,23 +126,23 @@ h2{
     list-style: none;
     font-size: 25px;
     line-height: 1;
-    -webkit-transition: font-size 0.5s;
-    color: $tertiary;
+
+    /* promote to a GPU layer */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    -webkit-transition-timing-function: ease-out;
+    transition: opacity $animation-time;
+    -webkit-transition: opacity $animation-time;
+
+    color: $primary;
+    opacity: 0.5;
 
     &:nth-child(1) {
-      -webkit-animation: fade-in 0.5s;
-     }
-
-    &:nth-child(1) {
-      color: $primary;
+      opacity: 1.0;
+      animation: fade-in $animation-time;
+      -webkit-animation: fade-in $animation-time;
     }
-    &:nth-child(2) {
-      color: $secondary;
-    }
-    &:nth-child(3) {
-      color: $tertiary;
-    }
-
+    &:nth-child(2) { opacity: 0.7; }
   }
 }
 
@@ -166,47 +188,33 @@ h2{
       list-style: none;
       font-size: 25px;
       line-height: 1;
-      -webkit-transition: font-size .5s;
-    }
-    li:nth-child(1){
-      -webkit-animation: fade-in .5s;
-    }
-    li:nth-child(1){ 
-      font-size: 160%; 
-      em{
-        color:#6f777b;
-      }
+      /* promote to a GPU layer */
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      -webkit-transition-timing-function: ease-out;
+      transition: opacity $animation-time;
+      -webkit-transition: opacity $animation-time;
+      color: $primary;
+      opacity: 0.5;
+
+      em {
+        color:#3E4345;
+        font-style: normal;
+        display: block;
+        font-size: 0.8em;
+        font-weight: normal;
+        span {
+          font-size: 0.8em;
+        }
       }
 
-      li {
-        color: $tertiary;
-        em{
-          color:#3E4345;
-          font-style: normal;
-          display: block;
-          font-size: 0.8em;
-          font-weight: normal;
-          span {
-            font-size: 0.8em;
-          }
-        }
-        
+      &:nth-child(1){
+        animation: fade-in $animation-time;
+        -webkit-animation: fade-in $animation-time;
+        opacity: 1.0;
       }
-      li:nth-child(1){
-        color: $primary;
-      }
-      li:nth-child(2){
-        color: $secondary;
-        em{
-          color:#5C6366
-        }
-      }
-      li:nth-child(3){
-        color: $tertiary;
-        em{
-          color:#3E4345;
-        }
-      }
+      &:nth-child(2){ opacity: 0.7; }
+    }
   }
 }
 
@@ -293,6 +301,7 @@ h2{
 }
 
 @-webkit-keyframes fade-in {
-  0%   { margin-top: -35px; opacity: 0;}
-  100% { margin-top: 0; opacity: 1;}
+  0%   { margin-top: -50px; opacity: 0.1; }
+  50%  {                    opacity: 0.2; }
+  100% { margin-top: 0; opacity: 1; }
 }

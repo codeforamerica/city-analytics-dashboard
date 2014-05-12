@@ -50,45 +50,70 @@ h2 {
       margin: 0;
       padding: 0.5em 0;
       list-style: none;
+      /*
       font-size: 25px;
+      */
       line-height: 1;
-      -webkit-transition: font-size 0.5s; }
-      .bricks .brick .content ul li ul li:nth-child(1) {
+      /*
+      transition: font-size 0.5s;
+      -webkit-transition: font-size 0.5s;
+      */
+      animation-timing-function: cubic-bezier(0, 0, 0.58, 1); }
+      .bricks .brick .content ul li:nth-child(1) {
+        animation: fade-in 0.5s;
         -webkit-animation: fade-in 0.5s;
+        /*
         font-size: 160%;
-        color: #2c403c; }
+        color:$tertiary;
+        */ }
     .bricks .brick .search-terms ul li {
       margin: 0;
       padding: 0.5em 0;
       list-style: none;
       font-size: 25px;
       line-height: 1;
-      -webkit-transition: font-size 0.5s;
-      color: #2c403c; }
+      /* promote to a GPU layer */
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      -webkit-transition-timing-function: ease-out;
+      /*
+      color: $tertiary;
+
+      &:nth-child(1) {
+        animation: fade-in $animation-time;
+        -webkit-animation: fade-in $animation-time;
+        color: $primary;
+      }
+      &:nth-child(2)    { color: $secondary; }
+      */
+      color: #2f7360;
+      opacity: 0.5; }
       .bricks .brick .search-terms ul li:nth-child(1) {
-        -webkit-animation: fade-in 0.5s;
-        font-size: 160%;
-        color: #2f7360; }
+        opacity: 1.0;
+        animation: fade-in 0.5s;
+        -webkit-animation: fade-in 0.5s; }
       .bricks .brick .search-terms ul li:nth-child(2) {
-        color: #2a594c; }
-      .bricks .brick .search-terms ul li:nth-child(3) {
-        color: #2c403c; }
+        opacity: 0.7; }
   .bricks .searches ul li {
     margin: 0;
     padding: 0.5em 0;
     list-style: none;
     font-size: 25px;
     line-height: 1;
-    -webkit-transition: font-size 0.5s;
-    color: #2c403c; }
+    /* promote to a GPU layer */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    -webkit-transition-timing-function: ease-out;
+    transition: opacity 0.5s;
+    -webkit-transition: opacity 0.5s;
+    color: #2f7360;
+    opacity: 0.5; }
     .bricks .searches ul li:nth-child(1) {
+      opacity: 1.0;
+      animation: fade-in 0.5s;
       -webkit-animation: fade-in 0.5s; }
-    .bricks .searches ul li:nth-child(1) {
-      color: #2f7360; }
     .bricks .searches ul li:nth-child(2) {
-      color: #2a594c; }
-    .bricks .searches ul li:nth-child(3) {
-      color: #2c403c; }
+      opacity: 0.7; }
 
 .top-bar {
   background: #212126;
@@ -125,15 +150,14 @@ h2 {
     list-style: none;
     font-size: 25px;
     line-height: 1;
-    -webkit-transition: font-size .5s; }
-  .searches ul li:nth-child(1) {
-    -webkit-animation: fade-in .5s; }
-  .searches ul li:nth-child(1) {
-    font-size: 160%; }
-    .searches ul li:nth-child(1) em {
-      color: #6f777b; }
-  .searches ul li {
-    color: #2c403c; }
+    /* promote to a GPU layer */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    -webkit-transition-timing-function: ease-out;
+    transition: opacity 0.5s;
+    -webkit-transition: opacity 0.5s;
+    color: #2f7360;
+    opacity: 0.5; }
     .searches ul li em {
       color: #3E4345;
       font-style: normal;
@@ -142,16 +166,12 @@ h2 {
       font-weight: normal; }
       .searches ul li em span {
         font-size: 0.8em; }
-  .searches ul li:nth-child(1) {
-    color: #2f7360; }
-  .searches ul li:nth-child(2) {
-    color: #2a594c; }
-    .searches ul li:nth-child(2) em {
-      color: #5c6366; }
-  .searches ul li:nth-child(3) {
-    color: #2c403c; }
-    .searches ul li:nth-child(3) em {
-      color: #3E4345; }
+    .searches ul li:nth-child(1) {
+      animation: fade-in 0.5s;
+      -webkit-animation: fade-in 0.5s;
+      opacity: 1.0; }
+    .searches ul li:nth-child(2) {
+      opacity: 0.7; }
 
 .traffic {
   color: black;
@@ -217,8 +237,11 @@ h2 {
 
 @-webkit-keyframes fade-in {
   0% {
-    margin-top: -35px;
-    opacity: 0; }
+    margin-top: -50px;
+    opacity: 0.1; }
+
+  50% {
+    opacity: 0.2; }
 
   100% {
     margin-top: 0;
