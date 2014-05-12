@@ -20,7 +20,7 @@ h2 {
   background-image: none; }
 
 .bricks {
-  margin: 0 0 0 10px;
+  margin: 0;
   padding: 0; }
   .bricks .brick {
     display: inline-block;
@@ -28,7 +28,8 @@ h2 {
     width: 30%;
     background-color: #212126;
     border-radius: 3px;
-    margin: 3px;
+    border: 1px solid #0c0b0d;
+    margin: 0;
     max-height: 560px;
     overflow: hidden;
     padding: 1em; }
@@ -82,7 +83,7 @@ h2 {
 .top-bar {
   background: #212126;
   padding: 10px 20px;
-  margin: 10px 15px 2px 15px;
+  border: 1px solid #0c0b0d;
   border-radius: 3px;
   color: #000; }
   .top-bar .inner {
