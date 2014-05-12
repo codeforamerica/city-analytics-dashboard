@@ -34,16 +34,21 @@ h2{
 .bricks{
   margin:0;
   padding:0;
+  display:flex;
+  flex-flow: row nowrap;
+  flex-grow:1;
+  justify-content: space-between;
+
 
   .brick{
-    display:inline-block;
-    float:left;
-    width:29%;
+    order:auto;
+    width: 32%;
+    flex: 1 1 auto;
+    align-self:auto;
+    min-height:100%;
     background-color:$secondary-background;
     border-radius:3px;
     border:1px solid $background;
-    margin:0;
-    max-height:560px;
     overflow:hidden;
     padding:1em;
     ul, li {
