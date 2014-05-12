@@ -164,7 +164,8 @@ h1 {
   font-size: 22px;
   margin: 0;
   padding-bottom: 10px;
-  list-style: none; }
+  list-style: none;
+  color: #2f7360; }
   .content li em {
     font-style: normal;
     display: block;
