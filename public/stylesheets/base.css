@@ -135,7 +135,8 @@ h2 {
   .traffic .text-feature {
     color: white;
     display: block;
-    font-weight: bold; }
+    font-weight: bold;
+    font-size: 300%; }
   .traffic h1 {
     margin: 0em 0 0;
     font-size: 100px; }
@@ -143,12 +144,12 @@ h2 {
     margin: 0; }
   .traffic .count {
     float: left;
-    width: 33.33%; }
+    width: 20%; }
     .tall .traffic .count {
       width: 50%; }
   .traffic .graph {
     float: left;
-    width: 60%;
+    width: 80%;
     /*.tall & {
       width: 50%;
     }*/ }
