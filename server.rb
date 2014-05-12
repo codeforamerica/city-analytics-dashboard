@@ -40,6 +40,10 @@ get '/feed' do
   Hash.from_xml(response.body).to_json
 end
 
+get '/setup' do
+  File.read(File.join('public', 'setup.html'))
+end
+
 def get_token
   if @token.nil? || @token_timeout < Time.now
     params = {
