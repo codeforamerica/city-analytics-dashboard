@@ -110,9 +110,9 @@
       var term = landing.newTerms.pop();
       var url = landing.newURLs.pop();
       var source = landing.newSources.pop();
-      var sourceStr = (source) ? ' <em>source: '+source+'</em>' : '';
+      var sourceStr = (source) ? ' <em>via: '+source+'</em>' : '';
       if(term){
-        landing.$el.prepend('<li>'+$('<div>').text(term).html()+sourceStr+'</li>');
+        landing.$el.prepend('<li>'+$('<div>').text(term).html()+sourceStr+'<em>path: '+url+'</em></li>');
         landing.$el.find('li:gt(10)').remove();
         root.setTimeout(landing.displayResults, (landing.nextRefresh - Date.now())/landing.newTerms.length);
       } else {
