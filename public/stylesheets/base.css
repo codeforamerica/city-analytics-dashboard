@@ -128,9 +128,7 @@ h1 {
   padding: 20px; }
 
 .small-box {
-  overflow: hidden;
-  width: 100%;
-  height: 160px; }
+  overflow: hidden; }
 
 .searches h1 {
   font-size: 14px;
