@@ -2,10 +2,7 @@
 <head>
   <title>Data Screen</title>
   <link rel="stylesheet" href="./stylesheets/base.css">
-  <!--link rel="stylesheet" href="http://style.codeforamerica.org/0/style/css/main.css">
-  <link rel="stylesheet" href="http://style.codeforamerica.org/0/style/css/layout.css" media="all and (min-width: 40em)">
-  <link href="http://style.codeforamerica.org/0/style/css/prism.css" rel="stylesheet" /-->
-  <link href='http://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Bitter:400,700,400italic' rel='stylesheet' type='text/css'>
 </head>
 <body>
 <div class="js-container">
@@ -14,7 +11,10 @@
       <img src="http://style.codeforamerica.org/_assets/logo-colored.png" alt="Code for America">
     </div>
     <div style="float:left;" class="small-box traffic">
-
+        <span id="traffic" class="count">
+          <span class="text-feature" id="traffic-count">&nbsp;</span>
+          visitors online
+        </span>
         <div class="graph box-in">
           <div id="traffic-count-graph" class="box-inner">
           </div>
@@ -26,7 +26,7 @@
     <ul class="bricks bricks-cta bricks-3">
 
        <li class="brick badge-heading badge-red">
-              <h3 class="brick-heading">The words they're using to find stuff <em>right now!</em></h3>
+              <h2 class="brick-heading">Live search</h2>
           <div class="box search-terms">
             <div class="box-inner">
               <ul id="search-terms">
@@ -36,9 +36,7 @@
       </li>
 
       <li class="brick badge-heading badge-blue">
-              <h3 class="brick-heading">Where the <span id="traffic" class="count">
-                                                    <span class="text-feature" id="traffic-count">&nbsp;</span>
-                                                  </span> active visitors are <em>right now!</em></h3>
+              <h2 class="brick-heading">Active pages</h2>
           <div class="box searches">
             <div class="box-inner">
               <ul id="search"></ul>
@@ -46,10 +44,8 @@
           </div>
       </li>
 
-
-
       <li class="brick badge-heading badge-dark-blue">
-              <h3 class="brick-heading">Top pages in the last 7 days</h3>
+              <h2 class="brick-heading">Top pages in the last 7 days</h2>
           <div class="box popular content">
             <div class="box-inner">
               <ul id="content"></ul>
@@ -60,16 +56,6 @@
 
   </ul>
 </div>
-
-
-
-
-
-<!--div class="box recent content"><div class="box-inner">
-  <h1>Recent content from departments:</h1>
-  <ul id="inside-gov"></ul>
-</div></div-->
-
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 <script src="http://d3js.org/d3.v3.min.js"></script>
@@ -104,25 +90,30 @@
 </script>
 <script type="text/mustache" id="content-results">
   {{#pages}}
-    <li class="icon-star2">
+    <li>
       {{ title }}
+      <em>
+      visits: {{displayHits}}
+      <span class="triangle">&#x25b2;</span>&nbsp;<span class="percent">{{percentageUp}}</span>
+      </em>
     </li>
   {{/pages}}
 </script>
-<script type="text/mustache" id="search-results">
+<!--script type="text/mustache" id="search-results">
   {{#pages}}
-    <li class="icon-star2">
+    <li>
       {{ title }}
+      <em>Source: [[search]]</em>
     </li>
   {{/pages}}
 </script>
 <script type="text/mustache" id="search-term-results">
   {{#pages}}
-    <li class="icon-star2">
+    <li>
       {{ title }}
     </li>
   {{/pages}}
-</script>
+</script-->
 <!--//<em>
       //  visits: {{displayHits}}
       //  <span class="triangle">&#x25b2;</span>&nbsp;<span class="percent">{{percentageUp}}</span>

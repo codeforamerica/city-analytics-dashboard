@@ -1,3 +1,10 @@
+$background: #0C0B0D;
+$secondary-background: #212126;
+$tertiary: #2C403C;
+$secondary: #2A594C;
+$primary: #2F7360;
+$main-font: #fff;
+
 html {
   width: 100%;
   height: 100%;
@@ -5,15 +12,19 @@ html {
 }
 
 body {
-  background-color:#333;
+  background-color:$background;
   padding:0;
   margin:0;
-  color:#fff;
-  font-family: 'Roboto', sans-serif;
+  color:$main-font;
+  font-family: 'Bitter', serif;
 }
 
 h1{
   font-size:2em !important;
+}
+
+h2{
+  margin:0;
 }
 
 .brick.badge-heading{
@@ -21,14 +32,18 @@ h1{
 }
 
 .bricks{
-  margin:0;
+  margin:0 0 0 10px;
   padding:0;
 
   .brick{
     display:inline-block;
     float:left;
     width:30%;
-    margin:0;
+    background-color:$secondary-background;
+    border-radius:3px;
+    margin:3px;
+    max-height:560px;
+    overflow:hidden;
     padding:1em;
     ul, li {
       margin:0;
@@ -46,14 +61,9 @@ h1{
       ul li {
         &:nth-child(1) {
           -webkit-animation: fade-in 0.5s;
-          font-weight:bold;
           font-size: 160%;
+          color:$tertiary;
         }
-        &:nth-child(7) { opacity: 0.9; }
-        &:nth-child(8) { opacity: 0.7; }
-        &:nth-child(9) { opacity: 0.5; }
-        &:nth-child(10) { opacity: 0.25; }
-        &:nth-child(n+11) { display:none; }
       }
     }
 
@@ -64,24 +74,15 @@ h1{
       font-size: 25px;
       line-height: 1;
       -webkit-transition: font-size 0.5s;
-      color: #2b8cc4;
+      color: $tertiary;
 
       &:nth-child(1) {
         -webkit-animation: fade-in 0.5s;
-        font-weight: bold; /* FIXME(slightlyoff): doesn't transition well */
         font-size: 160%;
-        color: #df3133;
+        color: $primary;
       }
-      &:nth-child(2)    { color: #cc4c4a; }
-      &:nth-child(3)    { color: #b75f61; }
-      &:nth-child(4)    { color: #a06e77; }
-      &:nth-child(5)    { color: #867990; }
-      &:nth-child(6)    { color: #6683a9; }
-      &:nth-child(7)    { opacity: 0.9; }
-      &:nth-child(8)    { opacity: 0.7; }
-      &:nth-child(9)    { opacity: 0.5; }
-      &:nth-child(10)   { opacity: 0.25; }
-      &:nth-child(n+11) { display:none; }
+      &:nth-child(2)    { color: $secondary; }
+      &:nth-child(3)    { color: $tertiary; }
     }
 
   }
@@ -93,37 +94,30 @@ h1{
     font-size: 25px;
     line-height: 1;
     -webkit-transition: font-size 0.5s;
+    color: $tertiary;
 
     &:nth-child(1) {
       -webkit-animation: fade-in 0.5s;
      }
 
     &:nth-child(1) {
-      font-weight:bold;
-      font-size: 160%;
+      color: $primary;
+    }
+    &:nth-child(2) {
+      color: $secondary;
+    }
+    &:nth-child(3) {
+      color: $tertiary;
     }
 
-    &:nth-child(7) {
-      opacity: 0.9;
-    }
-    &:nth-child(8) {
-      opacity: 0.7;
-    }
-    &:nth-child(9) {
-      opacity: 0.5;
-    }
-    &:nth-child(10) {
-      opacity: 0.25;
-    }
-    &:nth-child(n+11) {
-      display:none;
-    }
   }
 }
 
 .top-bar {
-  background: #f1f1f1;
+  background: $secondary-background;
   padding: 10px 20px;
+  margin: 10px 15px 2px 15px;
+  border-radius: 3px;
   color:#000;
 
   .inner {
@@ -142,13 +136,8 @@ h1{
   height: calc(100% - 210px);
   text-align: left;
 }
-.box-inner {
-  padding: 20px;
-}
 .small-box {
   overflow: hidden;
-  width: 100%;
-  height: 160px;
 }
 .searches {
   h1 {
@@ -174,36 +163,32 @@ h1{
       -webkit-animation: fade-in .5s;
     }
     li:nth-child(1){ font-size: 160%; }
-    .not {
+
       li {
-        color: #2b8cc4;
+        color: $tertiary;
       }
       li:nth-child(1){
-        color: #df3133;
+        color: $primary;
       }
       li:nth-child(2){
-        color: #cc4c4a;
+        color: $secondary;
       }
       li:nth-child(3){
-        color: #b75f61;
+        color: $tertiary;
       }
-      li:nth-child(4){
-        color: #a06e77;
-      }
-      li:nth-child(5){
-        color: #867990;
-      }
-      li:nth-child(6){
-        color: #6683a9;
-      }
-    }
   }
 }
 
 .traffic {
   color: black;
-  text-align: left;
+  color: $primary;
+  text-align: center;
 
+  .text-feature{
+    color: $main-font;
+    display:block;
+    font-weight:bold;
+  }
   h1 {
     margin: 0em 0 0;
     font-size: 100px;
@@ -252,6 +237,7 @@ h1{
     margin: 0;
     padding-bottom: 10px;
     list-style: none;
+    color: $primary;
     em {
       font-style: normal;
       display: block;
@@ -272,6 +258,18 @@ h1{
     }
   }
   li:nth-child(1){ font-size: 160%; }
+}
+#search{
+  em{
+    font-style: normal;
+    display: block;
+      font-size: 0.8em;
+      font-weight: normal;
+      color: #6f777b;
+      span {
+        font-size: 0.8em;
+        }
+  }
 }
 @-webkit-keyframes fade-in {
   0%   { margin-top: -35px; opacity: 0;}

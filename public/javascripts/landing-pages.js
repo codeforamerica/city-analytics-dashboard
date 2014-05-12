@@ -106,7 +106,7 @@
       var term = landing.newTerms.pop();
       var url = landing.newURLs.pop();
       if(term){
-        landing.$el.prepend('<li>'+$('<div>').text(term).html()+'</li>');
+        landing.$el.prepend('<li>'+$('<div>').text(term).html()+' <em>Source: </em></li>');
         landing.$el.find('li:gt(10)').remove();
         root.setTimeout(landing.displayResults, (landing.nextRefresh - Date.now())/landing.newTerms.length);
       } else {
