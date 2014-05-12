@@ -131,7 +131,11 @@ h2 {
 
 #traffic {
   color: #2f7360;
-  text-align: left; }
+  text-align: center; }
+  #traffic .text-feature {
+    color: white;
+    display: block;
+    font-weight: bold; }
   #traffic h1 {
     margin: 0em 0 0;
     font-size: 100px; }

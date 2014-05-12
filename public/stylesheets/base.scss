@@ -179,8 +179,13 @@ h2{
 
 #traffic {
   color: $primary;
-  text-align: left;
+  text-align: center;
 
+  .text-feature{
+    color: $main-font;
+    display:block; 
+    font-weight:bold;
+  }
   h1 {
     margin: 0em 0 0;
     font-size: 100px;
