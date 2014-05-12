@@ -13,6 +13,9 @@ body {
 h1 {
   font-size: 2em !important; }
 
+h3 {
+  margin: 0; }
+
 .brick.badge-heading {
   background-image: none; }
 
