@@ -29,6 +29,8 @@ h2 {
     background-color: #212126;
     border-radius: 3px;
     margin: 3px;
+    max-height: 560px;
+    overflow: hidden;
     padding: 1em; }
     .bricks .brick ul, .bricks .brick li {
       margin: 0;

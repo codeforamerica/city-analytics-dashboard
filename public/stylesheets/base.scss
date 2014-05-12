@@ -42,6 +42,8 @@ h2{
     background-color:$secondary-background;
     border-radius:3px;
     margin:3px;
+    max-height:560px;
+    overflow:hidden;
     padding:1em;
     ul, li {
       margin:0;
