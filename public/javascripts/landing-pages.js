@@ -10,6 +10,7 @@
     urls: [],
     newTerms: [],
     newURLs: [],
+    newSources: [],
     $el: false,
     nextRefresh: 0,
 
@@ -17,7 +18,7 @@
       return "/realtime?"
         + "ids=ga:56899021&"
         + "metrics=ga:activeVisitors&"
-        + "dimensions=ga:pageTitle,ga:pagePath&"
+        + "dimensions=ga:pageTitle,ga:pagePath,rt:source&"
         /*+ "filters="+ encodeURIComponent("ga:pagePath==/search") +"&"*/
         + "sort=-ga:activeVisitors&"
         + "max-results=10000";
@@ -41,7 +42,7 @@
       }
       return true;
     },
-    addTerm: function(term, count, url){
+    addTerm: function(term, count, url, source){
 
       var i, _i;
       for(i=0, _i=landing.terms.length; i<_i;  i++){
@@ -55,7 +56,8 @@
         total: 0,
         nextTick: count,
         currentTick: 0,
-        url: url
+        url: url,
+        source: source
       });
     },
     zeroNextTicks: function(){
@@ -65,12 +67,13 @@
       }
     },
     addNextTickValues: function(data){
-      var i, _i, term, url;
+      var i, _i, term, url, source;
       for(i=0,_i=data.rows.length; i<_i; i++){
         term = data.rows[i][0].split(' — ');
         url = data.rows[i][1];
+        source = data.rows[i][2];
         if(term[0] !== 'Search' && landing.safeTerm(term[0])){
-          landing.addTerm(term[0], root.parseInt(data.rows[i][2], 10), url);
+          landing.addTerm(term[0], root.parseInt(data.rows[i][3], 10), url, source);
         }
        
       }
@@ -86,6 +89,7 @@
           for(j=0,_j=newPeople; j<_j; j++){
             landing.newTerms.push(term.term);
             landing.newURLs.push(term.url);
+            landing.newSources.push(term.source);
           }
         }
         if(term.currentTick > 0){
@@ -105,8 +109,10 @@
     displayResults: function(){
       var term = landing.newTerms.pop();
       var url = landing.newURLs.pop();
+      var source = landing.newSources.pop();
+      var sourceStr = (source) ? ' <em>source: '+source+'</em>' : '';
       if(term){
-        landing.$el.prepend('<li>'+$('<div>').text(term).html()+' <em>source: </em></li>');
+        landing.$el.prepend('<li>'+$('<div>').text(term).html()+sourceStr+'</li>');
         landing.$el.find('li:gt(10)').remove();
         root.setTimeout(landing.displayResults, (landing.nextRefresh - Date.now())/landing.newTerms.length);
       } else {
