@@ -32,8 +32,8 @@
       if(term.match(/^[0-9\s]+$/)){
         return false;
       }
-      // Nothing that is like a NI number
-      if(term.match(/^[A-Za-z]{2}\s+?[0-9]{2}\s+?[0-9]{2}\s+?[0-9]{2}\s+?[A-Za-z]$/)){
+      // Nothing that is like a SSN
+      if(term.match(/^[0-9]{3}\s+?[0-9]{2}\s+?[0-9]{4}$/)){
         return false;
       }
       // filter out pages that don't have associated search terms
@@ -50,7 +50,7 @@
       return true;
     },
     addTerm: function(term, count, url){
-     // console.log("term: "+term+" count: "+count+" url: "+url) 
+     // console.log("term: "+term+" count: "+count+" url: "+url)
       var i, _i;
       for(i=0, _i=search.terms.length; i<_i;  i++){
         if(search.terms[i].term === term){
@@ -84,7 +84,7 @@
          // console.log(term[0])
           search.addTerm(term[0], root.parseInt(data.rows[i][2], 10), url);
         }
-       
+
       }
     },
     addTimeIndexValues: function(){
