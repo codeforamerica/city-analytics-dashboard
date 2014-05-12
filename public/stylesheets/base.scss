@@ -200,9 +200,8 @@ h1{
   }
 }
 
-#traffic {
-  background: #2b8cc4;
-  color: #fff;
+.traffic {
+  color: black;
   text-align: left;
 
   h1 {
@@ -228,12 +227,12 @@ h1{
     }
   }
   path, line.axis {
-    stroke: #fff;
-    stroke-width: 2;
+    stroke: black;
+    stroke-width: 0.4;
     fill: none;
   }
   .label {
-    fill: #fff;
+    fill: black;
     font-size: 16px;
   }
 }

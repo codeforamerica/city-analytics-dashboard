@@ -167,31 +167,30 @@ h1 {
   .searches ul .not li:nth-child(6) {
     color: #6683a9; }
 
-#traffic {
-  background: #2b8cc4;
-  color: #fff;
+.traffic {
+  color: black;
   text-align: left; }
-  #traffic h1 {
+  .traffic h1 {
     margin: 0em 0 0;
     font-size: 100px; }
-  #traffic p {
+  .traffic p {
     margin: 0; }
-  #traffic .count {
+  .traffic .count {
     float: left;
     width: 33.33%; }
-    .tall #traffic .count {
+    .tall .traffic .count {
       width: 50%; }
-  #traffic .graph {
+  .traffic .graph {
     float: left;
     width: 66.66%; }
-    .tall #traffic .graph {
+    .tall .traffic .graph {
       width: 50%; }
-  #traffic path, #traffic line.axis {
-    stroke: #fff;
-    stroke-width: 2;
+  .traffic path, .traffic line.axis {
+    stroke: black;
+    stroke-width: 0.4;
     fill: none; }
-  #traffic .label {
-    fill: #fff;
+  .traffic .label {
+    fill: black;
     font-size: 16px; }
 
 .content h1 {
