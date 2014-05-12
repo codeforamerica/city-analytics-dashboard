@@ -1,7 +1,7 @@
 /* This gets the data for the total people currently online and the sparkline */
 (function(){
   "use strict"
-  var debug = 1;
+  var debug = 0;
   var root = this,
       $ = root.jQuery;
   if(typeof root.matrix === 'undefined'){ root.matrix = {} }
