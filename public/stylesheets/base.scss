@@ -171,19 +171,41 @@ h2{
     li:nth-child(1){
       -webkit-animation: fade-in .5s;
     }
-    li:nth-child(1){ font-size: 160%; }
+    li:nth-child(1){ 
+      font-size: 160%; 
+      em{
+        color:#6f777b;
+      }
+      }
 
       li {
         color: $tertiary;
+        em{
+          color:#3E4345;
+          font-style: normal;
+          display: block;
+          font-size: 0.8em;
+          font-weight: normal;
+          span {
+            font-size: 0.8em;
+          }
+        }
+        
       }
       li:nth-child(1){
         color: $primary;
       }
       li:nth-child(2){
         color: $secondary;
+        em{
+          color:#5C6366
+        }
       }
       li:nth-child(3){
         color: $tertiary;
+        em{
+          color:#3E4345;
+        }
       }
   }
 }
@@ -269,18 +291,7 @@ h2{
   }
   li:nth-child(1){ font-size: 160%; }
 }
-#search{
-  em{
-    font-style: normal;
-    display: block;
-      font-size: 0.8em;
-      font-weight: normal;
-      color: #6f777b;
-      span {
-        font-size: 0.8em;
-        }
-  }
-}
+
 @-webkit-keyframes fade-in {
   0%   { margin-top: -35px; opacity: 0;}
   100% { margin-top: 0; opacity: 1;}
