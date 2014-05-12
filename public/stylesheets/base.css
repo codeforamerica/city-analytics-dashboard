@@ -37,7 +37,6 @@ h1 {
       -webkit-transition: font-size 0.5s; }
       .bricks .brick .content ul li ul li:nth-child(1) {
         -webkit-animation: fade-in 0.5s;
-        font-weight: bold;
         font-size: 160%; }
       .bricks .brick .content ul li ul li:nth-child(7) {
         opacity: 0.9; }
@@ -59,8 +58,6 @@ h1 {
       color: #2b8cc4; }
       .bricks .brick .search-terms ul li:nth-child(1) {
         -webkit-animation: fade-in 0.5s;
-        font-weight: bold;
-        /* FIXME(slightlyoff): doesn't transition well */
         font-size: 160%;
         color: #df3133; }
       .bricks .brick .search-terms ul li:nth-child(2) {
@@ -93,7 +90,6 @@ h1 {
     .bricks .searches ul li:nth-child(1) {
       -webkit-animation: fade-in 0.5s; }
     .bricks .searches ul li:nth-child(1) {
-      font-weight: bold;
       font-size: 160%; }
     .bricks .searches ul li:nth-child(7) {
       opacity: 0.9; }

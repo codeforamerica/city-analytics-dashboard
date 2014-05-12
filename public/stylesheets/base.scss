@@ -46,7 +46,6 @@ h1{
       ul li {
         &:nth-child(1) {
           -webkit-animation: fade-in 0.5s;
-          font-weight:bold;
           font-size: 160%;
         }
         &:nth-child(7) { opacity: 0.9; }
@@ -68,7 +67,6 @@ h1{
 
       &:nth-child(1) {
         -webkit-animation: fade-in 0.5s;
-        font-weight: bold; /* FIXME(slightlyoff): doesn't transition well */
         font-size: 160%;
         color: #df3133;
       }
@@ -99,7 +97,6 @@ h1{
      }
 
     &:nth-child(1) {
-      font-weight:bold;
       font-size: 160%;
     }
 
