@@ -179,13 +179,14 @@ h2{
   }
 }
 
-#traffic {
+.traffic {
+  color: black;
   color: $primary;
   text-align: center;
 
   .text-feature{
     color: $main-font;
-    display:block; 
+    display:block;
     font-weight:bold;
   }
   h1 {
@@ -211,12 +212,12 @@ h2{
     }
   }
   path, line.axis {
-    stroke: #fff;
-    stroke-width: 2;
+    stroke: black;
+    stroke-width: 0.4;
     fill: none;
   }
   .label {
-    fill: #fff;
+    fill: black;
     font-size: 16px;
   }
 }
