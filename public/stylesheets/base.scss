@@ -1,4 +1,4 @@
-$background: #333;
+$background: #0C0B0D;
 $secondary-background: #212126;
 $tertiary: #2C403C;
 $secondary: #2A594C;
@@ -12,7 +12,7 @@ html {
 }
 
 body {
-  background-color:$secondary-background;
+  background-color:$background;
   padding:0;
   margin:0;
   color:$main-font;
@@ -28,14 +28,16 @@ h1{
 }
 
 .bricks{
-  margin:0;
+  margin:0 0 0 10px;
   padding:0;
 
   .brick{
     display:inline-block;
     float:left;
     width:30%;
-    margin:0;
+    background-color:$secondary-background;
+    border-radius:3px;
+    margin:3px;
     padding:1em;
     ul, li {
       margin:0;
@@ -106,8 +108,10 @@ h1{
 }
 
 .top-bar {
-  background: $background;
+  background: $secondary-background;
   padding: 10px 20px;
+  margin: 10px 15px 2px 15px;
+  border-radius: 3px;
   color:#000;
 
   .inner {
@@ -125,9 +129,6 @@ h1{
 .box {
   height: calc(100% - 210px);
   text-align: left;
-}
-.box-inner {
-  padding: 20px;
 }
 .small-box {
   overflow: hidden;
