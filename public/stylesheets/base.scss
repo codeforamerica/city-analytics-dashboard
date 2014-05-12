@@ -136,9 +136,7 @@ h2{
   height: calc(100% - 210px);
   text-align: left;
 }
-.small-box {
-  overflow: hidden;
-}
+
 .searches {
   h1 {
     font-size: 14px;
@@ -206,18 +204,18 @@ h2{
   }
   .graph {
     float: left;
-    width: 66.66%;
-    .tall & {
+    width: 500px;
+    /*.tall & {
       width: 50%;
-    }
+    }*/
   }
   path, line.axis {
-    stroke: black;
+    stroke: $main-font;
     stroke-width: 0.4;
     fill: none;
   }
   .label {
-    fill: black;
+    fill: $secondary;
     font-size: 16px;
   }
 }

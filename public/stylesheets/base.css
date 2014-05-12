@@ -99,9 +99,6 @@ h2 {
   height: calc(100% - 210px);
   text-align: left; }
 
-.small-box {
-  overflow: hidden; }
-
 .searches h1 {
   font-size: 14px;
   font-weight: 500;
@@ -151,15 +148,16 @@ h2 {
       width: 50%; }
   .traffic .graph {
     float: left;
-    width: 66.66%; }
-    .tall .traffic .graph {
-      width: 50%; }
+    width: 500px;
+    /*.tall & {
+      width: 50%;
+    }*/ }
   .traffic path, .traffic line.axis {
-    stroke: black;
+    stroke: white;
     stroke-width: 0.4;
     fill: none; }
   .traffic .label {
-    fill: black;
+    fill: #2a594c;
     font-size: 16px; }
 
 .content h1 {
