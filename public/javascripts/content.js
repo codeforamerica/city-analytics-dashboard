@@ -9,7 +9,7 @@
     $el: false,
 
     endpoint: function(){
-      return "/realtime?ids=ga:56899021&metrics=rt%3Apageviews&dimensions=rt%3ApageTitle&max-results=10&sort=-rt%3Apageviews"
+      return "/realtime?ids=ga:25299571&metrics=rt%3Apageviews&dimensions=rt%3ApageTitle&max-results=10&sort=-rt%3Apageviews"
     },
     parseResponse: function(data){
       var i, _i;
