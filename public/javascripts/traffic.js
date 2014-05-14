@@ -22,7 +22,7 @@
     interval: (debug) ? 500 : 2 * 60 * 1000,
 
     endpoint: function(){
-      return "/realtime?ids=ga:25299571&metrics=rt:activeUsers&max-results=10"
+      return "/realtime?ids=ga:"+matrix.settings.profileId+"&metrics=rt:activeUsers&max-results=10"
     },
     parseResponse: function(data){
       var i, _i;

@@ -16,7 +16,7 @@
 
     endpoint: function(profileId){
       return "/realtime?"
-        + "ids=ga:25299571&"
+        + "ids=ga:"+matrix.settings.profileId+"&"
         + "metrics=ga:activeVisitors&"
         + "dimensions=ga:pageTitle,ga:pagePath,rt:source&"
         /*+ "filters="+ encodeURIComponent("ga:pagePath==/search") +"&"*/
