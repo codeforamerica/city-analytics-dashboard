@@ -69,7 +69,7 @@
     addNextTickValues: function(data){
       var i, _i, term, url, source;
       for(i=0,_i=data.rows.length; i<_i; i++){
-        term = data.rows[i][0].split(' — ');
+        term = data.rows[i][0].split(matrix.settings.titlefilter);
         url = data.rows[i][1];
         source = data.rows[i][2];
         if(term[0] !== 'Search' && landing.safeTerm(term[0])){
@@ -111,8 +111,9 @@
       var url = landing.newURLs.pop();
       var source = landing.newSources.pop();
       var sourceStr = (source) ? ' <em>via: '+source+'</em>' : '';
+      var linkStr = (url) ? ' <a href="http://'+url+'">link</a>' : '';
       if(term){
-        landing.$el.prepend('<li>'+$('<div>').text(term).html()+sourceStr);
+        landing.$el.prepend('<li>'+$('<div>').text(term).html()+sourceStr+linkStr);
         landing.$el.find('li:gt(10)').remove();
         root.setTimeout(landing.displayResults, (landing.nextRefresh - Date.now())/landing.newTerms.length);
       } else {
