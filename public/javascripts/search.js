@@ -18,7 +18,7 @@
         + "ids=ga:"+matrix.settings.profileId+"&"
         + "metrics=rt:activeVisitors&"
         + "dimensions=rt:pageTitle,rt:keyword&"
-        + "sort=-rt:activeVisitors&"
+        //+ "sort=-rt:activeVisitors&"
         + "max-results=10000";
     },
     safeTerm: function(term){
