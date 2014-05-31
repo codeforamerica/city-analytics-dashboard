@@ -108,10 +108,10 @@
     },
     displayResults: function(){
       var term = landing.newTerms.pop();
-      var url = landing.newURLs.pop();
+      var url = landing.newURLs.pop();  
       var source = landing.newSources.pop();
       var sourceStr = (source) ? ' <em>via: '+source+'</em>' : '';
-      var linkStr = (url) ? ' <a href="http://'+url+'" target="_blank"><img src="../stylesheets/icons/external-link.png" alt="external link"  height="16px" width="16px"></a>' : '';
+      var linkStr = (url) ? ' <a href="http://'+url+'" target="_blank"><img style="background-color:#fff;padding:1px" src="../stylesheets/icons/external-link.png" alt="external link"  height="16px" width="16px"></a>' : '';
       if(term){
         landing.$el.prepend('<li>'+$('<div>').text(term).html()+linkStr+sourceStr);
         landing.$el.find('li:gt(10)').remove();
