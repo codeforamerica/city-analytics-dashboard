@@ -68,7 +68,6 @@
     },
     addNextTickValues: function(data){
       var i, _i, term, url, source;
-      console.log("term: "+term+" url: "+url+" source:"+source);
       for(i=0,_i=data.rows.length; i<_i; i++){
         term = data.rows[i][0].split(' - ');
         url = data.rows[i][1];
