@@ -28,7 +28,13 @@ It's probably worth generating everything you need, then creating a .env file in
     GA_WEBSITE_URL=www.yoursite.com
 ```
 
-Then, once you've added that file, you can simple run foreman start -e .env and view the project at localhost:5000
+Then, once you've added that file, you can simple run 
+
+```
+    foreman start -e .env
+```
+
+and view the project at localhost:5000
 
 Also, you'll need to change the profileID in index to that of your GA UA.
 
