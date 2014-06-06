@@ -25,7 +25,7 @@ It's probably worth generating everything you need, then creating a .env file in
     CLIENT_SECRET=XXX
     REFRESH_TOKEN=XXX
     GA_VIEW_ID=XXX
-    GA_WEBSITE_URL=XXX
+    GA_WEBSITE_URL=www.yoursite.com
 ```
 
 Then, once you've added that file, you can simple run foreman start -e .env and view the project at localhost:5000
