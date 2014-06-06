@@ -1,16 +1,14 @@
 /* Inbound search terms */
-(function(){
+(function(root){
   "use strict"
-  var root = this,
-      $ = root.jQuery;
-  if(typeof root.matrix === 'undefined'){ root.matrix = {} }
+  if (typeof root.matrix == "undefined") { root.matrix = {}; }
 
   var search = {
     terms: [],
     urls: [],
     newTerms: [],
     newURLs: [],
-    $el: false,
+    el: false,
     nextRefresh: 0,
 
     endpoint: function(profileId){
@@ -97,7 +95,9 @@
           nonZeroTerms.push(term);
         }
       }
-      search.newTerms.sort(function(){ return Math.floor((Math.random() * 3) - 1) });
+      search.newTerms.sort(function(){
+        return Math.floor((Math.random() * 3) - 1)
+      });
       search.terms = nonZeroTerms;
     },
     parseResponse: function(data){
@@ -110,16 +110,20 @@
     displayResults: function(){
       var term = search.newTerms.pop();
       var url = search.newURLs.pop();
+      var el = search.el;
       if(term){
-        search.$el.prepend('<li>'+$('<div>').text(term).html()+'</li>');
-        search.$el.find('li:gt(20)').remove();
-        root.setTimeout(search.displayResults, (search.nextRefresh - Date.now())/search.newTerms.length);
+        var tempList = el.ol().template("search-result-item", { term: term });
+        // FIXME(slightlyoff): animate insertion on rAF
+        el.prepend(tempList.firstElementChild);
+        el.maxChildren(20);
+        setTimeout(search.displayResults,
+                   (search.nextRefresh - Date.now())/search.newTerms.length);
       } else {
-        root.setTimeout(search.displayResults, 5e3);
+        setTimeout(search.displayResults, 5000);
       }
     },
     init: function(){
-      search.$el = $('#search-terms');
+      search.el = document.getElementById('search-terms');
       search.reload();
       search.displayResults();
       window.setInterval(search.reload, 60e3);
@@ -127,9 +131,9 @@
     reload: function(){
       var endpoint = search.endpoint(root.matrix.settings.profileId);
       search.nextRefresh = Date.now() + 60e3;
-      $.ajax({ dataType: 'json', url: endpoint, success: search.parseResponse});
+      d3.json(endpoint, search.parseResponse);
     }
   };
 
   root.matrix.search = search;
-}).call(this);
+}).call(this, this);

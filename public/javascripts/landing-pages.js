@@ -1,9 +1,7 @@
 /* This one gets which pages are being hit right now */
-(function(){
+(function(root){
   "use strict"
-  var root = this,
-      $ = root.jQuery;
-  if(typeof root.matrix === 'undefined'){ root.matrix = {} }
+  if (typeof root.matrix == "undefined") { root.matrix = {}; }
 
   var landing = {
     terms: [],
@@ -11,7 +9,7 @@
     newTerms: [],
     newURLs: [],
     newSources: [],
-    $el: false,
+    el: false,
     nextRefresh: 0,
 
     endpoint: function(profileId){
@@ -32,8 +30,8 @@
       if(term.match(/^[0-9\s]+$/)){
         return false;
       }
-      // Nothing that is like a NI number
-      if(term.match(/^[A-Za-z]{2}\s+?[0-9]{2}\s+?[0-9]{2}\s+?[0-9]{2}\s+?[A-Za-z]$/)){
+      // Nothing that is like a SSN
+      if(term.match(/^[0-9]{3}\s+?[0-9]{2}\s+?[0-9]{4}$/)){
         return false;
       }
       // No 503 requests
@@ -75,7 +73,7 @@
         if(term[0] !== 'Search' && landing.safeTerm(term[0])){
           landing.addTerm(term[0], root.parseInt(data.rows[i][3], 10), url, source);
         }
-       
+
       }
     },
     addTimeIndexValues: function(){
@@ -108,20 +106,29 @@
     },
     displayResults: function(){
       var term = landing.newTerms.pop();
-      var url = landing.newURLs.pop();  
+      var url = landing.newURLs.pop();
       var source = landing.newSources.pop();
-      var sourceStr = (source) ? ' <em>via: '+source+'</em>' : '';
-      var linkStr = (url) ? ' <a href="http://'+url+'" target="_blank"><img style="background-color:#fff;padding:1px" src="../stylesheets/icons/external-link.png" alt="external link"  height="16px" width="16px"></a>' : '';
+      var el = landing.el;
       if(term){
-        landing.$el.prepend('<li>'+$('<div>').text(term).html()+linkStr+sourceStr);
-        landing.$el.find('li:gt(10)').remove();
-        root.setTimeout(landing.displayResults, (landing.nextRefresh - Date.now())/landing.newTerms.length);
+        var context = {
+          term: term,
+          has_url: !!url,
+          url: url,
+          has_source: !!source,
+          source: source,
+        }
+        var tempList = el.ol().template("landing-pages-item", context);
+        // FIXME(slightlyoff): animate insertion on rAF
+        el.prepend(tempList.firstElementChild);
+        el.maxChildren(10);
+        setTimeout(landing.displayResults,
+                  (landing.nextRefresh - Date.now())/landing.newTerms.length);
       } else {
-        root.setTimeout(landing.displayResults, 5e3);
+        root.setTimeout(landing.displayResults, 5000);
       }
     },
     init: function(){
-      landing.$el = $('#search');
+      landing.el = document.getElementById('search');
       landing.reload();
       landing.displayResults();
       window.setInterval(landing.reload, 60e3);
@@ -129,9 +136,9 @@
     reload: function(){
       var endpoint = landing.endpoint(root.matrix.settings.profileId);
       landing.nextRefresh = Date.now() + 60e3;
-      $.ajax({ dataType: 'json', url: endpoint, success: landing.parseResponse});
+      d3.json(endpoint, landing.parseResponse);
     }
   };
 
   root.matrix.landing = landing;
-}).call(this);
+}).call(this, this);

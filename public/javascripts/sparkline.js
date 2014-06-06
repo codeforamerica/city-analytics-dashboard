@@ -1,9 +1,6 @@
-(function(){
+(function(root){
   "use strict";
-  var root = this,
-      $ = root.jQuery;
-
-  if(typeof root.matrix === 'undefined'){ root.matrix = {}; }
+  if (typeof root.matrix == "undefined") { root.matrix = {}; }
 
   var makeScales = function(data, width, height) {
     var maxY = d3.max(data),
@@ -119,4 +116,4 @@
 
   root.matrix.sparkline = sparkline;
   root.matrix.sparklineGraph = sparklineGraph;
-}).call(this);
+}).call(this, this);
