@@ -22,6 +22,8 @@ REFRESH_TOKEN=XXX
 
 Then, once you've added that file, you can simple run foreman start -e .env and view the project at localhost:5000
 
+Also, you'll need to change the profileID in index to that of your GA UA.
+
 # Licence
 
 Copyright (C) 2013 Edd Sowden

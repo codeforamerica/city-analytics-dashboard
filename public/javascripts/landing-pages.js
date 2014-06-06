@@ -69,7 +69,7 @@
     addNextTickValues: function(data){
       var i, _i, term, url, source;
       for(i=0,_i=data.rows.length; i<_i; i++){
-        term = data.rows[i][0].split(' — ');
+        term = data.rows[i][0].split(' - ');
         url = data.rows[i][1];
         source = data.rows[i][2];
         if(term[0] !== 'Search' && landing.safeTerm(term[0])){
@@ -108,11 +108,12 @@
     },
     displayResults: function(){
       var term = landing.newTerms.pop();
-      var url = landing.newURLs.pop();
+      var url = landing.newURLs.pop();  
       var source = landing.newSources.pop();
       var sourceStr = (source) ? ' <em>via: '+source+'</em>' : '';
+      var linkStr = (url) ? ' <a href="http://'+url+'" target="_blank"><img style="background-color:#fff;padding:1px" src="../stylesheets/icons/external-link.png" alt="external link"  height="16px" width="16px"></a>' : '';
       if(term){
-        landing.$el.prepend('<li>'+$('<div>').text(term).html()+sourceStr);
+        landing.$el.prepend('<li>'+$('<div>').text(term).html()+linkStr+sourceStr);
         landing.$el.find('li:gt(10)').remove();
         root.setTimeout(landing.displayResults, (landing.nextRefresh - Date.now())/landing.newTerms.length);
       } else {
