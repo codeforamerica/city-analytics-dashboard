@@ -100,7 +100,6 @@
       var x = Math.min(dt / animationDuration, 1);
       var y = Bezier.cubicBezier(0.4, 0, 0.2, 1, x, animationDuration);
       var topDelta = (y - lasty) * height;
-      console.log(topDelta);
       elements.forEach(function(e) {
         var t = parseFloat(e.style.top);
         e.style.top = (t+topDelta)+"px";
