@@ -28,7 +28,7 @@
     <ul class="bricks bricks-cta bricks-3">
 
        <li class="brick badge-heading badge-red">
-              <h2 class="brick-heading">Live search</h2>
+          <h2 class="brick-heading">Live search</h2>
           <div class="box search-terms">
             <div class="box-inner">
               <ul id="search-terms">
@@ -38,7 +38,7 @@
       </li>
 
       <li class="brick badge-heading badge-blue">
-              <h2 class="brick-heading">Active pages</h2>
+          <h2 class="brick-heading">Active pages</h2>
           <div class="box searches">
             <div class="box-inner">
               <ul id="search"></ul>
@@ -47,7 +47,7 @@
       </li>
 
       <li class="brick badge-heading badge-dark-blue">
-              <h2 class="brick-heading">Most popular pages</h2>
+          <h2 class="brick-heading">Most popular pages</h2>
           <div class="box popular content">
             <div class="box-inner">
               <ul id="content"></ul>
@@ -59,12 +59,11 @@
   </ul>
 </div>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="javascripts/vendor/d3.v3.min.js"></script>
 <script src="javascripts/vendor/mustache.js"></script>
 <script src="javascripts/vendor/pretty.js"></script>
+<script src="javascripts/vendor/bezier.js"></script>
 
-<script src="javascripts/template.js"></script>
 <script src="javascripts/sparkline.js"></script>
 <script src="javascripts/landing-pages.js"></script>
 <script src="javascripts/search.js"></script>
@@ -82,17 +81,19 @@
     titlefilter: ' ~ '
   };
 
-  $(function(){
-   matrix.manager.init();
-  });
+  window.addEventListener("load", matrix.manager.init);
 </script>
-<script type="text/mustache" id="select-options">
+
+
+
+<script type="template" id="select-options">
   <option value="">Select {{object}}</option>
   {{#options}}
     <option value="{{id}}">{{name}}</option>
   {{/options}}
 </script>
-<script type="text/mustache" id="content-results">
+
+<script type="template" id="content-results">
   {{#pages}}
     <li>
       {{ title }}
@@ -103,6 +104,29 @@
     </li>
   {{/pages}}
 </script>
+
+<script type="template" id="search-result-item">
+  <li><div>{{ term }}</div></li>
+</script>
+
+<script type="template" id="landing-pages-item">
+  <li>
+    <div>
+      {{ term }}
+      {{#has_url}}
+        <a href="http://{{ url }}" target="_blank"><img
+            style="background-color:#fff;padding:1px"
+            src="../stylesheets/icons/external-link.png"
+            alt="external link"  height="16px" width="16px"></a>
+      {{/has_url}}
+      {{#has_source}}
+        <em>via: {{ source }}</em>
+      {{/has_source}}
+    </div>
+  </li>
+</script>
+
+
 <!--script type="text/mustache" id="search-results">
 <span class="triangle">&#x25b2;</span>&nbsp;<span class="percent">{{percentageUp}}</span>
   {{#pages}}

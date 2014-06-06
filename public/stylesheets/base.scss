@@ -61,46 +61,37 @@ h2{
   justify-content: space-between;
   -webkit-justify-content: space-between;
 
-  .brick{
-    order:auto;
+  .brick {
+    order: auto;
     width: 32%;
     flex: 1 1 auto;
     -webkit-flex: 1 1 auto;
-    align-self:auto;
-    -webkit-align-self:auto;
-    min-height:100%;
-    background-color:$secondary-background;
-    border-radius:3px;
-    border:1px solid $background;
-    overflow:hidden;
-    padding:1em;
+    align-self: auto;
+    -webkit-align-self: auto;
+    min-height: 100%;
+    background-color: $secondary-background;
+    border-radius: 3px;
+    border: 1px solid $background;
+    overflow: hidden;
+    padding: 1em;
+
     ul, li {
-      margin:0;
-      padding:0;
+      margin: 0;
+      padding: 0;
+
+      /* promote to a GPU layer */
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+
+      animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      -webkit-animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .content ul li {
       margin: 0;
-      padding:0.5em 0;
+      padding: 0.5em 0;
       list-style: none;
-      /*
-      font-size: 25px;
-      */
       line-height: 1;
-      /*
-      transition: font-size 0.5s;
-      -webkit-transition: font-size 0.5s;
-      */
-      animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
-
-      &:nth-child(1) {
-        animation: fade-in $animation-time;
-        -webkit-animation: fade-in $animation-time;
-        /*
-        font-size: 160%;
-        color:$tertiary;
-        */
-      }
     }
 
     .search-terms ul li {
@@ -110,28 +101,10 @@ h2{
       font-size: 25px;
       line-height: 1;
 
-      /* promote to a GPU layer */
-      transform: translateZ(0);
-      -webkit-transform: translateZ(0);
-      -webkit-transition-timing-function: ease-out;
-      /*
-      color: $tertiary;
-
-      &:nth-child(1) {
-        animation: fade-in $animation-time;
-        -webkit-animation: fade-in $animation-time;
-        color: $primary;
-      }
-      &:nth-child(2)    { color: $secondary; }
-      */
       color: $primary;
       opacity: 0.5;
 
-      &:nth-child(1) {
-        opacity: 1.0;
-        animation: fade-in $animation-time;
-        -webkit-animation: fade-in $animation-time;
-      }
+      &:nth-child(1) { opacity: 1.0; }
       &:nth-child(2) { opacity: 0.7; }
     }
 
@@ -147,18 +120,13 @@ h2{
     /* promote to a GPU layer */
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
-    -webkit-transition-timing-function: ease-out;
     transition: opacity $animation-time;
     -webkit-transition: opacity $animation-time;
 
     color: $primary;
     opacity: 0.5;
 
-    &:nth-child(1) {
-      opacity: 1.0;
-      animation: fade-in $animation-time;
-      -webkit-animation: fade-in $animation-time;
-    }
+    &:nth-child(1) { opacity: 1.0; }
     &:nth-child(2) { opacity: 0.7; }
   }
 }
@@ -187,52 +155,34 @@ h2{
   text-align: left;
 }
 
-.searches {
-  h1 {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1;
-    margin-top: 0;
-    color: #999;
-  }
-  ul {
-    margin: 0;
-    padding: 0;
+.searches ul li {
+  margin: 0;
+  padding: 5px 0;
+  list-style: none;
+  font-size: 25px;
+  line-height: 1;
+  /* promote to a GPU layer */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 
-    li {
-      margin: 0;
-      padding: 5px 0;
-      list-style: none;
-      font-size: 25px;
-      line-height: 1;
-      /* promote to a GPU layer */
-      transform: translateZ(0);
-      -webkit-transform: translateZ(0);
-      -webkit-transition-timing-function: ease-out;
-      transition: opacity $animation-time;
-      -webkit-transition: opacity $animation-time;
-      color: $primary;
-      opacity: 0.5;
+  transition: opacity $animation-time;
+  -webkit-transition: opacity $animation-time;
+  color: $primary;
+  opacity: 0.5;
 
-      em {
-        color:#3E4345;
-        font-style: normal;
-        display: block;
-        font-size: 0.8em;
-        font-weight: normal;
-        span {
-          font-size: 0.8em;
-        }
-      }
-
-      &:nth-child(1){
-        animation: fade-in $animation-time;
-        -webkit-animation: fade-in $animation-time;
-        opacity: 1.0;
-      }
-      &:nth-child(2){ opacity: 0.7; }
+  em {
+    color:#3E4345;
+    font-style: normal;
+    display: block;
+    font-size: 0.8em;
+    font-weight: normal;
+    span {
+      font-size: 0.8em;
     }
   }
+
+  &:nth-child(1){ opacity: 1.0; }
+  &:nth-child(2){ opacity: 0.7; }
 }
 
 .traffic {
@@ -315,10 +265,4 @@ h2{
     }
   }
   li:nth-child(1){ font-size: 160%; }
-}
-
-@-webkit-keyframes fade-in {
-  0%   { margin-top: -50px; opacity: 0.1; }
-  50%  {                    opacity: 0.2; }
-  100% { margin-top: 0; opacity: 1; }
 }

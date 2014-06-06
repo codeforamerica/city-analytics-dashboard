@@ -1,12 +1,10 @@
-(function(){
+(function(root){
   "use strict"
-  var root = this,
-      $ = root.jQuery;
   if(typeof root.matrix === 'undefined'){ root.matrix = {} }
 
   var content = {
     pages: [],
-    $el: false,
+    el: false,
 
     endpoint: function(){
       return "/realtime?ids=ga:"+matrix.settings.profileId+"&metrics=rt%3Apageviews&dimensions=rt%3ApageTitle&max-results=10&sort=-rt%3Apageviews"
@@ -27,20 +25,23 @@
       content.displayResults();
     },
     displayResults: function(){
-      matrix.template(content.$el, 'content-results', { pages: content.pages.slice(0,10) });
+      matrix.template(content.el,
+                      'content-results',
+                      { pages: content.pages.slice(0,10) }
+      );
     },
     init: function(){
-      content.$el = $('#content');
-
+      content.el = document.getElementById('content');
       content.reload();
-      window.setInterval(content.reload, 60e3 * 60 * 12); // refresh every 12 hours
-    },
-    reload: function(){
-      var endpoint = content.endpoint();
 
-      $.ajax({ dataType: 'json', url: endpoint, success: content.parseResponse});
-    }
+      // FIXME(slightlyoff): persist in-memory data to local storage before
+      // refreshing
+
+      // refresh every 12 hours
+      // window.setInterval(content.reload, 60e3 * 60 * 12);
+    },
+    reload: function(){ d3.json(content.endpoint(), content.parseResponse); }
   };
 
   root.matrix.content = content;
-}).call(this);
+}).call(this, this);
