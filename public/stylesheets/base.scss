@@ -91,23 +91,7 @@ h2{
       margin: 0;
       padding: 0.5em 0;
       list-style: none;
-      /*
-      font-size: 25px;
-      */
       line-height: 1;
-      /*
-      transition: font-size 0.5s;
-      -webkit-transition: font-size 0.5s;
-      */
-      &:nth-child(1) {
-        animation: fade-in $animation-time;
-        -webkit-animation: fade-in $animation-time;
-        -webkit-animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        /*
-        font-size: 160%;
-        color:$tertiary;
-        */
-      }
     }
 
     .search-terms ul li {
@@ -117,25 +101,10 @@ h2{
       font-size: 25px;
       line-height: 1;
 
-      /*
-      color: $tertiary;
-
-      &:nth-child(1) {
-        animation: fade-in $animation-time;
-        -webkit-animation: fade-in $animation-time;
-        color: $primary;
-      }
-      &:nth-child(2)    { color: $secondary; }
-      */
       color: $primary;
       opacity: 0.5;
 
-      &:nth-child(1) {
-        opacity: 1.0;
-        animation: fade-in $animation-time;
-        -webkit-animation: fade-in $animation-time;
-        -webkit-animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-      }
+      &:nth-child(1) { opacity: 1.0; }
       &:nth-child(2) { opacity: 0.7; }
     }
 
@@ -157,12 +126,7 @@ h2{
     color: $primary;
     opacity: 0.5;
 
-    &:nth-child(1) {
-      opacity: 1.0;
-      animation: fade-in $animation-time;
-      -webkit-animation: fade-in $animation-time;
-      -webkit-animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    }
+    &:nth-child(1) { opacity: 1.0; }
     &:nth-child(2) { opacity: 0.7; }
   }
 }
@@ -217,11 +181,7 @@ h2{
     }
   }
 
-  &:nth-child(1){
-    animation: fade-in $animation-time;
-    -webkit-animation: fade-in $animation-time;
-    opacity: 1.0;
-  }
+  &:nth-child(1){ opacity: 1.0; }
   &:nth-child(2){ opacity: 0.7; }
 }
 
@@ -305,10 +265,4 @@ h2{
     }
   }
   li:nth-child(1){ font-size: 160%; }
-}
-
-@-webkit-keyframes fade-in {
-  0%   { margin-top: -50px; opacity: 0.1; }
-  50%  {                    opacity: 0.2; }
-  100% { margin-top: 0;     opacity: 1;   }
 }

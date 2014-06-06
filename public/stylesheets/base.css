@@ -69,45 +69,17 @@ h2 {
       margin: 0;
       padding: 0.5em 0;
       list-style: none;
-      /*
-      font-size: 25px;
-      */
-      line-height: 1;
-      /*
-      transition: font-size 0.5s;
-      -webkit-transition: font-size 0.5s;
-      */ }
-      .bricks .brick .content ul li:nth-child(1) {
-        animation: fade-in 0.5s;
-        -webkit-animation: fade-in 0.5s;
-        -webkit-animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        /*
-        font-size: 160%;
-        color:$tertiary;
-        */ }
+      line-height: 1; }
     .bricks .brick .search-terms ul li {
       margin: 0;
       padding: 0.5em 0;
       list-style: none;
       font-size: 25px;
       line-height: 1;
-      /*
-      color: $tertiary;
-
-      &:nth-child(1) {
-        animation: fade-in $animation-time;
-        -webkit-animation: fade-in $animation-time;
-        color: $primary;
-      }
-      &:nth-child(2)    { color: $secondary; }
-      */
       color: #b4d9d9;
       opacity: 0.5; }
       .bricks .brick .search-terms ul li:nth-child(1) {
-        opacity: 1.0;
-        animation: fade-in 0.5s;
-        -webkit-animation: fade-in 0.5s;
-        -webkit-animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+        opacity: 1.0; }
       .bricks .brick .search-terms ul li:nth-child(2) {
         opacity: 0.7; }
   .bricks .searches ul li {
@@ -124,10 +96,7 @@ h2 {
     color: #b4d9d9;
     opacity: 0.5; }
     .bricks .searches ul li:nth-child(1) {
-      opacity: 1.0;
-      animation: fade-in 0.5s;
-      -webkit-animation: fade-in 0.5s;
-      -webkit-animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+      opacity: 1.0; }
     .bricks .searches ul li:nth-child(2) {
       opacity: 0.7; }
 
@@ -173,8 +142,6 @@ h2 {
     .searches ul li em span {
       font-size: 0.8em; }
   .searches ul li:nth-child(1) {
-    animation: fade-in 0.5s;
-    -webkit-animation: fade-in 0.5s;
     opacity: 1.0; }
   .searches ul li:nth-child(2) {
     opacity: 0.7; }
@@ -240,15 +207,3 @@ h2 {
         color: #006435; }
 .content li:nth-child(1) {
   font-size: 160%; }
-
-@-webkit-keyframes fade-in {
-  0% {
-    margin-top: -50px;
-    opacity: 0.1; }
-
-  50% {
-    opacity: 0.2; }
-
-  100% {
-    margin-top: 0;
-    opacity: 1; } }

@@ -11,6 +11,7 @@
     newSources: [],
     el: false,
     nextRefresh: 0,
+    limit: 10,
 
     endpoint: function(profileId){
       return "/realtime?"
@@ -118,13 +119,12 @@
           source: source,
         }
         var tempList = el.ol().template("landing-pages-item", context);
-        // FIXME(slightlyoff): animate insertion on rAF
-        el.prepend(tempList.firstElementChild);
-        el.maxChildren(10);
+        root.matrix.manager.animateInto(tempList.firstElementChild, el,
+                                        landing.limit);
         setTimeout(landing.displayResults,
                   (landing.nextRefresh - Date.now())/landing.newTerms.length);
       } else {
-        root.setTimeout(landing.displayResults, 5000);
+        setTimeout(landing.displayResults, 5000);
       }
     },
     init: function(){

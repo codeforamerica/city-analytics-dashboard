@@ -34,8 +34,16 @@
     } else {
       this.appendChild(e);
     }
+    return this;
   });
-  def(HTMLElement.prototype, "append", function(e) { this.appendChild(e); });
+  def(HTMLElement.prototype, "append", function(e) {
+    this.appendChild(e);
+    return this;
+  });
+  def(HTMLElement.prototype, "remove", function(e) {
+    this.removeChild(e);
+    return this;
+  });
 
   def(HTMLElement.prototype, "maxChildren", function(count) {
     var c = this.children;
@@ -80,9 +88,35 @@
     return this;
   });
 
+  var animationDuration = 500;
+  var animateDownBy = function(elements, height) {
+    var start = Date.now();
+    var prev = start;
+    var last = 0;
+    var lasty = 0;
+    var _animateDownBy = function() {
+      var now = Date.now();
+      var dt = now - start;
+      var x = Math.min(dt / animationDuration, 1);
+      var y = Bezier.cubicBezier(0.4, 0, 0.2, 1, x, animationDuration);
+      var topDelta = (y - lasty) * height;
+      console.log(topDelta);
+      elements.forEach(function(e) {
+        var t = parseFloat(e.style.top);
+        e.style.top = (t+topDelta)+"px";
+      });
+      var prev = now;
+      lasty = y;
+      if (dt <= animationDuration) {
+        window.requestAnimationFrame(_animateDownBy);
+      }
+    };
+    window.requestAnimationFrame(_animateDownBy);
+  };
 
   var manager =
   root.matrix.manager = {
+    animationDuration: 500,
     init: function(){
       var body = document.body;
       if(body.offsetWidth < body.offsetHeight){
@@ -92,6 +126,33 @@
       matrix.landing.init();
       matrix.search.init();
       matrix.content.init();
+    },
+    animateInto: function(element, column, limit) {
+      // Insert the element into the bottom of the column to calculate
+      // dimensions, then remove.
+      var width = 0;
+      var height = 0;
+
+      element.style.opacity = 0;
+      element.style.position = "absolute";
+      element.style.left = "0px";
+      element.style.top = "0px";
+      column.prepend(element);
+      // get layout at next rAF
+      window.requestAnimationFrame(function() {
+        column.maxChildren(limit);
+
+        width = element.offsetWidth;
+        height = element.offsetHeight;
+
+        // Position
+        element.style.opacity = null;
+        element.style.top = -height + "px";
+
+        // Now grab all of the elements and schedule them to slide down
+        var elements = [].slice.call(column.children, 0);
+        animateDownBy(elements, height);
+      });
     },
   };
 

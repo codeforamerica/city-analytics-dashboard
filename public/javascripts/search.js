@@ -10,6 +10,7 @@
     newURLs: [],
     el: false,
     nextRefresh: 0,
+    limit: 20,
 
     endpoint: function(profileId){
       return "/realtime?"
@@ -113,9 +114,8 @@
       var el = search.el;
       if(term){
         var tempList = el.ol().template("search-result-item", { term: term });
-        // FIXME(slightlyoff): animate insertion on rAF
-        el.prepend(tempList.firstElementChild);
-        el.maxChildren(20);
+        root.matrix.manager.animateInto(tempList.firstElementChild, el,
+                                        search.limit);
         setTimeout(search.displayResults,
                    (search.nextRefresh - Date.now())/search.newTerms.length);
       } else {
