@@ -18,7 +18,10 @@ if ENV['USERNAME'] && ENV['PASSWORD']
 end
 
 get '/' do
-  File.read(File.join('public', 'index.html'))
+  html = File.read(File.join('public', 'index.html'))
+  html.sub!('$PROFILE_ID', JSON.dump(ENV['GA_VIEW_ID']))
+  html.sub!('$DOMAIN_URL', JSON.dump(ENV['GA_WEBSITE_URL']))
+  return html
 end
 
 get '/realtime' do
