@@ -19,12 +19,11 @@ You also need the View ID from the Google Analytics account you're accessing (lo
 It's probably worth generating everything you need, then creating a .env file in the root of the project with the environment variables the server calls for:
 
 .env:
-
- CLIENT_ID=XXX.apps.googleusercontent.com
- CLIENT_SECRET=XXX
- REFRESH_TOKEN=XXX
- GA_VIEW_ID=XXX
- GA_WEBSITE_URL=XXX
+    CLIENT_ID=XXX.apps.googleusercontent.com
+    CLIENT_SECRET=XXX
+    REFRESH_TOKEN=XXX
+    GA_VIEW_ID=XXX
+    GA_WEBSITE_URL=XXX
 
 Then, once you've added that file, you can simple run foreman start -e .env and view the project at localhost:5000
 
