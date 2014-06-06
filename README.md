@@ -12,7 +12,7 @@ His project can be found [here](https://github.com/edds/display-screen), and his
 
 This is a fairly bog-standard sinatra app.  Clone the respository, bundle install.
 
-For it to work, you'll need to generate some keys from the Google API Console (and turn on the Google Analytics API).  You can use @migurski's Ouath dance app to get those values: [OAuth Dance](oauth-dance.herukoapp.com)  
+For it to work locally, you'll need to generate some keys from the Google API Console (and turn on the Google Analytics API).  You can use @migurski's Ouath dance app to get those values: [OAuth Dance](oauth-dance.herukoapp.com)  
 
 You also need the View ID from the Google Analytics account you're accessing (look in Admin > View Settings > View ID). 
 
@@ -28,7 +28,7 @@ It's probably worth generating everything you need, then creating a .env file in
     GA_WEBSITE_URL=www.yoursite.com
 ```
 
-Then, once you've added that file, you can simple run 
+Then, once you've added that file, you can simply run 
 
 ```
     foreman start -e .env
@@ -36,6 +36,9 @@ Then, once you've added that file, you can simple run
 
 and view the project at localhost:5000
 
+# Deploying this application
+
+See [Dashboard Setup Instructions](http://dfd-dashboard-setup.herokuapp.com/) for the easiest way to run it. 
 
 # Licence
 
