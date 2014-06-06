@@ -8,17 +8,23 @@ This project is a fork of Edd Sowden's dashboard built for the Government Digita
 
 His project can be found [here](https://github.com/edds/display-screen), and his licence below.
 
-# Running this application
+# Running this application locally
 
 This is a fairly bog-standard sinatra app.  Clone the respository, bundle install.
 
-For it to work, you'll need to generate some keys from the Google API Console.  It's probably worth generating everything you need, then creating a .env file in the root of the project with the environment variables the server calls for:
+For it to work, you'll need to generate some keys from the Google API Console (and turn on the Google Analytics API).  You can use @migurski's Ouath dance app to get those values: [OAuth Dance](oauth-dance.herukoapp.com)  
+
+You also need the View ID from the Google Analytics account you're accessing (look in Admin > View Settings > View ID). 
+
+It's probably worth generating everything you need, then creating a .env file in the root of the project with the environment variables the server calls for:
 
 .env:
 
-CLIENT_ID=XXX.apps.googleusercontent.com
-CLIENT_SECRET=XXX
-REFRESH_TOKEN=XXX
+ CLIENT_ID=XXX.apps.googleusercontent.com
+ CLIENT_SECRET=XXX
+ REFRESH_TOKEN=XXX
+ GA_VIEW_ID=XXX
+ GA_WEBSITE_URL=XXX
 
 Then, once you've added that file, you can simple run foreman start -e .env and view the project at localhost:5000
 
