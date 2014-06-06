@@ -45,7 +45,12 @@ h2 {
     padding: 1em; }
     .bricks .brick ul, .bricks .brick li {
       margin: 0;
-      padding: 0; }
+      padding: 0;
+      /* promote to a GPU layer */
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      -webkit-animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
     .bricks .brick .content ul li {
       margin: 0;
       padding: 0.5em 0;
@@ -57,11 +62,11 @@ h2 {
       /*
       transition: font-size 0.5s;
       -webkit-transition: font-size 0.5s;
-      */
-      animation-timing-function: cubic-bezier(0, 0, 0.58, 1); }
+      */ }
       .bricks .brick .content ul li:nth-child(1) {
         animation: fade-in 0.5s;
         -webkit-animation: fade-in 0.5s;
+        -webkit-animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         /*
         font-size: 160%;
         color:$tertiary;
@@ -72,10 +77,6 @@ h2 {
       list-style: none;
       font-size: 25px;
       line-height: 1;
-      /* promote to a GPU layer */
-      transform: translateZ(0);
-      -webkit-transform: translateZ(0);
-      -webkit-transition-timing-function: ease-out;
       /*
       color: $tertiary;
 
@@ -91,7 +92,8 @@ h2 {
       .bricks .brick .search-terms ul li:nth-child(1) {
         opacity: 1.0;
         animation: fade-in 0.5s;
-        -webkit-animation: fade-in 0.5s; }
+        -webkit-animation: fade-in 0.5s;
+        -webkit-animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
       .bricks .brick .search-terms ul li:nth-child(2) {
         opacity: 0.7; }
   .bricks .searches ul li {
@@ -103,7 +105,6 @@ h2 {
     /* promote to a GPU layer */
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
-    -webkit-transition-timing-function: ease-out;
     transition: opacity 0.5s;
     -webkit-transition: opacity 0.5s;
     color: #2f7360;
@@ -111,7 +112,8 @@ h2 {
     .bricks .searches ul li:nth-child(1) {
       opacity: 1.0;
       animation: fade-in 0.5s;
-      -webkit-animation: fade-in 0.5s; }
+      -webkit-animation: fade-in 0.5s;
+      -webkit-animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
     .bricks .searches ul li:nth-child(2) {
       opacity: 0.7; }
 
@@ -135,43 +137,33 @@ h2 {
   height: calc(100% - 210px);
   text-align: left; }
 
-.searches h1 {
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1;
-  margin-top: 0;
-  color: #999; }
-.searches ul {
+.searches ul li {
   margin: 0;
-  padding: 0; }
-  .searches ul li {
-    margin: 0;
-    padding: 5px 0;
-    list-style: none;
-    font-size: 25px;
-    line-height: 1;
-    /* promote to a GPU layer */
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-    -webkit-transition-timing-function: ease-out;
-    transition: opacity 0.5s;
-    -webkit-transition: opacity 0.5s;
-    color: #2f7360;
-    opacity: 0.5; }
-    .searches ul li em {
-      color: #3E4345;
-      font-style: normal;
-      display: block;
-      font-size: 0.8em;
-      font-weight: normal; }
-      .searches ul li em span {
-        font-size: 0.8em; }
-    .searches ul li:nth-child(1) {
-      animation: fade-in 0.5s;
-      -webkit-animation: fade-in 0.5s;
-      opacity: 1.0; }
-    .searches ul li:nth-child(2) {
-      opacity: 0.7; }
+  padding: 5px 0;
+  list-style: none;
+  font-size: 25px;
+  line-height: 1;
+  /* promote to a GPU layer */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  transition: opacity 0.5s;
+  -webkit-transition: opacity 0.5s;
+  color: #2f7360;
+  opacity: 0.5; }
+  .searches ul li em {
+    color: #3E4345;
+    font-style: normal;
+    display: block;
+    font-size: 0.8em;
+    font-weight: normal; }
+    .searches ul li em span {
+      font-size: 0.8em; }
+  .searches ul li:nth-child(1) {
+    animation: fade-in 0.5s;
+    -webkit-animation: fade-in 0.5s;
+    opacity: 1.0; }
+  .searches ul li:nth-child(2) {
+    opacity: 0.7; }
 
 .traffic {
   color: black;
