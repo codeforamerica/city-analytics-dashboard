@@ -117,6 +117,7 @@ h2 {
       width: 70%; }
 
 .box {
+  position: relative;
   height: calc(100% - 210px);
   text-align: left; }
 

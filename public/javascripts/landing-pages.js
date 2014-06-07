@@ -115,9 +115,10 @@
           term: term,
           has_url: !!url,
           url: url,
-          has_source: !!source,
+          has_source: !!source && (source != "(not set)"),
           source: source,
         }
+        console.log(source);
         var tempList = el.ol().template("landing-pages-item", context);
         root.matrix.manager.animateInto(tempList.firstElementChild, el,
                                         landing.limit);
