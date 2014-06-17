@@ -134,6 +134,9 @@ h2 {
   -webkit-transition: opacity 0.5s;
   color: #b4d9d9;
   opacity: 0.5; }
+  .searches ul li a {
+    color: inherit;
+    text-decoration: none; }
   .searches ul li em {
     color: #3E4345;
     font-style: normal;
