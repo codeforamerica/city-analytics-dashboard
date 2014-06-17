@@ -112,13 +112,10 @@
 <script type="template" id="landing-pages-item">
   <li>
     <div>
+      {{#has_url}}<a href="http://{{ url }}" target="_blank">{{/has_url}}
       {{ term }}
-      {{#has_url}}
-        <a href="http://{{ url }}" target="_blank"><img
-            style="background-color:#fff;padding:1px"
-            src="../stylesheets/icons/external-link.png"
-            alt="external link"  height="16px" width="16px"></a>
-      {{/has_url}}
+      {{#has_url}}</a>{{/has_url}}
+      
       {{#has_source}}
         <em>via: {{ source }}</em>
       {{/has_source}}
