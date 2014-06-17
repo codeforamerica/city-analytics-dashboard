@@ -38,8 +38,8 @@
       // FIXME(slightlyoff): persist in-memory data to local storage before
       // refreshing
 
-      // refresh every 12 hours
-      window.setInterval(content.reload, 60e3 * 60 * 12);
+      // refresh every 30 minutes
+      window.setInterval(content.reload, 1800000);
     },
     reload: function(){ d3.json(content.endpoint(), content.parseResponse); }
   };
