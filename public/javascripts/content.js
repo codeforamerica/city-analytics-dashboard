@@ -1,3 +1,4 @@
+/* This is for the top pages */
 (function(root){
   "use strict"
   if(typeof root.matrix === 'undefined'){ root.matrix = {} }
@@ -38,7 +39,7 @@
       // refreshing
 
       // refresh every 12 hours
-      // window.setInterval(content.reload, 60e3 * 60 * 12);
+      window.setInterval(content.reload, 60e3 * 60 * 12);
     },
     reload: function(){ d3.json(content.endpoint(), content.parseResponse); }
   };
