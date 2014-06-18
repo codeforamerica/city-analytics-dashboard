@@ -137,7 +137,13 @@ h2{
   border:1px solid $background;
   border-radius: 3px;
   color:#000;
-
+  p{
+    color:$primary;
+    font-size:0.6em;
+    a{
+      color:$primary;
+    }
+  }
   .inner {
     position: relative;
     width: 105px;

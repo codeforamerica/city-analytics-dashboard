@@ -70,9 +70,11 @@
     },
     addNextTickValues: function(data){
       var i, _i, term, url;
+      console.log(data);
       for(i=0,_i=data.rows.length; i<_i; i++){
         term = data.rows[i][1].split(' — ');
         url = data.rows[i][2];
+        //console.log("url: "+url)
         if(term[0] !== 'Search' && search.safeTerm(term[0])){
           search.addTerm(term[0], root.parseInt(data.rows[i][2], 10), url);
         }
