@@ -92,6 +92,10 @@ h2{
       padding: 0.5em 0;
       list-style: none;
       line-height: 1;
+      a{
+        color:inherit;
+        text-decoration:none;
+      }
     }
 
     .search-terms ul li {

@@ -70,6 +70,9 @@ h2 {
       padding: 0.5em 0;
       list-style: none;
       line-height: 1; }
+      .bricks .brick .content ul li a {
+        color: inherit;
+        text-decoration: none; }
     .bricks .brick .search-terms ul li {
       margin: 0;
       padding: 0.5em 0;
