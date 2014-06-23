@@ -108,7 +108,7 @@
 </script>
 
 <script type="template" id="search-result-item">
-  <li><div>{{ term }}</div></li>
+  <li><div><a href="http://{{ url }}" target="_blank">{{ term }}</a></div></li>
 </script>
 
 <script type="template" id="landing-pages-item">
@@ -125,42 +125,5 @@
   </li>
 </script>
 
-
-<!--script type="text/mustache" id="search-results">
-<span class="triangle">&#x25b2;</span>&nbsp;<span class="percent">{{percentageUp}}</span>
-  {{#pages}}
-    <li>
-      {{ title }}
-      <em>Source: [[search]]</em>
-    </li>
-  {{/pages}}
-</script>
-<script type="text/mustache" id="search-term-results">
-  {{#pages}}
-    <li>
-      {{ title }}
-    </li>
-  {{/pages}}
-</script-->
-<!--//<em>
-      //  visits: {{displayHits}}
-      //  <span class="triangle">&#x25b2;</span>&nbsp;<span class="percent">{{percentageUp}}</span>
-      //</em>-->
-<!--script type="text/mustache" id="inside-gov-posts">
-  {{#posts}}
-    <li>{{ title }}<em>{{type}} - <span title="{{published}}">{{published}}</span></em></li>
-  {{/posts}}
-</script-->
-<!--script type="text/mustache" id="tweets">
-  {{#tweets}}
-    <li class="tweet">
-      <img src="{{img}}">
-      <div class="text">
-        <p class="user"><strong>{{from}}</strong> @{{handle}}</p>
-        <p>{{text}} - <span title="{{posted}}">{{posted}}</span></p>
-      </div>
-    </li>
-  {{/tweets}}
-</script-->
 </body>
 </html>

@@ -16,7 +16,7 @@
       return "/realtime?"
         + "ids=ga:"+matrix.settings.profileId+"&"
         + "metrics=rt:activeVisitors&"
-        + "dimensions=rt:pageTitle,rt:keyword&"
+        + "dimensions=rt:pagePath,rt:keyword&"
         //+ "sort=-rt:activeVisitors&"
         + "max-results=10000";
     },
@@ -70,11 +70,11 @@
     },
     addNextTickValues: function(data){
       var i, _i, term, url;
-      console.log(data);
+
       for(i=0,_i=data.rows.length; i<_i; i++){
         term = data.rows[i][1].split(' — ');
-        url = data.rows[i][2];
-        //console.log("url: "+url)
+        url = data.rows[i][0];
+
         if(term[0] !== 'Search' && search.safeTerm(term[0])){
           search.addTerm(term[0], root.parseInt(data.rows[i][2], 10), url);
         }
@@ -115,7 +115,7 @@
       var url = search.newURLs.pop();
       var el = search.el;
       if(term){
-        var tempList = el.ol().template("search-result-item", { term: term });
+        var tempList = el.ol().template("search-result-item", { term: term, url: url });
         root.matrix.manager.animateInto(tempList.firstElementChild, el,
                                         search.limit);
         setTimeout(search.displayResults,
