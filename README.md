@@ -1,4 +1,4 @@
-# Display Dashboard
+# Display Screen
 
 This is a display screen to show real time analytics of a given website. 
 
@@ -8,7 +8,19 @@ This project is a fork of Edd Sowden's dashboard built for the Government Digita
 
 His project can be found [here](https://github.com/edds/display-screen), and his licence below.
 
-# Running this application locally
+
+Using Display Screen in your city
+---------------
+
+Deploying the app
+----------
+
+See [Dashboard Setup Instructions](http://dfd-dashboard-setup.herokuapp.com/) for the easiest way to run it. 
+
+
+
+For developers - local setup
+-----------
 
 This is a fairly bog-standard sinatra app.  Clone the respository, bundle install.
 
@@ -36,6 +48,20 @@ Then, once you've added that file, you can simply run
 
 and view the project at localhost:5000
 
+Contributing
+------------
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
+
+License and Copyright
+---------------------
+
+Copyright 2013-2014 Code for America, MIT License (see LICENSE.md for details)
+
 # Deploying this application
 
-See [Dashboard Setup Instructions](http://dfd-dashboard-setup.herokuapp.com/) for the easiest way to run it. 
+
