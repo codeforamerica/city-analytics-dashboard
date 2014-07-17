@@ -146,6 +146,8 @@ h2{
   border:1px solid $background;
   border-radius: 3px;
   color:#000;
+  clear:both; 
+  overflow:hidden;
   p{
     color:$primary;
     font-size:0.6em;
@@ -158,6 +160,7 @@ h2{
     width: 105px;
     height: 42px;
     overflow: hidden;
+    float:left;
     img {
       position: absolute;
       border: none;
