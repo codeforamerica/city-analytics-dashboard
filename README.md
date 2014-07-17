@@ -1,4 +1,4 @@
-# Display Screen
+# City Analytics Dashboard
 
 This is a display screen to show real time analytics of a given website. 
 
@@ -7,7 +7,7 @@ This project is a fork of Edd Sowden's dashboard built for the Government Digita
 His project can be found [here](https://github.com/edds/display-screen).
 
 
-Using Display Screen in your city
+Using City Analytics Dashboard in your city
 ---------------
 
 Deploying the app
