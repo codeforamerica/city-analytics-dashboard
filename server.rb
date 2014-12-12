@@ -66,3 +66,7 @@ def get_token
   end
   @token
 end
+
+configure do
+    set :protection, except: [:frame_options]
+end
