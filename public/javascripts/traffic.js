@@ -76,10 +76,10 @@
           for (var i = 0; i < traffic.points; i++) {
             traffic.counts[i] = json.rows[i][1];
           }
+          traffic.reload();
         });
        
-     // d3.json(historic, traffic.parseResponse);
-      traffic.reload();
+      
       
       // Check the traffic intermittently
       window.setInterval(traffic.reload, traffic.interval);
