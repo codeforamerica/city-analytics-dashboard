@@ -6,6 +6,14 @@
   var debugRand = function() {
     return (Math.random() * debugCountLimit) | 0;
   };
+
+  var today = new Date().toISOString();
+    today = today.split("T"[0]);
+  
+  var yesterday = today[0].split("-");
+    yesterday = yesterday[2]-2;
+    yesterday = today[0].split("-")[0]+"-"+today[0].split("-")[1]+"-"+yesterday;
+
   if(typeof root.matrix === 'undefined'){ root.matrix = {} }
 
   var traffic = {
@@ -22,7 +30,11 @@
     endpoint: function(){
       return "/realtime?ids=ga:"+matrix.settings.profileId+"&metrics=rt:activeUsers&max-results=10"
     },
+    historic: function(){
+      return "/historic?ids=ga:"+matrix.settings.profileId+"&dimensions=ga%3AnthMinute&metrics=ga%3Ahits&start-date="+yesterday+"&end-date="+today[0]+"&max-results=1000"
+    },
     parseResponse: function(data){
+
       var counts = traffic.counts;
       var activeUsers = parseInt(data.totalsForAllResults['rt:activeUsers'], 10);
       traffic.el.innerText = activeUsers;
@@ -30,6 +42,7 @@
       counts.unshift(activeUsers);
       counts.length = traffic.points;
       if(typeof traffic.sparkline === 'undefined'){
+     
         traffic.sparkline = root.matrix.sparklineGraph(
           '#traffic-count-graph',
           { data: counts,
@@ -46,6 +59,9 @@
       traffic.el = document.getElementById('traffic-count');
       traffic.graphEl = document.getElementById('traffic-count-graph');
       traffic.counts.length = traffic.points;
+      
+      
+
       // Zero fill the points
       for (var i = 0; i < traffic.points; i++) {
         traffic.counts[i] = 0;
@@ -53,7 +69,18 @@
         if (debug) { traffic.counts[i] = debugRand(); }
       }
 
+       d3.json(traffic.historic(), function(error, json) {
+          if (error) return console.warn(error);
+
+          // going over each historic item
+          for (var i = 0; i < traffic.points; i++) {
+            traffic.counts[i] = json.rows[i][1];
+          }
+        });
+       
+     // d3.json(historic, traffic.parseResponse);
       traffic.reload();
+      
       // Check the traffic intermittently
       window.setInterval(traffic.reload, traffic.interval);
     },
@@ -69,6 +96,7 @@
         return;
       }
       d3.json(endpoint, traffic.parseResponse);
+
     }
   };
 

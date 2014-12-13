@@ -35,6 +35,17 @@ get '/realtime' do
   response.body
 end
 
+get '/historic' do
+  cache_control :public, :max_age => 20
+  query = { :access_token => get_token }.merge(params)
+
+  http = Net::HTTP.new('www.googleapis.com', 443)
+  http.use_ssl = true
+  req = Net::HTTP::Get.new("/analytics/v3/data/ga?#{query.to_param}")
+  response = http.request(req)
+  response.body
+end
+
 get '/feed' do
   http = Net::HTTP.new('www.gov.uk', 443)
   http.use_ssl = true
