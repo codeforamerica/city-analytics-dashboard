@@ -31,7 +31,7 @@
       return "/realtime?ids=ga:"+matrix.settings.profileId+"&metrics=rt:activeUsers&max-results=10"
     },
     historic: function(){
-      return "/historic?ids=ga:"+matrix.settings.profileId+"&dimensions=ga%3AnthMinute&metrics=ga%3Ahits&start-date="+yesterday+"&end-date="+today[0]+"&max-results=1000"
+      return "/historic?ids=ga:"+matrix.settings.profileId+"&dimensions=ga%3AnthMinute&metrics=ga%3Asessions&start-date="+yesterday+"&end-date="+today[0]+"&max-results=1000"
     },
     parseResponse: function(data){
 
@@ -73,8 +73,11 @@
           if (error) return console.warn(error);
 
           // going over each historic item
-          for (var i = 0; i < traffic.points; i++) {
-            traffic.counts[i] = json.rows[i][1];
+          var i = traffic.points;
+          var j = 0;
+          while(i--) {
+            traffic.counts[j] = json.rows[i][1];
+            j++;
           }
           traffic.reload();
         });

@@ -6,8 +6,8 @@
     var maxY = d3.max(data),
         minY = d3.min(data);
 
-    maxY = maxY + (maxY * 0.01);
-    minY = minY - (minY * 0.01);
+    /*maxY = maxY + (maxY * 0.01);
+    minY = minY - (minY * 0.01);*/
 
     var x = d3.scale.linear().domain([0, data.length-1]).range([-(width/data.length), width+(width/data.length)]),
         y = d3.scale.linear().domain([minY, maxY]).range([height, 0]);
