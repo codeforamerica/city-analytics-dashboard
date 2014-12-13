@@ -11,7 +11,7 @@
     today = today.split("T"[0]);
   
   var yesterday = today[0].split("-");
-    yesterday = yesterday[2]-2;
+    yesterday = yesterday[2]-1;
     yesterday = today[0].split("-")[0]+"-"+today[0].split("-")[1]+"-"+yesterday;
 
   if(typeof root.matrix === 'undefined'){ root.matrix = {} }
