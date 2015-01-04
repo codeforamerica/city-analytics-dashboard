@@ -22,7 +22,7 @@ For developers - local setup
 
 This is a fairly bog-standard sinatra app.  Clone the respository, bundle install.
 
-For it to work locally, you'll need to generate some keys from the Google API Console (and turn on the Google Analytics API).  You can use @migurski's Ouath dance app to get those values: [OAuth Dance](oauth-dance.herukoapp.com)  
+For it to work locally, you'll need to generate some keys from the Google API Console (and turn on the Google Analytics API).  You can use @migurski's OAuth Dance app to get those values: [OAuth Dance](http://oauth-dance.herokuapp.com/)  
 
 You also need the View ID from the Google Analytics account you're accessing (look in Admin > View Settings > View ID). 
 
