@@ -132,6 +132,10 @@
       landing.reload();
       landing.displayResults();
       window.setInterval(landing.reload, 60e3);
+      document.addEventListener(
+          "visibilitychange",
+          function() { root.matrix.manager.positionFixups(landing); },
+          false);
     },
     reload: function(){
       var endpoint = landing.endpoint(root.matrix.settings.profileId);

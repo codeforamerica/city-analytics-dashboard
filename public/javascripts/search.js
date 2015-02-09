@@ -129,6 +129,10 @@
       search.reload();
       search.displayResults();
       window.setInterval(search.reload, 60e3);
+      document.addEventListener(
+          "visibilitychange",
+          function() { root.matrix.manager.positionFixups(search); },
+          false);
     },
     reload: function(){
       var endpoint = search.endpoint(root.matrix.settings.profileId);
