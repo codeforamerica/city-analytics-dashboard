@@ -44,6 +44,9 @@
     this.removeChild(e);
     return this;
   });
+  def(HTMLElement.prototype, "kids", function() {
+    return [].slice.call(this.children, 0);
+  });
 
   def(HTMLElement.prototype, "maxChildren", function(count) {
     var c = this.children;
@@ -88,15 +91,17 @@
     return this;
   });
 
+  var now = function() { return window.performance.now(); };
+
   var animationDuration = 500;
   var animateDownBy = function(elements, height) {
-    var start = Date.now();
+    var start = now();
     var prev = start;
     var last = 0;
     var lasty = 0;
     var _animateDownBy = function() {
-      var now = Date.now();
-      var dt = now - start;
+      var current = now();
+      var dt = current - start;
       var x = Math.min(dt / animationDuration, 1);
       var y = Bezier.cubicBezier(0.4, 0, 0.2, 1, x, animationDuration);
       var topDelta = (y - lasty) * height;
@@ -104,7 +109,7 @@
         var t = parseFloat(e.style.top);
         e.style.top = (t+topDelta)+"px";
       });
-      var prev = now;
+      var prev = current;
       lasty = y;
       if (dt <= animationDuration) {
         window.requestAnimationFrame(_animateDownBy);
@@ -126,6 +131,18 @@
       matrix.search.init();
       matrix.content.init();
     },
+    positionFixups: function(column) {
+      // Clobber all previous position data and measure/place elements
+      // synchronously; called only during visibility change handlers, so
+      // flashing and layout shouldn't be a problem. We go to great lengths to
+      // prevent this in other methods.
+      var totalHeight = 0;
+      column.el.kids().forEach(function(k) {
+        k.style.top = totalHeight + "px";
+        k.style.opacity = null;
+        totalHeight += k.offsetHeight;
+      });
+    },
     animateInto: function(element, column, limit) {
       // Insert the element into the bottom of the column to calculate
       // dimensions, then remove.
@@ -138,6 +155,9 @@
       element.style.top = "0px";
       column.prepend(element);
       // get layout at next rAF
+      if (document.visibilityState != "visible") {
+        return;
+      }
       window.requestAnimationFrame(function() {
         column.maxChildren(limit);
 
@@ -149,10 +169,11 @@
         element.style.top = -height + "px";
 
         // Now grab all of the elements and schedule them to slide down
-        var elements = [].slice.call(column.children, 0);
-        animateDownBy(elements, height);
+        animateDownBy(column.kids(), height);
       });
     },
   };
+
+
 
 }).call(this, this);
