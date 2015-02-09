@@ -1,8 +1,8 @@
 # City Analytics Dashboard
 
-This is a display screen to show real time analytics of a given website. 
+This is a display screen to show real time analytics of a given website.
 
-This project is a fork of Edd Sowden's dashboard built for the Government Digital Service.  
+This project is a fork of Edd Sowden's dashboard built for the Government Digital Service.
 
 His project can be found [here](https://github.com/edds/display-screen).
 
@@ -13,7 +13,7 @@ Using City Analytics Dashboard in your city
 Deploying the app
 ----------
 
-See [Dashboard Setup Instructions](http://dfd-dashboard-setup.herokuapp.com/) for the easiest way to run it. 
+See [Dashboard Setup Instructions](http://dfd-dashboard-setup.herokuapp.com/) for the easiest way to run it.
 
 
 
@@ -22,9 +22,9 @@ For developers - local setup
 
 This is a fairly bog-standard sinatra app.  Clone the respository, bundle install.
 
-For it to work locally, you'll need to generate some keys from the Google API Console (and turn on the Google Analytics API).  You can use @migurski's Ouath dance app to get those values: [OAuth Dance](oauth-dance.herukoapp.com)  
+For it to work locally, you'll need to generate some keys from the Google API Console (and turn on the Google Analytics API).  You can use @migurski's Ouath dance app to get those values: [OAuth Dance](http://oauth-dance.herokuapp.com/)
 
-You also need the View ID from the Google Analytics account you're accessing (look in Admin > View Settings > View ID). 
+You also need the View ID from the Google Analytics account you're accessing (look in Admin > View Settings > View ID).
 
 It's probably worth generating everything you need, then creating a .env file in the root of the project with the environment variables the server calls for:
 
@@ -38,7 +38,7 @@ It's probably worth generating everything you need, then creating a .env file in
     GA_WEBSITE_URL=www.yoursite.com
 ```
 
-Then, once you've added that file, you can simply run 
+Then, once you've added that file, you can simply run
 
 ```
     foreman start -e .env
