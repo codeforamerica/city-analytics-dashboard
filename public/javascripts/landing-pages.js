@@ -72,9 +72,9 @@
         term = data.rows[i][0].split(' - ');
         url = data.rows[i][1];
         source = data.rows[i][2];
-        if(term[0] !== 'Search' && landing.safeTerm(term[0])){
+        //if(term[0] !== 'Search' && landing.safeTerm(term[0])){
           landing.addTerm(term[0], root.parseInt(data.rows[i][3], 10), url, source);
-        }
+       // }
 
       }
     },
@@ -96,7 +96,7 @@
           nonZeroTerms.push(term);
         }
       }
-      landing.newTerms.sort(function(){ return Math.floor((Math.random() * 3) - 1) });
+      //landing.newTerms.sort(function(){ return Math.floor((Math.random() * 3) - 1) });
       landing.terms = nonZeroTerms;
     },
     parseResponse: function(data){
@@ -117,8 +117,9 @@
           has_url: !!url,
           url: url,
           has_source: !!source && (source != "(not set)"),
-          source: source,
+          source: source
         }
+
         var tempList = el.ol().template("landing-pages-item", context);
         root.matrix.manager.animateInto(tempList.firstElementChild, el,
                                         landing.limit);

@@ -115,6 +115,8 @@
           {{#has_url}}<a href="http://{{ url }}" target="_blank">{{/has_url}}
           {{ term }}
           {{#has_url}}</a>{{/has_url}}
+
+          {{#has_url}}<span style="font-size:10px">{{ count }} {{ url }}</span>{{/has_url}}
           
           {{#has_source}}
             <em>via: {{ source }}</em>
