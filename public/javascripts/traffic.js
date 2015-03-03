@@ -10,9 +10,10 @@
   var today = new Date().toISOString();
     today = today.split("T"[0]);
   
-  var yesterday = today[0].split("-");
-    yesterday = yesterday[2]-1;
-    yesterday = today[0].split("-")[0]+"-"+today[0].split("-")[1]+"-"+yesterday;
+  var yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  yesterday = yesterday.toISOString();
+  yesterday = yesterday.split("T"[0]);
 
   if(typeof root.matrix === 'undefined'){ root.matrix = {} }
 
@@ -31,7 +32,7 @@
       return "/realtime?ids=ga:"+matrix.settings.profileId+"&metrics=rt:activeUsers&max-results=10"
     },
     historic: function(){
-      return "/historic?ids=ga:"+matrix.settings.profileId+"&dimensions=ga%3AnthMinute&metrics=ga%3Asessions&start-date="+yesterday+"&end-date="+today[0]+"&max-results=1000"
+      return "/historic?ids=ga:"+matrix.settings.profileId+"&dimensions=ga%3AnthMinute&metrics=ga%3Asessions&start-date="+yesterday[0]+"&end-date="+today[0]+"&max-results=1000"
     },
     parseResponse: function(data){
 
