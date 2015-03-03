@@ -66,6 +66,7 @@
       }
     },
     addNextTickValues: function(data){
+
       var i, _i, term, url, source;
       for(i=0,_i=data.rows.length; i<_i; i++){
         term = data.rows[i][0].split(' - ');
@@ -107,7 +108,7 @@
     },
     displayResults: function(){
       var term = landing.newTerms.pop();
-      var url = matrix.settings.domain+landing.newURLs.pop();
+      var url = landing.newURLs.pop();
       var source = landing.newSources.pop();
       var el = landing.el;
       if(term){
