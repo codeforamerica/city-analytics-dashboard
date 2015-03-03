@@ -72,9 +72,9 @@
         term = data.rows[i][0].split(' - ');
         url = data.rows[i][1];
         source = data.rows[i][2];
-        //if(term[0] !== 'Search' && landing.safeTerm(term[0])){
+        if(term[0] !== 'Search' && landing.safeTerm(term[0])){
           landing.addTerm(term[0], root.parseInt(data.rows[i][3], 10), url, source);
-       // }
+        }
 
       }
     },
