@@ -112,7 +112,7 @@
     },
     displayResults: function(){
       var term = search.newTerms.pop();
-      var url = search.newURLs.pop();
+      var url = matrix.settings.domain+search.newURLs.pop();
       var el = search.el;
       if(term){
         var tempList = el.ol().template("search-result-item", { term: term, url: url });
