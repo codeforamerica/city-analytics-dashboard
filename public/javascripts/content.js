@@ -11,12 +11,10 @@
       return "/realtime?ids=ga:"+matrix.settings.profileId+"&metrics=rt%3Apageviews&dimensions=rt%3ApageTitle,rt:pagePath&max-results=10&sort=-rt%3Apageviews"
     },
     parseResponse: function(data){
-      console.log(matrix.settings.domain)
       var i, _i;
 
       content.pages = [];
       for(i=0,_i=data.rows.length; i<_i; i++){
-        console.log(data.rows[i][1]);
         content.pages.push({
           title: data.rows[i][0],//.split(' — ').slice(0,-1).join(' - '),
           url: data.rows[i][1],
