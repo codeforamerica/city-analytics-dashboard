@@ -107,7 +107,7 @@
     },
     displayResults: function(){
       var term = landing.newTerms.pop();
-      var url = landing.newURLs.pop();
+      var url = matrix.settings.domain+landing.newURLs.pop();
       var source = landing.newSources.pop();
       var el = landing.el;
       if(term){
