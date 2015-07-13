@@ -3,7 +3,7 @@ GEM
   specs:
     activesupport (3.0.0)
       activesupport (= 3.0.0)
-    json (1.8.0)
+    json (1.8.3)
     rack (1.5.2)
     rack-cache (1.2)
       rack (>= 0.4)
