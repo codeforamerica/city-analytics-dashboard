@@ -4,6 +4,12 @@ describe('traffic', function() {
       profileId: ''
     };
     subject =  window.matrix.traffic;
+    sandbox = sinon.sandbox.create();
+    server = sinon.fakeServer.create();
+  });
+  afterEach(function() {
+    sandbox.restore();
+    server.restore();
   });
   it('has initial points', function() {
     expect(subject.points).to.eq(720);
