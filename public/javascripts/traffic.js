@@ -15,6 +15,15 @@
   yesterday = yesterday.toISOString();
   yesterday = yesterday.split("T"[0]);
 
+  var parseRows = function(rows) {
+    var rowObj = {},
+    length = rows.length;
+    for(var i=0;i<length;i++){
+      rowObj[rows[i][0]] = rows[i][1];
+    }
+    return rowObj;
+  }
+
   if(typeof root.matrix === 'undefined'){ root.matrix = {} }
 
   var traffic = {
@@ -37,8 +46,11 @@
     parseResponse: function(data){
 
       var counts = traffic.counts;
-      var activeUsers = parseInt(data.totalsForAllResults['rt:activeUsers'], 10);
+      var users = parseRows(data.rows)
+      var activeUsers = parseInt(users['DESKTOP'], 10);
+      var activeUsersMobile = parseInt(users['MOBILE'], 10);
       traffic.el.innerText = activeUsers;
+      traffic.elMob.innerText = activeUsersMobile;
 
       counts.unshift(activeUsers);
       counts.length = traffic.points;
@@ -58,6 +70,7 @@
     },
     init: function(){
       traffic.el = document.getElementById('traffic-count');
+      traffic.elMob = document.getElementById('traffic-count-mobile');
       traffic.graphEl = document.getElementById('traffic-count-graph');
       traffic.counts.length = traffic.points;
       
@@ -69,7 +82,6 @@
         // Dummy data in debug mode
         if (debug) { traffic.counts[i] = debugRand(); }
       }
-
        d3.json(traffic.historic(), function(error, json) {
           if (error) return console.warn(error);
 

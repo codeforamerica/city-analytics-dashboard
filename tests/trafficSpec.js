@@ -84,4 +84,35 @@ describe('traffic', function() {
       });
     });
   });
+  describe('#parseResponse', function() {
+    context('realtime data', function() {
+      beforeEach(function() {
+        sparkline =  window.matrix.sparklineGraph('body',{});
+        subject.sparkline = sandbox.stub(sparkline);
+        realtimeData = { totalsForAllResults: { 'rt:activeUsers': 3 }, rows: [["DESKTOP", 1], ["MOBILE", 2]] };
+      });
+      it('sets the activeUser count on the el', function() {
+        el = document.createElement();
+        elMob = document.createElement();
+        subject.el = el;
+        subject.elMob = elMob;
+        subject.parseResponse(realtimeData);
+        expect(el.innerText).to.eq('1')
+      });
+      it('sets the mobile user count to #traffic-count-mobile', function() {
+        $('body').append('<div id="traffic-count"></div>')
+        $('body').append('<div id="traffic-count-mobile"></div>')
+        subject.init()
+        subject.parseResponse(realtimeData);
+        expect($('#traffic-count-mobile')).to.have.text('2')
+      });
+      it('sets the activeUser count to #traffic-count', function() {
+        $('body').append('<div id="traffic-count"></div>')
+        $('body').append('<div id="traffic-count-mobile"></div>')
+        subject.init()
+        subject.parseResponse(realtimeData);
+        expect($('#traffic-count')).to.have.text('1')
+      });
+    });
+  });
 });
