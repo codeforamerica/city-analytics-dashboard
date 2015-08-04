@@ -22,7 +22,7 @@ describe('traffic', function() {
   });
   describe('#endpoint', function() {
     it('returns the path to the servers realtime endpoint', function() {
-      expect(subject.endpoint()).to.eql('/realtime?ids=ga:&metrics=rt:activeUsers&max-results=10');
+      expect(subject.endpoint()).to.eql('/realtime?ids=ga:&metrics=rt:activeUsers&dimensions=rt:deviceCategory&max-results=10');
     });
     context('with profileId', function() {
       beforeEach(function() {
@@ -31,7 +31,7 @@ describe('traffic', function() {
         };
       });
       it('returns correct profile Id in the endpoint path', function() {
-        expect(subject.endpoint()).to.eql('/realtime?ids=ga:Test&metrics=rt:activeUsers&max-results=10');
+        expect(subject.endpoint()).to.eql('/realtime?ids=ga:Test&metrics=rt:activeUsers&dimensions=rt:deviceCategory&max-results=10');
       });
     });
   });

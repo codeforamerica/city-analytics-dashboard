@@ -29,7 +29,7 @@
     interval: (debug) ? 500 : 2 * 60 * 1000,
 
     endpoint: function(){
-      return "/realtime?ids=ga:"+matrix.settings.profileId+"&metrics=rt:activeUsers&max-results=10"
+      return "/realtime?ids=ga:"+matrix.settings.profileId+"&metrics=rt:activeUsers&dimensions=rt:deviceCategory&max-results=10"
     },
     historic: function(){
       return "/historic?ids=ga:"+matrix.settings.profileId+"&dimensions=ga%3AnthMinute&metrics=ga%3Asessions&start-date="+yesterday[0]+"&end-date="+today[0]+"&max-results=1000"
