@@ -7,13 +7,12 @@
     return (Math.random() * debugCountLimit) | 0;
   };
 
-  var today = new Date().toISOString();
-    today = today.split("T"[0]);
-  
-  var yesterday = new Date();
-  yesterday.setDate(yesterday.getDate() - 1);
-  yesterday = yesterday.toISOString();
-  yesterday = yesterday.split("T"[0]);
+  var dateFormat = d3.time.format("%Y-%m-%d");
+  var todayDate = new Date();
+  var today = dateFormat(todayDate);
+
+  var yesterdayDate = d3.time.day.offset(new Date(), -1);
+  var yesterday = dateFormat(yesterdayDate);
 
   if(typeof root.matrix === 'undefined'){ root.matrix = {} }
 
@@ -32,7 +31,7 @@
       return "/realtime?ids=ga:"+matrix.settings.profileId+"&metrics=rt:activeUsers&max-results=10"
     },
     historic: function(){
-      return "/historic?ids=ga:"+matrix.settings.profileId+"&dimensions=ga%3AnthMinute&metrics=ga%3Asessions&start-date="+yesterday[0]+"&end-date="+today[0]+"&max-results=1000"
+      return "/historic?ids=ga:"+matrix.settings.profileId+"&dimensions=ga%3AnthMinute&metrics=ga%3Asessions&start-date="+yesterday+"&end-date="+today+"&max-results=1000"
     },
     parseResponse: function(data){
 
