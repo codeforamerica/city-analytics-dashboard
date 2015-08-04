@@ -46,6 +46,22 @@ Then, once you've added that file, you can simply run
 
 and view the project at localhost:5000
 
+Testing
+-----------
+
+This project uses [karma](http://karma-runner.github.io/) to run the tests.
+Install node and npm to run the tests.
+
+Install the dependencies with
+```
+npm install
+```
+
+To run the tests:
+```
+karma start
+```
+
 Contributing
 ------------
 

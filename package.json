@@ -1,0 +1,32 @@
+{
+  "name": "city-analytics-dashboard",
+  "version": "0.2.0",
+  "description": "This is a display screen to show real time analytics of a given website.",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/karma/bin/karma start --single-run --browsers PhantomJS"
+  },
+  "devDependencies": {
+    "karma": "^0.13.2",
+    "karma-chai": "0.1.0",
+    "karma-chai-jquery": "^1.0.0",
+    "karma-coverage": "^0.4.2",
+    "karma-fixture": "^0.2.5",
+    "karma-jquery": "^0.1.0",
+    "karma-json-fixtures-preprocessor": "0.0.4",
+    "karma-mocha": "^0.1.10",
+    "karma-phantomjs-launcher": "0.1.4",
+    "karma-sinon-chai": "0.3.0",
+    "mocha": "^2.2.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/milafrerichs/city-analytics-dashboard.git"
+  },
+  "author": "Mila Frerichs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/milafrerichs/city-analytics-dashboard/issues"
+  },
+  "homepage": "https://github.com/milafrerichs/city-analytics-dashboard"
+}
