@@ -12,6 +12,7 @@ module.exports = function(config) {
       '**/*.swp'
     ],
     preprocessors: {
+      'public/javascripts/*.js': ['coverage'],
       'tests/**/*.json'   : ['json_fixtures']
     },
     jsonFixturesPreprocessor: {
