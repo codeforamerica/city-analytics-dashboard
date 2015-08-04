@@ -40,4 +40,20 @@ describe('traffic', function() {
       expect(subject.historic()).to.eql('/historic?ids=ga:&dimensions=ga%3AnthMinute&metrics=ga%3Asessions&start-date=2015-08-03&end-date=2015-08-04&max-results=1000');
     });
   });
+  describe('#init', function() {
+    it('sets the count to the points value', function() {
+      subject.init();
+      expect(subject.counts.length).to.eq(subject.points);
+    });
+    it('fills the counts with zeros', function() {
+      subject.points = 1;
+      subject.init();
+      expect(subject.counts[0]).to.eq(0);
+    });
+    it('calls the historic endpoint', function() {
+      mock = sandbox.mock(subject).expects('historic').returns('');
+      subject.init();
+      mock.verify();
+    });
+  });
 });
