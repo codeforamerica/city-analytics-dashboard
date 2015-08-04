@@ -1,3 +1,6 @@
 .sass-cache
 startup.sh
 .env
+node_modules/
+coverage/
+*.swp
