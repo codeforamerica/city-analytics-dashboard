@@ -29,4 +29,9 @@ describe('traffic', function() {
       });
     });
   });
+  describe('#historic', function() {
+    it('returns the path to the servers historic endpoint', function() {
+      expect(subject.historic()).to.eql('/historic?ids=ga:&dimensions=ga%3AnthMinute&metrics=ga%3Asessions&start-date=2015-08-03&end-date=2015-08-04&max-results=1000');
+    });
+  });
 });
