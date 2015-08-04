@@ -55,5 +55,33 @@ describe('traffic', function() {
       subject.init();
       mock.verify();
     });
+    context('no json returned', function() {
+      beforeEach(function() {
+        stub = sandbox.stub(d3, 'json');
+      });
+      it('returns without reloading', function() {
+        mock = sandbox.mock(subject).expects('reload').never();
+        subject.init();
+        stub.callArgWith(1, {}, null)
+        mock.verify();
+      });
+    });
+    context('returns json', function() {
+      beforeEach(function() {
+        stub = sandbox.stub(d3, 'json');
+        subject.points = 1;
+      });
+      it('set the count to row value', function() {
+        subject.init();
+        stub.callArgWith(1, null, {rows: [["000000",1],["000001",1]]});
+        expect(subject.counts[0]).to.eql(1);
+      });
+      it('reloads', function() {
+        mock = sandbox.mock(subject).expects('reload').once();
+        subject.init();
+        stub.callArgWith(1, null, {rows: [["000000",1],["000001",1]]});
+        mock.verify();
+      });
+    });
   });
 });
