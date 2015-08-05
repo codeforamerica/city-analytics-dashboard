@@ -37,7 +37,7 @@ describe('traffic', function() {
   });
   describe('#historic', function() {
     beforeEach(function() {
-      clock = sinon.useFakeTimers(Date.parse("2015-08-05"));
+      clock = sinon.useFakeTimers(Date.now());
     });
     afterEach(function(){
       clock.restore();
