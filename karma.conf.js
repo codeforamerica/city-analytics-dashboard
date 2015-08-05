@@ -19,7 +19,7 @@ module.exports = function(config) {
     jsonFixturesPreprocessor: {
       variableName: '__json__'
     },
-    reporters: ['progress', 'coverage'],
+    reporters: ['progress', 'coverage', 'coveralls'],
     coverageReporter: {
       reporters: [
         { type: 'html', subdir: 'report-html' },
