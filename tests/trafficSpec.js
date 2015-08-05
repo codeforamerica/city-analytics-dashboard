@@ -36,8 +36,17 @@ describe('traffic', function() {
     });
   });
   describe('#historic', function() {
+    beforeEach(function() {
+      clock = sinon.useFakeTimers(Date.now());
+    });
+    afterEach(function(){
+      clock.restore();
+    });
     it('returns the path to the servers historic endpoint', function() {
-      expect(subject.historic()).to.eql('/historic?ids=ga:&dimensions=ga%3AnthMinute&metrics=ga%3Asessions&start-date=2015-08-03&end-date=2015-08-04&max-results=1000');
+      today = new Date().toISOString().split("T")[0];
+      clock.tick(-(1000*60*60*24));
+      yesterday = new Date().toISOString().split("T")[0];
+      expect(subject.historic()).to.eql('/historic?ids=ga:&dimensions=ga%3AnthMinute&metrics=ga%3Asessions&start-date='+ yesterday+'&end-date='+ today+'&max-results=1000');
     });
   });
   describe('#init', function() {
