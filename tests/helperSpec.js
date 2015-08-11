@@ -44,6 +44,35 @@ describe("helper", function() {
 
     });
   });
+  describe("deviceMinuteIntervalResults", function() {
+    beforeEach(function() {
+      clock = sinon.useFakeTimers(Date.now());
+      var newYorkTimeZoneMidnight = 6;
+      var yesterday = -(1000*60*60*24)
+      endDate = new Date();
+      endDate.setHours(newYorkTimeZoneMidnight,0,0)
+      clock.tick(yesterday);
+      startDate = new Date();
+      startDate.setHours(newYorkTimeZoneMidnight,0,0)
+      f = d3.time.format("%Y%m%d");
+      resultsMinuteDate = [["desktop",f(startDate),"00","02","1"],["desktop",f(startDate),"00","25","1"],["desktop",f(startDate),"00","29","2"],["desktop",f(startDate),"01","30","1"],["desktop",f(startDate),"01","31","1"]];
+    });
+    context("every 30 minutes", function() {
+      it("returns results for 30 minutes", function() {
+        expect(Object.keys(subject.deviceMinuteIntervalResults(resultsMinuteDate, 30, startDate, endDate)).length).to.eql(49);
+      });
+      it("returns zero for results not in google results", function() {
+        var d = new Date()
+        d.setHours(7,0,0)
+        expect(subject.deviceMinuteIntervalResults(resultsMinuteDate, 30, startDate, endDate)[d].desktop).to.eq(0);
+      });
+      it("returns result aggregated by 15 minutes and device", function() {
+        var d = new Date()
+        d.setHours(6,00,0)
+        expect(subject.deviceMinuteIntervalResults(resultsMinuteDate, 30, startDate, endDate)[d].desktop).to.eq(4);
+      });
+    });
+  });
   describe("leadingZero", function() {
     context("single digit", function() {
       it("returns the number with leading zero", function() {
