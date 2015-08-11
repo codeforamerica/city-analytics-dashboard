@@ -43,10 +43,7 @@ describe('traffic', function() {
       clock.restore();
     });
     it('returns the path to the servers historic endpoint', function() {
-      today = new Date().toISOString().split("T")[0];
-      clock.tick(-(1000*60*60*24));
-      yesterday = new Date().toISOString().split("T")[0];
-      expect(subject.historic()).to.eql('/historic?ids=ga:&dimensions=ga%3AnthMinute&metrics=ga%3Asessions&start-date='+ yesterday+'&end-date='+ today+'&max-results=1000');
+      expect(subject.historic()).to.eql('/historic?ids=ga:&dimensions=ga%3AdeviceCategory,ga%3Adate,ga%3Ahour,ga%3Aminute&metrics=ga%3Asessions&start-date=yesterday&end-date=today&max-results=2000');
     });
   });
   describe('#init', function() {
