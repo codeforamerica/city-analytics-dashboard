@@ -44,59 +44,44 @@
       return "/historic?ids=ga:"+matrix.settings.profileId+"&dimensions=ga%3AdeviceCategory,ga%3Adate,ga%3Ahour,ga%3Aminute&metrics=ga%3Asessions&start-date=yesterday&end-date=today&max-results=2000"
     },
     parseResponse: function(data){
-
-      var counts = traffic.counts;
-      var users = parseRows(data.rows)
+      //data can be empty (rows object not exitent)
+      var users = parseRows(data.rows);
       var activeUsers = parseInt(users['DESKTOP'], 10);
       var activeUsersMobile = parseInt(users['MOBILE'], 10);
       traffic.el.innerText = activeUsers;
       traffic.elMob.innerText = activeUsersMobile;
 
-      counts.unshift(activeUsers);
-      counts.length = traffic.points;
-      if(typeof traffic.sparkline === 'undefined'){
-     
-        traffic.sparkline = root.matrix.sparklineGraph(
-          '#traffic-count-graph',
-          { data: counts,
-            points: traffic.points,
-            height: 120,
-            width: traffic.graphEl.offsetWidth
-          }
-        );
+      var dataArray = helper.arrayFromObject(traffic.counts);
+      dataArray.reverse();
+      if(typeof traffic.chart === 'undefined'){
+        var width = traffic.graphEl.offsetWidth;
+        traffic.chart = new Morris.Bar({
+          data: dataArray,
+          element: 'traffic-count-graph',
+          xkey: 'date',
+          ykeys: ['desktop', 'mobile'],
+          labels: ['Desktop', 'Mobile'],
+          stacked: true,
+          barColors: ["#1B406D", "#265C8D"]
+        });
       }
-      traffic.sparkline.update(counts,
-        "Traffic over the past " + (Math.round(traffic.points/30)) + " hours");
+      traffic.chart.setData(dataArray);
     },
     init: function(){
       traffic.el = document.getElementById('traffic-count');
       traffic.elMob = document.getElementById('traffic-count-mobile');
       traffic.graphEl = document.getElementById('traffic-count-graph');
       traffic.counts.length = traffic.points;
-      
-      
 
-      // Zero fill the points
-      for (var i = 0; i < traffic.points; i++) {
-        traffic.counts[i] = 0;
-        // Dummy data in debug mode
-        if (debug) { traffic.counts[i] = debugRand(); }
-      }
-       d3.json(traffic.historic(), function(error, json) {
-          if (error) return console.warn(error);
+      d3.json(traffic.historic(), function(error, json) {
+        if (error) return console.warn(error);
 
-          // going over each historic item
-          var i = traffic.points;
-          var j = 0;
-          while(i--) {
-            traffic.counts[j] = json.rows[i][1];
-            j++;
-          }
-          traffic.reload();
+        var timeFormat = d3.time.format('%Y-%m-%d%H%M%Z');
+        var startDate = timeFormat.parse(yesterday[0]+"0000-0400")
+        var endDate = new Date();
+        traffic.counts = window.helper.deviceMinuteIntervalResults(json.rows, 30, startDate, endDate);
+        traffic.reload();
         });
-       
-      
-      
       // Check the traffic intermittently
       window.setInterval(traffic.reload, traffic.interval);
     },

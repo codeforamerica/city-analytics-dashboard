@@ -85,5 +85,16 @@ describe("helper", function() {
       });
     });
   });
+  describe("#arrayFromObject", function() {
+    beforeEach(function() {
+      dataObject = {test: {test: 'Test'}, bla: {bla: 'Bla'}};
+    });
+    it("returns array with objects", function() {
+      expect(subject.arrayFromObject(dataObject).length).to.eql(2);
+    });
+    it("first element is object", function() {
+      expect(subject.arrayFromObject(dataObject)[0]).to.eql({test: 'Test'});
+    });
+  });
 });
 

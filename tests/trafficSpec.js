@@ -51,11 +51,6 @@ describe('traffic', function() {
       subject.init();
       expect(subject.counts.length).to.eq(subject.points);
     });
-    it('fills the counts with zeros', function() {
-      subject.points = 1;
-      subject.init();
-      expect(subject.counts[0]).to.eq(0);
-    });
     it('calls the historic endpoint', function() {
       mock = sandbox.mock(subject).expects('historic').returns('');
       subject.init();
@@ -77,15 +72,18 @@ describe('traffic', function() {
         stub = sandbox.stub(d3, 'json');
         subject.points = 1;
       });
-      it('set the count to row value', function() {
+      it('calls deviceMinuteIntervalResults from helper', function() {
+        rows = {test: 'test'}
+        mock = sandbox.mock(helper).expects("deviceMinuteIntervalResults").once()//.with(rows)
         subject.init();
-        stub.callArgWith(1, null, {rows: [["000000",1],["000001",1]]});
-        expect(subject.counts[0]).to.eql(1);
+        stub.callArgWith(1, null, {rows: rows}, null)
+        mock.verify();
       });
       it('reloads', function() {
         mock = sandbox.mock(subject).expects('reload').once();
+        subject.counts = [];
         subject.init();
-        stub.callArgWith(1, null, {rows: [["000000",1],["000001",1]]});
+        stub.callArgWith(1, null, {rows: [["desktop","0","1"],["desktop","1","1"]]});
         mock.verify();
       });
     });
@@ -93,8 +91,10 @@ describe('traffic', function() {
   describe('#parseResponse', function() {
     context('realtime data', function() {
       beforeEach(function() {
-        sparkline =  window.matrix.sparklineGraph('body',{});
-        subject.sparkline = sandbox.stub(sparkline);
+        $('body').append('<div id="traffic-count-graph"></div>')
+        chart = new Morris.Bar({element: 'traffic-count-graph'});
+        subject.chart = sandbox.stub(chart);
+        subject.counts = [];
         realtimeData = { totalsForAllResults: { 'rt:activeUsers': 3 }, rows: [["DESKTOP", 1], ["MOBILE", 2]] };
       });
       it('sets the activeUser count on the el', function() {

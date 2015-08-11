@@ -79,5 +79,12 @@ window.helper = {
   leadingZero: function(number) {
     s = "0"+number;
     return s.substr(s.length-2)
+  },
+  arrayFromObject: function(transformObject) {
+    var dataArray = new Array;
+    for(var o in transformObject) {
+        dataArray.push(transformObject[o]);
+    }
+    return dataArray;
   }
 }
