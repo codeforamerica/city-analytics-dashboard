@@ -44,5 +44,17 @@ describe("helper", function() {
 
     });
   });
+  describe("leadingZero", function() {
+    context("single digit", function() {
+      it("returns the number with leading zero", function() {
+        expect(subject.leadingZero(1)).to.eql("01")
+      });
+    });
+    context("double digit", function() {
+      it("returns the number", function() {
+        expect(subject.leadingZero(10)).to.eql("10")
+      });
+    });
+  });
 });
 

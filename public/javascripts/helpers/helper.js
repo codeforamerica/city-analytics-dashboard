@@ -40,4 +40,8 @@ window.helper = {
     }
     return results;
   },
+  leadingZero: function(number) {
+    s = "0"+number;
+    return s.substr(s.length-2)
+  }
 }
