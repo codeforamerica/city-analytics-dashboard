@@ -85,35 +85,68 @@ describe('traffic', function() {
     });
   });
   describe('#parseResponse', function() {
+    context("no rows in data", function() {
+      beforeEach(function() {
+        subject.el = {innerText: ''}
+        subject.elMob = {innerText: ''}
+      });
+      it("creates a Morris chart", function() {
+        $('body').append('<div id="traffic-count-graph"></div>')
+        subject.parseResponse({rows: []});
+        expect(subject.chart).be.instanceOf(Morris.Bar);
+      });
+    });
+    context('no data', function() {
+      it("should not create chart", function() {
+        subject.chart = 'test';
+        subject.parseResponse({});
+        expect(subject.chart).to.eq('test');
+      });
+      it("should not update chart", function() {
+        subject.chart = {setData: function() {}};
+        mock = sandbox.mock(subject.chart).expects('setData').never();
+        subject.parseResponse({});
+        mock.verify();
+      });
+    });
     context('realtime data', function() {
       beforeEach(function() {
+        $('body').append('<div id="traffic-count"></div>')
+        $('body').append('<div id="traffic-count-mobile"></div>')
         $('body').append('<div id="traffic-count-graph"></div>')
         chart = new Morris.Bar({element: 'traffic-count-graph'});
         subject.chart = sandbox.stub(chart);
-        subject.counts = [];
+        subject.counts = {};
+      });
+      context("has data for both device types", function() {
+        beforeEach(function() {
         realtimeData = { totalsForAllResults: { 'rt:activeUsers': 3 }, rows: [["DESKTOP", 1], ["MOBILE", 2]] };
+        });
+        it('sets the mobile user count to #traffic-count-mobile', function() {
+          subject.init()
+          subject.parseResponse(realtimeData);
+          expect($('#traffic-count-mobile')).to.have.text('2')
+        });
+        it('sets the activeUser count to #traffic-count', function() {
+          subject.init()
+          subject.parseResponse(realtimeData);
+          expect($('#traffic-count')).to.have.text('1')
+        });
       });
-      it('sets the activeUser count on the el', function() {
-        el = document.createElement();
-        elMob = document.createElement();
-        subject.el = el;
-        subject.elMob = elMob;
-        subject.parseResponse(realtimeData);
-        expect(el.innerText).to.eq('1')
-      });
-      it('sets the mobile user count to #traffic-count-mobile', function() {
-        $('body').append('<div id="traffic-count"></div>')
-        $('body').append('<div id="traffic-count-mobile"></div>')
-        subject.init()
-        subject.parseResponse(realtimeData);
-        expect($('#traffic-count-mobile')).to.have.text('2')
-      });
-      it('sets the activeUser count to #traffic-count', function() {
-        $('body').append('<div id="traffic-count"></div>')
-        $('body').append('<div id="traffic-count-mobile"></div>')
-        subject.init()
-        subject.parseResponse(realtimeData);
-        expect($('#traffic-count')).to.have.text('1')
+      context("has data for one device type", function() {
+        beforeEach(function() {
+        realtimeData = { totalsForAllResults: { 'rt:activeUsers': 3 }, rows: [["MOBILE", 2]] };
+        });
+        it('sets the mobile user count to #traffic-count-mobile', function() {
+          subject.init()
+          subject.parseResponse(realtimeData);
+          expect($('#traffic-count-mobile')).to.have.text('2')
+        });
+        it('sets the activeUser count to #traffic-count', function() {
+          subject.init()
+          subject.parseResponse(realtimeData);
+          expect($('#traffic-count')).to.have.text('0')
+        });
       });
     });
   });

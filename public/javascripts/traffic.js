@@ -44,28 +44,28 @@
       return "/historic?ids=ga:"+matrix.settings.profileId+"&dimensions=ga%3AdeviceCategory,ga%3Adate,ga%3Ahour,ga%3Aminute&metrics=ga%3Asessions&start-date=yesterday&end-date=today&max-results=2000"
     },
     parseResponse: function(data){
-      //data can be empty (rows object not exitent)
-      var users = parseRows(data.rows);
-      var activeUsers = parseInt(users['DESKTOP'], 10);
-      var activeUsersMobile = parseInt(users['MOBILE'], 10);
-      traffic.el.innerText = activeUsers;
-      traffic.elMob.innerText = activeUsersMobile;
+      if(data && data.hasOwnProperty('rows')){
+        var users = parseRows(data.rows);
+        var activeUsers = parseInt(users['DESKTOP'], 10) | 0;
+        var activeUsersMobile = parseInt(users['MOBILE'], 10) | 0;
+        traffic.el.innerText = activeUsers;
+        traffic.elMob.innerText = activeUsersMobile;
 
-      var dataArray = helper.arrayFromObject(traffic.counts);
-      dataArray.reverse();
-      if(typeof traffic.chart === 'undefined'){
-        var width = traffic.graphEl.offsetWidth;
-        traffic.chart = new Morris.Bar({
-          data: dataArray,
-          element: 'traffic-count-graph',
-          xkey: 'date',
-          ykeys: ['desktop', 'mobile'],
-          labels: ['Desktop', 'Mobile'],
-          stacked: true,
-          barColors: ["#1B406D", "#265C8D"]
-        });
+        var dataArray = helper.arrayFromObject(traffic.counts);
+        dataArray.reverse();
+        if(typeof traffic.chart === 'undefined'){
+          traffic.chart = new Morris.Bar({
+            data: dataArray,
+            element: 'traffic-count-graph',
+            xkey: 'date',
+            ykeys: ['desktop', 'mobile'],
+            labels: ['Desktop', 'Mobile'],
+            stacked: true,
+            barColors: ["#1B406D", "#265C8D"]
+          });
+        }
+        traffic.chart.setData(dataArray);
       }
-      traffic.chart.setData(dataArray);
     },
     init: function(){
       traffic.el = document.getElementById('traffic-count');
