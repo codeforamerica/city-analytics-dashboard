@@ -47,9 +47,11 @@ describe("helper", function() {
   describe("deviceMinuteIntervalResults", function() {
     beforeEach(function() {
       clock = sinon.useFakeTimers(Date.now());
-      var newYorkTimeZoneMidnight = 6;
+      var newYorkTimeZoneMidnight = 4;
       var yesterday = -(1000*60*60*24)
       endDate = new Date();
+      var currentTimeZoneOffSet = endDate.getTimezoneOffset()/60;
+      currentTimeZoneNewYorkMidnight = newYorkTimeZoneMidnight-currentTimeZoneOffSet;
       endDate.setHours(newYorkTimeZoneMidnight,0,0)
       clock.tick(yesterday);
       startDate = new Date();
@@ -62,13 +64,14 @@ describe("helper", function() {
         expect(Object.keys(subject.deviceMinuteIntervalResults(resultsMinuteDate, 30, startDate, endDate)).length).to.eql(49);
       });
       it("returns zero for results not in google results", function() {
-        var d = new Date()
-        d.setHours(7,0,0)
+        var oneOClock = currentTimeZoneNewYorkMidnight+1;
+        var d = new Date();
+        d.setHours(oneOClock,0,0);
         expect(subject.deviceMinuteIntervalResults(resultsMinuteDate, 30, startDate, endDate)[d].desktop).to.eq(0);
       });
       it("returns result aggregated by 15 minutes and device", function() {
-        var d = new Date()
-        d.setHours(6,00,0)
+        var d = new Date();
+        d.setHours(currentTimeZoneNewYorkMidnight,0,0);
         expect(subject.deviceMinuteIntervalResults(resultsMinuteDate, 30, startDate, endDate)[d].desktop).to.eq(4);
       });
     });
