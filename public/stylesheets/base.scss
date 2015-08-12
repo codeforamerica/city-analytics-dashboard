@@ -235,6 +235,14 @@ h2{
       width: 50%;
     }
   }
+  #traffic-count-graph {
+    height: 200px;
+  }
+  #graph-text {
+    text-align: right;
+    position: relative;
+    top: -30px;
+  }
   .graph {
     float: left;
     width: 80%;
