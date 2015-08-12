@@ -73,17 +73,20 @@
       traffic.graphEl = document.getElementById('traffic-count-graph');
       traffic.counts.length = traffic.points;
 
+      // Check the traffic intermittently
+      traffic.loadHistory();
+      window.setInterval(traffic.loadHistory, traffic.interval*4);
+      window.setInterval(traffic.reload, traffic.interval);
+    },
+    loadHistory: function() {
       d3.json(traffic.historic(), function(error, json) {
         if (error) return console.warn(error);
-
         var timeFormat = d3.time.format('%Y-%m-%d%H%M%Z');
         var startDate = timeFormat.parse(yesterday[0]+"0000-0400")
         var endDate = new Date();
         traffic.counts = window.helper.deviceMinuteIntervalResults(json.rows, 30, startDate, endDate);
         traffic.reload();
-        });
-      // Check the traffic intermittently
-      window.setInterval(traffic.reload, traffic.interval);
+      });
     },
     reload: function(){
       var endpoint = traffic.endpoint();

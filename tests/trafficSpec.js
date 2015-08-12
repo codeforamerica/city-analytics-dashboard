@@ -47,45 +47,41 @@ describe('traffic', function() {
     });
   });
   describe('#init', function() {
+    beforeEach(function() {
+      clock = sinon.useFakeTimers(Date.now());
+    });
+    afterEach(function(){
+      clock.restore();
+    });
     it('sets the count to the points value', function() {
       subject.init();
       expect(subject.counts.length).to.eq(subject.points);
     });
-    it('calls the historic endpoint', function() {
-      mock = sandbox.mock(subject).expects('historic').returns('');
+    it('calls loadHistory', function() {
+      mock = sandbox.mock(subject).expects('loadHistory').once();
       subject.init();
       mock.verify();
     });
-    context('no json returned', function() {
-      beforeEach(function() {
-        stub = sandbox.stub(d3, 'json');
-      });
-      it('returns without reloading', function() {
-        mock = sandbox.mock(subject).expects('reload').never();
-        subject.init();
-        stub.callArgWith(1, {}, null)
-        mock.verify();
-      });
+    it('calls loadHistory after interval * 4', function() {
+      mock = sandbox.mock(subject).expects('loadHistory').thrice();
+      subject.interval = 100
+      subject.init();
+      clock.tick(800)
+      mock.verify();
     });
-    context('returns json', function() {
-      beforeEach(function() {
-        stub = sandbox.stub(d3, 'json');
-        subject.points = 1;
-      });
-      it('calls deviceMinuteIntervalResults from helper', function() {
-        rows = {test: 'test'}
-        mock = sandbox.mock(helper).expects("deviceMinuteIntervalResults").once()//.with(rows)
-        subject.init();
-        stub.callArgWith(1, null, {rows: rows}, null)
-        mock.verify();
-      });
-      it('reloads', function() {
-        mock = sandbox.mock(subject).expects('reload').once();
-        subject.counts = [];
-        subject.init();
-        stub.callArgWith(1, null, {rows: [["desktop","0","1"],["desktop","1","1"]]});
-        mock.verify();
-      });
+    it('calls reload after interval', function() {
+      mock = sandbox.mock(subject).expects('reload').once();
+      subject.interval = 100
+      subject.init();
+      clock.tick(100)
+      mock.verify();
+    });
+    it('calls reload every interval', function() {
+      mock = sandbox.mock(subject).expects('reload').twice()
+      subject.interval = 100
+      subject.init();
+      clock.tick(200)
+      mock.verify();
     });
   });
   describe('#parseResponse', function() {
@@ -118,6 +114,44 @@ describe('traffic', function() {
         subject.init()
         subject.parseResponse(realtimeData);
         expect($('#traffic-count')).to.have.text('1')
+      });
+    });
+  });
+  describe('#loadHistory', function() {
+    it('calls the historic endpoint', function() {
+      mock = sandbox.mock(subject).expects('historic').returns('');
+      subject.loadHistory();
+      mock.verify();
+    });
+    context('no json returned', function() {
+      beforeEach(function() {
+        stub = sandbox.stub(d3, 'json');
+      });
+      it('returns without reloading', function() {
+        mock = sandbox.mock(subject).expects('reload').never();
+        subject.loadHistory();
+        stub.callArgWith(1, {}, null)
+        mock.verify();
+      });
+    });
+    context('returns json', function() {
+      beforeEach(function() {
+        stub = sandbox.stub(d3, 'json');
+        subject.points = 1;
+      });
+      it('calls deviceMinuteIntervalResults from helper', function() {
+        rows = {test: 'test'}
+        mock = sandbox.mock(helper).expects("deviceMinuteIntervalResults").once()//.with(rows)
+        subject.loadHistory();
+        stub.callArgWith(1, null, {rows: rows}, null)
+        mock.verify();
+      });
+      it('reloads', function() {
+        mock = sandbox.mock(subject).expects('reload').once();
+        subject.counts = [];
+        subject.loadHistory();
+        stub.callArgWith(1, null, {rows: [["desktop","0","1"],["desktop","1","1"]]});
+        mock.verify();
       });
     });
   });
