@@ -61,7 +61,12 @@
             ykeys: ['desktop', 'mobile'],
             labels: ['Desktop', 'Mobile'],
             stacked: true,
-            barColors: ["#1B406D", "#265C8D"]
+            barColors: ["#1B406D", "#265C8D"],
+            hideHover: 'always',
+            xLabelFormat: function(data){
+              debugger
+              return "";
+            },
           });
         }
         traffic.chart.setData(dataArray);
