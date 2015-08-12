@@ -52,7 +52,6 @@
         traffic.elMob.innerText = activeUsersMobile;
 
         var dataArray = helper.arrayFromObject(traffic.counts);
-        dataArray.reverse();
         if(typeof traffic.chart === 'undefined'){
           traffic.chart = new Morris.Bar({
             data: dataArray,
@@ -64,7 +63,6 @@
             barColors: ["#1B406D", "#265C8D"],
             hideHover: 'always',
             xLabelFormat: function(data){
-              debugger
               return "";
             },
           });
