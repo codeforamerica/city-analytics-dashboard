@@ -41,7 +41,7 @@
       return "/realtime?ids=ga:"+matrix.settings.profileId+"&metrics=rt:activeUsers&dimensions=rt:deviceCategory&max-results=10"
     },
     historic: function(){
-      return "/historic?ids=ga:"+matrix.settings.profileId+"&dimensions=ga%3AdeviceCategory,ga%3Adate,ga%3Ahour,ga%3Aminute&metrics=ga%3Asessions&start-date=yesterday&end-date=today&max-results=2000"
+      return "/historic?ids=ga:"+matrix.settings.profileId+"&dimensions=ga%3AdeviceCategory,ga%3Adate,ga%3Ahour,ga%3Aminute&metrics=ga%3Asessions&start-date=2daysAgo&end-date=today&max-results=4000"
     },
     parseResponse: function(data){
       if(data && data.hasOwnProperty('rows')){
@@ -84,9 +84,8 @@
     loadHistory: function() {
       d3.json(traffic.historic(), function(error, json) {
         if (error) return console.warn(error);
-        var timeFormat = d3.time.format('%Y-%m-%d%H%M%Z');
-        var startDate = timeFormat.parse(yesterday[0]+"0000-0400")
         var endDate = new Date();
+        var startDate = d3.time.day.offset(endDate, -2);
         traffic.counts = window.helper.deviceMinuteIntervalResults(json.rows, 30, startDate, endDate);
         traffic.reload();
       });

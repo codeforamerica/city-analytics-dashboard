@@ -47,15 +47,15 @@ describe("helper", function() {
   describe("deviceMinuteIntervalResults", function() {
     beforeEach(function() {
       clock = sinon.useFakeTimers(Date.now());
-      var newYorkTimeZoneMidnight = 4;
+      var timeZoneOffSet = 7;
       var yesterday = -(1000*60*60*24)
       endDate = new Date();
       var currentTimeZoneOffSet = endDate.getTimezoneOffset()/60;
-      currentTimeZoneNewYorkMidnight = newYorkTimeZoneMidnight-currentTimeZoneOffSet;
-      endDate.setHours(newYorkTimeZoneMidnight,0,0)
+      currentTimeZoneOffsetMidnight = timeZoneOffSet-currentTimeZoneOffSet;
       clock.tick(yesterday);
       startDate = new Date();
-      startDate.setHours(newYorkTimeZoneMidnight,0,0)
+      startDate.setHours(currentTimeZoneOffsetMidnight, 0,0);
+      endDate.setHours(currentTimeZoneOffsetMidnight, 0,0);
       f = d3.time.format("%Y%m%d");
       resultsMinuteDate = [["desktop",f(startDate),"00","02","1"],["desktop",f(startDate),"00","25","1"],["desktop",f(startDate),"00","29","2"],["desktop",f(startDate),"01","30","1"],["desktop",f(startDate),"01","31","1"]];
     });
@@ -64,14 +64,14 @@ describe("helper", function() {
         expect(Object.keys(subject.deviceMinuteIntervalResults(resultsMinuteDate, 30, startDate, endDate)).length).to.eql(49);
       });
       it("returns zero for results not in google results", function() {
-        var oneOClock = currentTimeZoneNewYorkMidnight+1;
+        var oneOClock = currentTimeZoneOffsetMidnight+1;
         var d = new Date();
         d.setHours(oneOClock,0,0);
         expect(subject.deviceMinuteIntervalResults(resultsMinuteDate, 30, startDate, endDate)[d].desktop).to.eq(0);
       });
       it("returns result aggregated by 15 minutes and device", function() {
         var d = new Date();
-        d.setHours(currentTimeZoneNewYorkMidnight,0,0);
+        d.setHours(currentTimeZoneOffsetMidnight,0,0);
         expect(subject.deviceMinuteIntervalResults(resultsMinuteDate, 30, startDate, endDate)[d].desktop).to.eq(4);
       });
     });
