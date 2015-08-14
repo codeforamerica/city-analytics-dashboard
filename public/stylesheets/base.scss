@@ -240,15 +240,10 @@ h2{
   }
   #graph-text {
     text-align: right;
-    position: relative;
-    top: -30px;
   }
   .graph {
     float: left;
     width: 80%;
-    /*.tall & {
-      width: 50%;
-    }*/
   }
   path, line.axis {
     stroke: $main-font;
