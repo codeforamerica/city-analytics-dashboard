@@ -4,6 +4,7 @@ module.exports = function(config) {
     frameworks: ['mocha', 'chai-jquery', 'jquery-2.1.0', 'chai', 'sinon-chai', 'fixture'],
     files: [
       'public/javascripts/vendor/d3.v3.min.js',
+      'public/javascripts/landing-pages.js',
       'public/javascripts/traffic.js',
       'tests/**/*Spec.js',
       'tests/fixtures/**/*'
