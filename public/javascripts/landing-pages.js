@@ -13,7 +13,7 @@
     nextRefresh: 0,
     limit: 10,
 
-    endpoint: function(profileId){
+    endpoint: function(){
       return "/realtime?"
         + "ids=ga:"+matrix.settings.profileId+"&"
         + "metrics=ga:activeVisitors&"
@@ -140,7 +140,7 @@
           false);
     },
     reload: function(){
-      var endpoint = landing.endpoint(root.matrix.settings.profileId);
+      var endpoint = landing.endpoint();
       landing.nextRefresh = Date.now() + 60e3;
       d3.json(endpoint, landing.parseResponse);
     }
