@@ -7,8 +7,13 @@
     pages: [],
     el: false,
 
-    endpoint: function(){
-      return "/realtime?ids=ga:"+matrix.settings.profileId+"&metrics=rt%3Apageviews&dimensions=rt%3ApageTitle,rt:pagePath&max-results=10&sort=-rt%3Apageviews"
+  endpoint: function(){
+    return "/realtime?"+
+    "ids=ga:"+matrix.settings.profileId+"&"+
+    "metrics=rt:pageviews&"+
+    "dimensions=rt:pageTitle,rt:pagePath&"+
+    "max-results=10&"+
+    "sort=-rt%3Apageviews"
     },
     parseResponse: function(data){
       var i, _i;
