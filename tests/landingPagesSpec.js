@@ -87,10 +87,16 @@ describe('traffic', function() {
   });
   describe('#parseData', function() {
     beforeEach(function() {
-      data = { rows: [["Term", "url", "source", "10"]]};
+      data = { rows: [["Titel 1","url 1","(not set)","00","1"],["Titel 2","url 2","(not set)","00","1"],["Titel 3","url 3","(not set)","01","3"],["Titel 4","url 4","(not set)","02","3"]] };
+    });
+    it("calls addTerm for every row less than two minutes ago", function() {
+      mock = sandbox.mock(subject).expects("addTerm").thrice();
+      subject.parseData(data);
+      mock.verify();
     });
     it("calls addTerm for every row", function() {
-      mock = sandbox.mock(subject).expects("addTerm").once().withArgs("Term", 10, "url", "source");
+      data = { rows: [["Titel 1","url 1","(not set)","00","1"]] };
+      mock = sandbox.mock(subject).expects("addTerm").withArgs("Titel 1", 1, "url 1", "(not set)");
       subject.parseData(data);
       mock.verify();
     });
@@ -129,7 +135,7 @@ describe('traffic', function() {
   });
   describe('#endpoint', function() {
     it('returns the path to the servers realtime endpoint', function() {
-      expect(subject.endpoint()).to.eql('/realtime?ids=ga:&metrics=ga:activeVisitors&dimensions=ga:pageTitle,ga:pagePath,rt:source&sort=-ga:activeVisitors&max-results=10000');
+      expect(subject.endpoint()).to.eql('/realtime?ids=ga:&metrics=rt:pageViews&dimensions=ga:pageTitle,ga:pagePath,rt:source,rt:minutesAgo&sort=rt:minutesAgo&max-results=10000');
     });
     context('with profileId', function() {
       beforeEach(function() {
@@ -138,7 +144,7 @@ describe('traffic', function() {
         };
       });
       it('returns correct profile Id in the endpoint path', function() {
-      expect(subject.endpoint()).to.eq('/realtime?ids=ga:Test&metrics=ga:activeVisitors&dimensions=ga:pageTitle,ga:pagePath,rt:source&sort=-ga:activeVisitors&max-results=10000');
+      expect(subject.endpoint()).to.eql('/realtime?ids=ga:Test&metrics=rt:pageViews&dimensions=ga:pageTitle,ga:pagePath,rt:source,rt:minutesAgo&sort=rt:minutesAgo&max-results=10000');
       });
     });
   });

@@ -10,10 +10,10 @@
     endpoint: function(){
       return "/realtime?"
         + "ids=ga:"+matrix.settings.profileId+"&"
-        + "metrics=ga:activeVisitors&"
-        + "dimensions=ga:pageTitle,ga:pagePath,rt:source&"
+        + "metrics=rt:pageViews&"
+        + "dimensions=ga:pageTitle,ga:pagePath,rt:source,rt:minutesAgo&"
         /*+ "filters="+ encodeURIComponent("ga:pagePath==/search") +"&"*/
-        + "sort=-ga:activeVisitors&"
+        + "sort=rt:minutesAgo&"
         + "max-results=10000";
     },
     safeTerm: function(term){
@@ -47,13 +47,20 @@
       });
     },
     parseData: function(data) {
-      var i, _i, term, url, source;
+      var i, _i, term, url, source, minutesAgo,
+      termColumn = 0, urlColumn = 1, sourceColumn = 2,
+      minutesAgoColumn = 3, countColumn = 4, maxMinutes = 2;
       for(i=0,_i=data.rows.length; i<_i; i++){
-        term = data.rows[i][0].split(' - ');
-        url = data.rows[i][1];
-        source = data.rows[i][2];
-        if(term[0] !== 'Search' && landing.safeTerm(term[0])){
-          landing.addTerm(term[0], root.parseInt(data.rows[i][3], 10), url, source);
+        term = data.rows[i][termColumn].split(/ \u2013|\u2014 /);
+        url = data.rows[i][urlColumn];
+        source = data.rows[i][sourceColumn];
+        minutesAgo = root.parseInt(data.rows[i][minutesAgoColumn]);
+        if(minutesAgo < maxMinutes) {
+          if(term[0] !== 'Search' && landing.safeTerm(term[0])){
+            landing.addTerm(term[0], root.parseInt(data.rows[i][countColumn], 10), url, source);
+          }
+        }else {
+          break;
         }
       }
     },
