@@ -58,6 +58,7 @@
 
     <script src="javascripts/vendor/d3.v3.min.js"></script>
     <script src="javascripts/vendor/mustache.js"></script>
+    <script src="javascripts/vendor/handlebars-v3.0.3.js"></script>
     <script src="javascripts/vendor/pretty.js"></script>
     <script src="javascripts/vendor/bezier.js"></script>
 
@@ -109,19 +110,20 @@
       </li>
     </script>
 
-    <script type="template" id="landing-pages-item">
+    <script type="template" id="landing-pages-items">
+      {{#each pages}}
       <li>
         <div>
           {{#has_url}}<a href="http://{{ url }}" target="_blank">{{/has_url}}
           {{ term }}
           {{#has_url}}</a>{{/has_url}}
-          
           {{#has_source}}
             <em>via: {{ source }}</em>
           {{/has_source}}
+          <em>{{total}} visit{{#if multiple_visits}}s{{/if}}</em>
         </div>
       </li>
+      {{/each}}
     </script>
-
   </body>
 </html>
