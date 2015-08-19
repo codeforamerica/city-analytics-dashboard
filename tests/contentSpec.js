@@ -58,29 +58,26 @@ describe('traffic', function() {
     });
     context("no error parsing json", function() {
       context("has data from GA", function() {
-        beforeEach(function() {
-          data = { rows: [["Titel 1","url 1","DESKTOP","1"]] };
-          subject.pages = [];
-        });
         it("displays the results", function() {
           mock = sandbox.mock(subject).expects("displayResults").once();
           subject.parseResponse(null, {rows: []});
           mock.verify();
         });
-        it("adds new items to pages", function() {
+        it("parses the data", function() {
+          data = {rows: []};
           sandbox.stub(subject, "displayResults");
-          expect(function() {
-            return subject.pages.length;
-          }).to.change.by(1).when(function() { subject.parseResponse(null, data)});
-        });
-        it("adds new items to terms", function() {
-          sandbox.stub(subject, "displayResults");
-          result = { title: 'Titel 1', url: "url 1", visits: 1 };
+          mock = sandbox.mock(subject).expects("parseData").withArgs(data).once();
           subject.parseResponse(null, data);
-          expect(subject.pages[0]).to.eql(result);
+          mock.verify();
         });
       });
       context("no rows (no data from GA)", function() {
+        it("does not call parseData", function() {
+          sandbox.stub(subject, "displayResults");
+          mock = sandbox.mock(subject).expects("parseData").never();
+          subject.parseResponse(null, {});
+          mock.verify();
+        });
         it("does not parse data", function() {
           sandbox.stub(subject, "displayResults");
           expect(function() {
@@ -94,6 +91,22 @@ describe('traffic', function() {
       window.matrix.template = templateSpy;
       subject.displayResults();
       expect(templateSpy).to.have.been.calledOnce
+    });
+  });
+  describe('#parseData', function() {
+    beforeEach(function() {
+      data = { rows: [["Titel 1","url 1","DESKTOP","1"]] };
+      subject.pages = [];
+    });
+    it("adds new items to pages", function() {
+      expect(function() {
+        return subject.pages.length;
+      }).to.change.by(1).when(function() { subject.parseData(data)});
+    });
+    it("adds new items to terms", function() {
+      result = { title: 'Titel 1', url: "url 1", visits: 1 };
+      subject.parseData(data);
+      expect(subject.pages[0]).to.eql(result);
     });
   });
   describe('#endpoint', function() {

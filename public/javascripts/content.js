@@ -16,12 +16,9 @@
     "max-results=1000&"+
     "sort=-ga%3Apageviews"
     },
-    parseResponse: function(error, data){
+    parseData: function(data) {
       var i, _i,
       titleColumn = 0, urlColumn= 1, visitsColumn = 3;
-      if(error) { return -1; }
-      if(!data.hasOwnProperty("rows")) { return -1; }
-      content.pages = [];
       for(i=0,_i=data.rows.length; i<_i; i++){
         content.pages.push({
           title: data.rows[i][titleColumn],
@@ -29,7 +26,12 @@
           visits: parseInt(data.rows[i][visitsColumn])
         });
       }
-
+    },
+    parseResponse: function(error, data){
+      if(error) { return -1; }
+      if(!data.hasOwnProperty("rows")) { return -1; }
+      content.pages = [];
+      content.parseData(data);
       content.displayResults();
     },
     displayResults: function(){
