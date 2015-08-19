@@ -6,6 +6,7 @@ module.exports = function(config) {
       'public/javascripts/vendor/d3.v3.min.js',
       'public/javascripts/traffic.js',
       'public/javascripts/content.js',
+      'public/javascripts/helper/dataHelper.js',
       'tests/**/*Spec.js',
       'tests/fixtures/**/*'
     ],
