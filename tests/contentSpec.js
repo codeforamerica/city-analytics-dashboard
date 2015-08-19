@@ -29,6 +29,25 @@ describe('traffic', function() {
       clock.restore();
     });
   });
+  describe('#reload', function() {
+    it("calls endpoint", function() {
+      sandbox.stub(d3, "json");
+      mock = sandbox.mock(subject).expects("endpoint").once();
+      subject.reload();
+      mock.verify();
+    });
+    context('json returned', function(){
+      beforeEach(function() {
+        stub = sandbox.stub(d3, 'json');
+      });
+      it("calls parseResponse", function() {
+        mock = sandbox.mock(subject).expects("parseResponse").once();
+        subject.reload();
+        stub.callArgWith(1, {}, {});
+        mock.verify();
+      });
+    });
+  });
   describe('#endpoint', function() {
     it('returns the path to the servers realtime endpoint', function() {
       expect(subject.endpoint()).to.eql('/realtime?ids=ga:&metrics=rt:pageviews&dimensions=rt:pageTitle,rt:pagePath&max-results=10&sort=-rt%3Apageviews');
