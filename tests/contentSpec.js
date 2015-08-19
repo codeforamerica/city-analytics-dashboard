@@ -48,6 +48,34 @@ describe('traffic', function() {
       });
     });
   });
+  describe('#parseResponse', function() {
+    context("error parsing json", function() {
+      it("does not display the results", function() {
+        mock = sandbox.mock(subject).expects("displayResults").never();
+        subject.parseResponse({}, null);
+        mock.verify();
+      });
+    });
+    context("no error parsing json", function() {
+      context("has data from GA", function() {
+        beforeEach(function() {
+          data = { rows: [["Titel 1","url 1","1"]] };
+          subject.pages = [];
+        });
+        it("displays the results", function() {
+          mock = sandbox.mock(subject).expects("displayResults").once();
+          subject.parseResponse(null, {rows: []});
+          mock.verify();
+        });
+      });
+    });
+    it("calls the template rendering", function() {
+      templateSpy = sandbox.spy();
+      window.matrix.template = templateSpy;
+      subject.displayResults();
+      expect(templateSpy).to.have.been.calledOnce
+    });
+  });
   describe('#endpoint', function() {
     it('returns the path to the servers realtime endpoint', function() {
       expect(subject.endpoint()).to.eql('/realtime?ids=ga:&metrics=rt:pageviews&dimensions=rt:pageTitle,rt:pagePath&max-results=10&sort=-rt%3Apageviews');

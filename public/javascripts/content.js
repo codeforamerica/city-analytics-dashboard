@@ -15,17 +15,16 @@
     "max-results=10&"+
     "sort=-rt%3Apageviews"
     },
-    parseResponse: function(data){
+    parseResponse: function(error, data){
       var i, _i;
-
+      if(error) { return -1; }
+      if(!data.hasOwnProperty("rows")) { return -1; }
       content.pages = [];
       for(i=0,_i=data.rows.length; i<_i; i++){
         content.pages.push({
-          title: data.rows[i][0],//.split(' — ').slice(0,-1).join(' - '),
+          title: data.rows[i][0],
           url: data.rows[i][1],
-          visits: data.rows[i][2]
-          //displayHits: root.matrix.numberWithCommas(data.rows[i].week2),
-          //percentageUp: root.matrix.numberWithCommas(Math.round(data.rows[i].percent_change)) + "%"
+          visits: parseInt(data.rows[i][2])
         });
       }
 
