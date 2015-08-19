@@ -18,13 +18,24 @@
     },
     parseData: function(data) {
       var i, _i,
-      titleColumn = 0, urlColumn= 1, visitsColumn = 3;
+      row, url, device, oldRow, visits, visitsDevice,
+      titleColumn = 0, urlColumn= 1, deviceColumn = 2, visitsColumn = 3;
       for(i=0,_i=data.rows.length; i<_i; i++){
-        content.pages.push({
-          title: data.rows[i][titleColumn],
-          url: data.rows[i][urlColumn],
-          visits: parseInt(data.rows[i][visitsColumn])
-        });
+        row = data.rows[i];
+        url = row[urlColumn];
+        device = row[deviceColumn].toLowerCase();
+        visits = parseInt(row[visitsColumn]);
+        if(oldRow = window.dataHelper.findWithUrl(content.pages, url)) {
+          oldRow.visits[device] += visits;
+        }else {
+          visitsDevice = { desktop: 0, mobile: 0 };
+          visitsDevice[device] += visits;
+          content.pages.push({
+            title: data.rows[i][titleColumn],
+            url: data.rows[i][urlColumn],
+            visits: visitsDevice
+          });
+        }
       }
     },
     parseResponse: function(error, data){

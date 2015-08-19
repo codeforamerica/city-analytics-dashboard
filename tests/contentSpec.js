@@ -103,8 +103,14 @@ describe('traffic', function() {
         return subject.pages.length;
       }).to.change.by(1).when(function() { subject.parseData(data)});
     });
-    it("adds new items to terms", function() {
-      result = { title: 'Titel 1', url: "url 1", visits: 1 };
+    it("adds new items to pages", function() {
+      result = { title: 'Titel 1', url: "url 1", visits: { desktop: 1, mobile: 0 } };
+      subject.parseData(data);
+      expect(subject.pages[0]).to.eql(result);
+    });
+    it("updates items for the same url", function() {
+      data = { rows: [["Titel 1","url 1","DESKTOP","1"], ["Titel 1","url 1","MOBILE","1"]] };
+      result = { title: 'Titel 1', url: "url 1", visits: { desktop: 1, mobile: 1 } };
       subject.parseData(data);
       expect(subject.pages[0]).to.eql(result);
     });
