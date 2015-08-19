@@ -7,6 +7,7 @@
     "test": "./node_modules/karma/bin/karma start --single-run --browsers PhantomJS"
   },
   "devDependencies": {
+    "chai-change": "^1.0.0",
     "karma": "^0.13.2",
     "karma-chai": "0.1.0",
     "karma-chai-jquery": "^1.0.0",
