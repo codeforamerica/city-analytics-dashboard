@@ -11,21 +11,22 @@
     return "/historic?"+
     "ids=ga:"+matrix.settings.profileId+"&"+
     "metrics=ga:pageviews&"+
-    "dimensions=ga:pageTitle,ga:pagePath&"+
+    "dimensions=ga:pageTitle,ga:pagePath,ga:deviceCategory&"+
     "start-date=today&end-date=today&"+
-    "max-results=10&"+
+    "max-results=1000&"+
     "sort=-ga%3Apageviews"
     },
     parseResponse: function(error, data){
-      var i, _i;
+      var i, _i,
+      titleColumn = 0, urlColumn= 1, visitsColumn = 3;
       if(error) { return -1; }
       if(!data.hasOwnProperty("rows")) { return -1; }
       content.pages = [];
       for(i=0,_i=data.rows.length; i<_i; i++){
         content.pages.push({
-          title: data.rows[i][0],
-          url: data.rows[i][1],
-          visits: parseInt(data.rows[i][2])
+          title: data.rows[i][titleColumn],
+          url: data.rows[i][urlColumn],
+          visits: parseInt(data.rows[i][visitsColumn])
         });
       }
 

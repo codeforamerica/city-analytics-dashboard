@@ -59,7 +59,7 @@ describe('traffic', function() {
     context("no error parsing json", function() {
       context("has data from GA", function() {
         beforeEach(function() {
-          data = { rows: [["Titel 1","url 1","1"]] };
+          data = { rows: [["Titel 1","url 1","DESKTOP","1"]] };
           subject.pages = [];
         });
         it("displays the results", function() {
@@ -98,7 +98,7 @@ describe('traffic', function() {
   });
   describe('#endpoint', function() {
     it('returns the path to the servers realtime endpoint', function() {
-      expect(subject.endpoint()).to.eql('/historic?ids=ga:&metrics=ga:pageviews&dimensions=ga:pageTitle,ga:pagePath&start-date=today&end-date=today&max-results=10&sort=-ga%3Apageviews');
+      expect(subject.endpoint()).to.eql('/historic?ids=ga:&metrics=ga:pageviews&dimensions=ga:pageTitle,ga:pagePath,ga:deviceCategory&start-date=today&end-date=today&max-results=1000&sort=-ga%3Apageviews');
     });
     context('with profileId', function() {
       beforeEach(function() {
@@ -107,7 +107,7 @@ describe('traffic', function() {
         };
       });
       it('returns correct profile Id in the endpoint path', function() {
-      expect(subject.endpoint()).to.eql('/historic?ids=ga:Test&metrics=ga:pageviews&dimensions=ga:pageTitle,ga:pagePath&start-date=today&end-date=today&max-results=10&sort=-ga%3Apageviews');
+      expect(subject.endpoint()).to.eql('/historic?ids=ga:Test&metrics=ga:pageviews&dimensions=ga:pageTitle,ga:pagePath,ga:deviceCategory&start-date=today&end-date=today&max-results=1000&sort=-ga%3Apageviews');
       });
     });
   });
