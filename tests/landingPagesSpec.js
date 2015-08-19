@@ -116,10 +116,7 @@ describe('traffic', function() {
       subject.terms = [];
     });
     it("adds new items to terms", function() {
-      expect(subject.addTerm).to.increase(subject.terms,'length');
-    });
-    it("adds new items to terms", function() {
-      result = { term: 'Test', total: 1, url: 'url', source: 'source', has_url: true, has_source: true, multiple_visits: false }
+      result = { term: 'Test', total: 1, url: 'url', source: 'source', has_url: true, has_source: true }
       subject.addTerm("Test", 1, "url", "source");
       expect(subject.terms[0]).to.eql(result);
     });

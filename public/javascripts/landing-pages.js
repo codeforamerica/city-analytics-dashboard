@@ -36,15 +36,17 @@
       return true;
     },
     addTerm: function(term, count, url, source){
-      landing.terms.push({
-        term: term,
-        total: count,
-        url: url,
-        source: source,
-        has_url: !!url,
-        has_source: !!source && (source != "(not set)"),
-        multiple_visits: (count > 1)
-      });
+      var i;
+      for(i=0;i<count;i++) {
+        landing.terms.push({
+          term: term,
+          total: count,
+          url: url,
+          source: source,
+          has_url: !!url,
+          has_source: !!source && (source != "(not set)")
+        });
+      }
     },
     parseData: function(data) {
       var i, _i, term, url, source, minutesAgo,
