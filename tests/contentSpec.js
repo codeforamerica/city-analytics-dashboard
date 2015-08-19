@@ -67,6 +67,26 @@ describe('traffic', function() {
           subject.parseResponse(null, {rows: []});
           mock.verify();
         });
+        it("adds new items to pages", function() {
+          sandbox.stub(subject, "displayResults");
+          expect(function() {
+            return subject.pages.length;
+          }).to.change.by(1).when(function() { subject.parseResponse(null, data)});
+        });
+        it("adds new items to terms", function() {
+          sandbox.stub(subject, "displayResults");
+          result = { title: 'Titel 1', url: "url 1", visits: 1 };
+          subject.parseResponse(null, data);
+          expect(subject.pages[0]).to.eql(result);
+        });
+      });
+      context("no rows (no data from GA)", function() {
+        it("does not parse data", function() {
+          sandbox.stub(subject, "displayResults");
+          expect(function() {
+            return subject.pages.length;
+          }).to.not.change.when(function() { subject.parseResponse(null, {})});
+        });
       });
     });
     it("calls the template rendering", function() {
