@@ -7,6 +7,8 @@ module.exports = function(config) {
       'public/javascripts/vendor/raphael-min.js',
       'public/javascripts/vendor/morris.min.js',
       'public/javascripts/helpers/helper.js',
+      'public/javascripts/vendor/handlebars-v3.0.3.js',
+      'public/javascripts/landing-pages.js',
       'public/javascripts/traffic.js',
       'tests/**/*Spec.js',
       'tests/fixtures/**/*'
