@@ -7,23 +7,42 @@
     pages: [],
     el: false,
 
-    endpoint: function(){
-      return "/realtime?ids=ga:"+matrix.settings.profileId+"&metrics=rt%3Apageviews&dimensions=rt%3ApageTitle,rt:pagePath&max-results=10&sort=-rt%3Apageviews"
+  endpoint: function(){
+    return "/historic?"+
+    "ids=ga:"+matrix.settings.profileId+"&"+
+    "metrics=ga:pageviews&"+
+    "dimensions=ga:pageTitle,ga:pagePath,ga:deviceCategory&"+
+    "start-date=today&end-date=today&"+
+    "max-results=1000&"+
+    "sort=-ga%3Apageviews"
     },
-    parseResponse: function(data){
-      var i, _i;
-
-      content.pages = [];
+    parseData: function(data) {
+      var i, _i,
+      row, url, device, oldRow, visits, visitsDevice,
+      titleColumn = 0, urlColumn= 1, deviceColumn = 2, visitsColumn = 3;
       for(i=0,_i=data.rows.length; i<_i; i++){
-        content.pages.push({
-          title: data.rows[i][0],//.split(' — ').slice(0,-1).join(' - '),
-          url: data.rows[i][1],
-          visits: data.rows[i][2]
-          //displayHits: root.matrix.numberWithCommas(data.rows[i].week2),
-          //percentageUp: root.matrix.numberWithCommas(Math.round(data.rows[i].percent_change)) + "%"
-        });
+        row = data.rows[i];
+        url = row[urlColumn];
+        device = row[deviceColumn].toLowerCase();
+        visits = parseInt(row[visitsColumn]);
+        if(oldRow = window.dataHelper.findWithUrl(content.pages, url)) {
+          oldRow.visits[device] += visits;
+        }else {
+          visitsDevice = { desktop: 0, mobile: 0 };
+          visitsDevice[device] += visits;
+          content.pages.push({
+            title: data.rows[i][titleColumn],
+            url: data.rows[i][urlColumn],
+            visits: visitsDevice
+          });
+        }
       }
-
+    },
+    parseResponse: function(error, data){
+      if(error) { return -1; }
+      if(!data.hasOwnProperty("rows")) { return -1; }
+      content.pages = [];
+      content.parseData(data);
       content.displayResults();
     },
     displayResults: function(){
