@@ -8,12 +8,13 @@
     el: false,
 
   endpoint: function(){
-    return "/realtime?"+
+    return "/historic?"+
     "ids=ga:"+matrix.settings.profileId+"&"+
-    "metrics=rt:pageviews&"+
-    "dimensions=rt:pageTitle,rt:pagePath&"+
+    "metrics=ga:pageviews&"+
+    "dimensions=ga:pageTitle,ga:pagePath&"+
+    "start-date=today&end-date=today&"+
     "max-results=10&"+
-    "sort=-rt%3Apageviews"
+    "sort=-ga%3Apageviews"
     },
     parseResponse: function(error, data){
       var i, _i;
