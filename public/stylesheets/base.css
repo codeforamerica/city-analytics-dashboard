@@ -186,15 +186,10 @@ h2 {
   .traffic #traffic-count-graph {
     height: 200px; }
   .traffic #graph-text {
-    text-align: right;
-    position: relative;
-    top: -30px; }
+    text-align: right; }
   .traffic .graph {
     float: left;
-    width: 80%;
-    /*.tall & {
-      width: 50%;
-    }*/ }
+    width: 80%; }
   .traffic path, .traffic line.axis {
     stroke: #F2F2F2;
     stroke-width: 0.4;

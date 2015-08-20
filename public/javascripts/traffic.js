@@ -62,8 +62,9 @@
             stacked: true,
             barColors: ["#1B406D", "#265C8D"],
             hideHover: 'always',
+            xLabelMargin: 100,
             xLabelFormat: function(data){
-              return "";
+              return d3.time.format("%I %p")(data.label);
             },
           });
         }
