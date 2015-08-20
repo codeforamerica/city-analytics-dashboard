@@ -5,6 +5,7 @@ module.exports = function(config) {
     files: [
       'public/javascripts/vendor/d3.v3.min.js',
       'public/javascripts/vendor/handlebars-v3.0.3.js',
+      'public/javascripts/helper/templateHelper.js',
       'public/javascripts/landing-pages.js',
       'public/javascripts/traffic.js',
       'tests/**/*Spec.js',
