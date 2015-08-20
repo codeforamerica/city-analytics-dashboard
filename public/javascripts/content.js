@@ -34,7 +34,7 @@
       for(i=0,_i=data.rows.length; i<_i; i++){
         row = data.rows[i];
         url = row[urlColumn];
-        device = row[deviceColumn].toLowerCase();
+        device = window.dataHelper.deviceType(row[deviceColumn]);
         visits = parseInt(row[visitsColumn]);
         if(oldRow = window.dataHelper.findWithUrl(content.pages, url)) {
           oldRow.visits[device] += visits;

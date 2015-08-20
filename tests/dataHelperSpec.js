@@ -25,4 +25,12 @@ describe('dataHelper', function() {
       expect(subject.findWithUrl(data, "test.de")).to.eql(entry1);
     });
   });
+  describe('#deviceType', function() {
+    it("returns the device name with lowerCase", function() {
+      expect(subject.deviceType("DESKTOP")).to.eql("desktop");
+    });
+    it("returns the mobile for tablet", function() {
+      expect(subject.deviceType("TABLET")).to.eql("mobile");
+    });
+  });
 });

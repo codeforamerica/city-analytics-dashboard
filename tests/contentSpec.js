@@ -121,6 +121,14 @@ describe('traffic', function() {
       subject.parseData(data);
       expect(subject.pages[0]).to.eql(result);
     });
+    context("table data", function() {
+      it("add tablets data to mobile entry", function() {
+        data = { rows: [["Titel 1","url 1","TABLET","1"], ["Titel 1","url 1","MOBILE","1"]] };
+        visits = { desktop: 0, mobile: 2 }
+        subject.parseData(data);
+        expect(subject.pages[0].visits).to.eql(visits);
+      });
+    });
   });
   describe('#reorderData', function() {
     it("reorders results to display the combined max on top", function() {
