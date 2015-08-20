@@ -76,14 +76,11 @@
       }
     },
     refreshResults: function() {
-      var html    = landing.compiledTemplate({pages: landing.terms });
-      landing.el.innerHTML = html + landing.el.innerHTML;
+      templateHelper.prependTemplate(landing.el, "landing-pages-items", {pages: landing.terms });
     },
     init: function(){
       var source;
       landing.el = document.getElementById('search');
-      source = document.getElementById("landing-pages-items");
-      landing.compiledTemplate = Handlebars.compile(source.innerHTML);
       landing.reload();
       window.setInterval(landing.reload, 60e3);
     },
