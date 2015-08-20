@@ -12,7 +12,7 @@
     "ids=ga:"+matrix.settings.profileId+"&"+
     "metrics=ga:pageviews&"+
     "dimensions=ga:pageTitle,ga:pagePath,ga:deviceCategory&"+
-    "start-date=today&end-date=today&"+
+    "start-date=yesterday&end-date=today&"+
     "max-results=1000&"+
     "sort=-ga%3Apageviews"
     },

@@ -117,7 +117,7 @@ describe('traffic', function() {
   });
   describe('#endpoint', function() {
     it('returns the path to the servers realtime endpoint', function() {
-      expect(subject.endpoint()).to.eql('/historic?ids=ga:&metrics=ga:pageviews&dimensions=ga:pageTitle,ga:pagePath,ga:deviceCategory&start-date=today&end-date=today&max-results=1000&sort=-ga%3Apageviews');
+      expect(subject.endpoint()).to.eql('/historic?ids=ga:&metrics=ga:pageviews&dimensions=ga:pageTitle,ga:pagePath,ga:deviceCategory&start-date=yesterday&end-date=today&max-results=1000&sort=-ga%3Apageviews');
     });
     context('with profileId', function() {
       beforeEach(function() {
@@ -126,7 +126,7 @@ describe('traffic', function() {
         };
       });
       it('returns correct profile Id in the endpoint path', function() {
-      expect(subject.endpoint()).to.eql('/historic?ids=ga:Test&metrics=ga:pageviews&dimensions=ga:pageTitle,ga:pagePath,ga:deviceCategory&start-date=today&end-date=today&max-results=1000&sort=-ga%3Apageviews');
+      expect(subject.endpoint()).to.eql('/historic?ids=ga:Test&metrics=ga:pageviews&dimensions=ga:pageTitle,ga:pagePath,ga:deviceCategory&start-date=yesterday&end-date=today&max-results=1000&sort=-ga%3Apageviews');
       });
     });
   });
