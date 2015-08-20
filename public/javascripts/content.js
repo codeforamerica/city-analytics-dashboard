@@ -16,6 +16,17 @@
     "max-results=1000&"+
     "sort=-ga%3Apageviews"
     },
+    reorderData: function() {
+      var overallVisits = function(visits) {
+        return (parseInt(visits.mobile) + parseInt(visits.desktop));
+      }
+      var visitSort = function(a,b) {
+        if(overallVisits(a.visits) < overallVisits(b.visits)) return 1;
+        if(overallVisits(a.visits) > overallVisits(b.visits)) return -1;
+        return 0;
+      }
+      content.pages = content.pages.sort(visitSort);
+    },
     parseData: function(data) {
       var i, _i,
       row, url, device, oldRow, visits, visitsDevice,
@@ -43,6 +54,7 @@
       if(!data.hasOwnProperty("rows")) { return -1; }
       content.pages = [];
       content.parseData(data);
+      content.reorderData();
       content.displayResults();
     },
     displayResults: function(){
