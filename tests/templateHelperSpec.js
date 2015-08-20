@@ -3,6 +3,9 @@ describe("templateHelper", function() {
     subject = window.templateHelper;
     sandbox = sinon.sandbox.create();
   });
+  afterEach(function() {
+    sandbox.restore();
+  });
   describe("#compileTemplate", function() {
     it("returns a template function", function() {
       expect(subject.compileTemplate("test")).be.instanceOf(Function);
