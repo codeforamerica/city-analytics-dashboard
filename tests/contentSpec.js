@@ -70,6 +70,13 @@ describe('traffic', function() {
           subject.parseResponse(null, data);
           mock.verify();
         });
+        it("calls reorderData", function() {
+          sandbox.stub(subject, "displayResults");
+          sandbox.stub(subject, "parseData");
+          mock = sandbox.mock(subject).expects("reorderData").once();
+          subject.parseResponse(null, data);
+          mock.verify();
+        });
       });
       context("no rows (no data from GA)", function() {
         it("does not call parseData", function() {
@@ -114,10 +121,28 @@ describe('traffic', function() {
       subject.parseData(data);
       expect(subject.pages[0]).to.eql(result);
     });
+    context("table data", function() {
+      it("add tablets data to mobile entry", function() {
+        data = { rows: [["Titel 1","url 1","TABLET","1"], ["Titel 1","url 1","MOBILE","1"]] };
+        visits = { desktop: 0, mobile: 2 }
+        subject.parseData(data);
+        expect(subject.pages[0].visits).to.eql(visits);
+      });
+    });
+  });
+  describe('#reorderData', function() {
+    it("reorders results to display the combined max on top", function() {
+      result1 = { title: 'Titel 1', url: "url 1", visits: { desktop: 4, mobile: 4 } };
+      result2 = { title: 'Titel 2', url: "url 2", visits: { desktop: 5, mobile: 0 } };
+      subject.pages = [result2, result1];
+      visits = { desktop: 4, mobile: 4 }
+      subject.reorderData();
+      expect(subject.pages[0].visits).to.eql(visits);
+    });
   });
   describe('#endpoint', function() {
     it('returns the path to the servers realtime endpoint', function() {
-      expect(subject.endpoint()).to.eql('/historic?ids=ga:&metrics=ga:pageviews&dimensions=ga:pageTitle,ga:pagePath,ga:deviceCategory&start-date=today&end-date=today&max-results=1000&sort=-ga%3Apageviews');
+      expect(subject.endpoint()).to.eql('/historic?ids=ga:&metrics=ga:pageviews&dimensions=ga:pageTitle,ga:pagePath,ga:deviceCategory&start-date=yesterday&end-date=today&max-results=1000&sort=-ga%3Apageviews');
     });
     context('with profileId', function() {
       beforeEach(function() {
@@ -126,7 +151,7 @@ describe('traffic', function() {
         };
       });
       it('returns correct profile Id in the endpoint path', function() {
-      expect(subject.endpoint()).to.eql('/historic?ids=ga:Test&metrics=ga:pageviews&dimensions=ga:pageTitle,ga:pagePath,ga:deviceCategory&start-date=today&end-date=today&max-results=1000&sort=-ga%3Apageviews');
+      expect(subject.endpoint()).to.eql('/historic?ids=ga:Test&metrics=ga:pageviews&dimensions=ga:pageTitle,ga:pagePath,ga:deviceCategory&start-date=yesterday&end-date=today&max-results=1000&sort=-ga%3Apageviews');
       });
     });
   });

@@ -8,5 +8,10 @@ window.dataHelper = {
       }
     }
     return undefined;
+  },
+  deviceType: function(device) {
+    device = device.toLowerCase();
+    if(device === "tablet") { device = "mobile"; }
+    return device;
   }
 }

@@ -12,9 +12,20 @@
     "ids=ga:"+matrix.settings.profileId+"&"+
     "metrics=ga:pageviews&"+
     "dimensions=ga:pageTitle,ga:pagePath,ga:deviceCategory&"+
-    "start-date=today&end-date=today&"+
+    "start-date=yesterday&end-date=today&"+
     "max-results=1000&"+
     "sort=-ga%3Apageviews"
+    },
+    reorderData: function() {
+      var overallVisits = function(visits) {
+        return (parseInt(visits.mobile) + parseInt(visits.desktop));
+      }
+      var visitSort = function(a,b) {
+        if(overallVisits(a.visits) < overallVisits(b.visits)) return 1;
+        if(overallVisits(a.visits) > overallVisits(b.visits)) return -1;
+        return 0;
+      }
+      content.pages = content.pages.sort(visitSort);
     },
     parseData: function(data) {
       var i, _i,
@@ -23,7 +34,7 @@
       for(i=0,_i=data.rows.length; i<_i; i++){
         row = data.rows[i];
         url = row[urlColumn];
-        device = row[deviceColumn].toLowerCase();
+        device = window.dataHelper.deviceType(row[deviceColumn]);
         visits = parseInt(row[visitsColumn]);
         if(oldRow = window.dataHelper.findWithUrl(content.pages, url)) {
           oldRow.visits[device] += visits;
@@ -43,6 +54,7 @@
       if(!data.hasOwnProperty("rows")) { return -1; }
       content.pages = [];
       content.parseData(data);
+      content.reorderData();
       content.displayResults();
     },
     displayResults: function(){
