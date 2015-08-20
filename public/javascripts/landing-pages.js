@@ -11,8 +11,7 @@
       return "/realtime?"
         + "ids=ga:"+matrix.settings.profileId+"&"
         + "metrics=rt:pageViews&"
-        + "dimensions=ga:pageTitle,ga:pagePath,rt:source,rt:minutesAgo&"
-        /*+ "filters="+ encodeURIComponent("ga:pagePath==/search") +"&"*/
+        + "dimensions=ga:pageTitle,ga:pagePath,rt:source,rt:minutesAgo,rt:deviceCategory&"
         + "sort=rt:minutesAgo&"
         + "max-results=10000";
     },
@@ -51,7 +50,7 @@
     parseData: function(data) {
       var i, _i, term, url, source, minutesAgo,
       termColumn = 0, urlColumn = 1, sourceColumn = 2,
-      minutesAgoColumn = 3, countColumn = 4, maxMinutes = 2;
+      minutesAgoColumn = 3, countColumn = 5, maxMinutes = 2;
       for(i=0,_i=data.rows.length; i<_i; i++){
         term = data.rows[i][termColumn].split(/ \u2013|\u2014 /);
         url = data.rows[i][urlColumn];

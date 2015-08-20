@@ -95,7 +95,7 @@ describe('traffic', function() {
       mock.verify();
     });
     it("calls addTerm for every row", function() {
-      data = { rows: [["Titel 1","url 1","(not set)","00","1"]] };
+      data = { rows: [["Titel 1","url 1","(not set)","00","DESKTOP","1"]] };
       mock = sandbox.mock(subject).expects("addTerm").withArgs("Titel 1", 1, "url 1", "(not set)");
       subject.parseData(data);
       mock.verify();
@@ -132,7 +132,7 @@ describe('traffic', function() {
   });
   describe('#endpoint', function() {
     it('returns the path to the servers realtime endpoint', function() {
-      expect(subject.endpoint()).to.eql('/realtime?ids=ga:&metrics=rt:pageViews&dimensions=ga:pageTitle,ga:pagePath,rt:source,rt:minutesAgo&sort=rt:minutesAgo&max-results=10000');
+      expect(subject.endpoint()).to.eql('/realtime?ids=ga:&metrics=rt:pageViews&dimensions=ga:pageTitle,ga:pagePath,rt:source,rt:minutesAgo,rt:deviceCategory&sort=rt:minutesAgo&max-results=10000');
     });
     context('with profileId', function() {
       beforeEach(function() {
@@ -141,7 +141,7 @@ describe('traffic', function() {
         };
       });
       it('returns correct profile Id in the endpoint path', function() {
-      expect(subject.endpoint()).to.eql('/realtime?ids=ga:Test&metrics=rt:pageViews&dimensions=ga:pageTitle,ga:pagePath,rt:source,rt:minutesAgo&sort=rt:minutesAgo&max-results=10000');
+      expect(subject.endpoint()).to.eql('/realtime?ids=ga:Test&metrics=rt:pageViews&dimensions=ga:pageTitle,ga:pagePath,rt:source,rt:minutesAgo,rt:deviceCategory&sort=rt:minutesAgo&max-results=10000');
       });
     });
   });
