@@ -12,12 +12,12 @@
     nextRefresh: 0,
     limit: 20,
 
-    endpoint: function(profileId){
+    endpoint: function(){
       return "/realtime?"
         + "ids=ga:"+matrix.settings.profileId+"&"
-        + "metrics=rt:activeVisitors&"
-        + "dimensions=rt:pagePath,rt:keyword&"
-        //+ "sort=-rt:activeVisitors&"
+        + "metrics=rt:pageViews&"
+        + "dimensions=rt:pagePath,rt:keyword,rt:minutesAgo,rt:deviceCategory&"
+        + "sort=rt:minutesAgo&"
         + "max-results=10000";
     },
     safeTerm: function(term){
@@ -47,97 +47,54 @@
       return true;
     },
     addTerm: function(term, count, url){
-      var i, _i;
-      for(i=0, _i=search.terms.length; i<_i;  i++){
-        if(search.terms[i].term === term){
-          search.terms[i].nextTick = count;
-          return true;
-        }
-      }
-      search.terms.push({
-        term: term,
-        total: 0,
-        nextTick: count,
-        currentTick: 0,
-        url: url
-      });
-    },
-    zeroNextTicks: function(){
-      var i, _i, newTerms = [];
-      for(i=0, _i=search.terms.length; i<_i;  i++){
-        search.terms[i].nextTick = 0;
+      var i;
+      for(i=0;i<count;i++) {
+        search.terms.push({
+          term: term,
+          total: count,
+          url: url
+        });
       }
     },
-    addNextTickValues: function(data){
-      var i, _i, term, url;
+    parseData: function(data) {
+      var i, _i, term, url, source, minutesAgo,
+      termColumn = 1, urlColumn = 0,
+      minutesAgoColumn = 2, countColumn = 4, maxMinutes = 2;
 
       for(i=0,_i=data.rows.length; i<_i; i++){
-        term = data.rows[i][1].split(' — ');
-        url = data.rows[i][0];
-
-        if(term[0] !== 'Search' && search.safeTerm(term[0])){
-          search.addTerm(term[0], root.parseInt(data.rows[i][2], 10), url);
-        }
-
-      }
-    },
-    addTimeIndexValues: function(){
-      var i, _i, j, _j, term, time, newPeople, nonZeroTerms = [];
-      for(i=0, _i=search.terms.length; i<_i;  i++){
-        term = search.terms[i];
-        newPeople = term.currentTick < term.nextTick ? term.nextTick - term.currentTick : 0;
-        term.total = term.total + newPeople;
-        term.currentTick = term.nextTick;
-        if(newPeople > 0){
-          for(j=0,_j=newPeople; j<_j; j++){
-            search.newTerms.push(term.term);
-            search.newURLs.push(term.url);
+        term = data.rows[i][termColumn];
+        url = data.rows[i][urlColumn];
+        minutesAgo = root.parseInt(data.rows[i][minutesAgoColumn]);
+        if(minutesAgo < maxMinutes) {
+          if(term !== 'Search' && search.safeTerm(term)){
+            search.addTerm(term, root.parseInt(data.rows[i][countColumn], 10), url);
           }
+        }else {
+          break;
         }
-        if(term.currentTick > 0){
-          nonZeroTerms.push(term);
-        }
-      }
-      search.newTerms.sort(function(){
-        return Math.floor((Math.random() * 3) - 1)
-      });
-      search.terms = nonZeroTerms;
-    },
-    parseResponse: function(data){
-      var term, i, _i;
 
-      search.zeroNextTicks();
-      search.addNextTickValues(data);
-      search.addTimeIndexValues();
-    },
-    displayResults: function(){
-      var term = search.newTerms.pop();
-      var url = search.newURLs.pop();
-      var el = search.el;
-      if(term){
-        var tempList = el.ol().template("search-result-item", { term: term, url: url });
-        root.matrix.manager.animateInto(tempList.firstElementChild, el,
-                                        search.limit);
-        setTimeout(search.displayResults,
-                   (search.nextRefresh - Date.now())/search.newTerms.length);
-      } else {
-        setTimeout(search.displayResults, 5000);
       }
+    },
+    parseResponse: function(error, data){
+      if(error) { return -1; }
+      if(data.hasOwnProperty('rows')) {
+        search.terms = [];
+        search.parseData(data);
+        search.refreshResults();
+      }else {
+        return -1;
+      }
+    },
+    refreshResults: function() {
+      templateHelper.prependTemplate(search.el, "search-result-items", {pages: search.terms });
     },
     init: function(){
       search.el = document.getElementById('search-terms');
       search.reload();
-      search.displayResults();
       window.setInterval(search.reload, 60e3);
-      document.addEventListener(
-          "visibilitychange",
-          function() { root.matrix.manager.positionFixups(search); },
-          false);
     },
     reload: function(){
-      var endpoint = search.endpoint(root.matrix.settings.profileId);
-      search.nextRefresh = Date.now() + 60e3;
-      d3.json(endpoint, search.parseResponse);
+      d3.json(search.endpoint(), search.parseResponse);
     }
   };
 

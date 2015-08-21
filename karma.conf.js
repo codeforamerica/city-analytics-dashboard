@@ -8,7 +8,9 @@ module.exports = function(config) {
       'public/javascripts/vendor/morris.min.js',
       'public/javascripts/helpers/helper.js',
       'public/javascripts/vendor/handlebars-v3.0.3.js',
+      'public/javascripts/helper/templateHelper.js',
       'public/javascripts/landing-pages.js',
+      'public/javascripts/search.js',
       'public/javascripts/traffic.js',
       'public/javascripts/content.js',
       'public/javascripts/helper/dataHelper.js',
@@ -20,6 +22,7 @@ module.exports = function(config) {
     ],
     preprocessors: {
       'public/javascripts/*.js': ['coverage'],
+      'public/javascripts/helper/*.js': ['coverage'],
       'tests/**/*.json'   : ['json_fixtures']
     },
     jsonFixturesPreprocessor: {

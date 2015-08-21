@@ -3,7 +3,7 @@ describe('traffic', function() {
     window.matrix.settings = {
       profileId: ''
     };
-    subject =  window.matrix.landing;
+    subject =  window.matrix.search;
     sandbox = sinon.sandbox.create();
     server = sinon.fakeServer.create();
   });
@@ -13,7 +13,7 @@ describe('traffic', function() {
   });
   describe('#init', function() {
     beforeEach(function() {
-      $('body').append('<div id="landing-pages-items"></div>');
+      $('body').append('<div id="search-terms"></div>');
       sandbox.stub(Handlebars, 'compile');
     });
     it("calls reload", function() {
@@ -87,7 +87,7 @@ describe('traffic', function() {
   });
   describe('#parseData', function() {
     beforeEach(function() {
-      data = { rows: [["Titel 1","url 1","(not set)","00","1"],["Titel 2","url 2","(not set)","00","1"],["Titel 3","url 3","(not set)","01","3"],["Titel 4","url 4","(not set)","02","3"]] };
+      data = { rows: [ ["url1", "keyword 1", "00", "DESKTOP", "1"],["url1", "keyword 2", "01", "DESKTOP", "1"],["url1", "keyword 3", "01", "DESKTOP", "1"],["url1", "keyowrd 4", "02", "DESKTOP", "1"]]};
     });
     it("calls addTerm for every row less than two minutes ago", function() {
       mock = sandbox.mock(subject).expects("addTerm").thrice();
@@ -95,14 +95,14 @@ describe('traffic', function() {
       mock.verify();
     });
     it("calls addTerm for every row", function() {
-      data = { rows: [["Titel 1","url 1","(not set)","00","DESKTOP","1"]] };
-      mock = sandbox.mock(subject).expects("addTerm").withArgs("Titel 1", 1, "url 1", "(not set)");
+      data = { rows: [ ["url1", "keyword", "00", "DESKTOP", "1"]]};
+      mock = sandbox.mock(subject).expects("addTerm").withArgs("keyword", 1, "url1");
       subject.parseData(data);
       mock.verify();
     });
     context('Search Term', function() {
       beforeEach(function(){
-        data = { rows: [["Search", "url", "source", "10"]]};
+      data = { rows: [ ["url1", "Search", "00", "DESKTOP", "1"]]};
       });
       it("does not call addTerm for the row", function() {
         mock = sandbox.mock(subject).expects("addTerm").never();
@@ -116,7 +116,7 @@ describe('traffic', function() {
       subject.terms = [];
     });
     it("adds new items to terms", function() {
-      result = { term: 'Test', total: 1, url: 'url', source: 'source', has_url: true, has_source: true }
+      result = { term: 'Test', total: 1, url: 'url' }
       subject.addTerm("Test", 1, "url", "source");
       expect(subject.terms[0]).to.eql(result);
     });
@@ -132,7 +132,11 @@ describe('traffic', function() {
   });
   describe('#endpoint', function() {
     it('returns the path to the servers realtime endpoint', function() {
-      expect(subject.endpoint()).to.eql('/realtime?ids=ga:&metrics=rt:pageViews&dimensions=ga:pageTitle,ga:pagePath,rt:source,rt:minutesAgo,rt:deviceCategory&sort=rt:minutesAgo&max-results=10000');
+      var result = '/realtime?ids=ga:&'+
+        'metrics=rt:pageViews&'+
+        'dimensions=rt:pagePath,rt:keyword,rt:minutesAgo,rt:deviceCategory&'+
+        'sort=rt:minutesAgo&max-results=10000';
+      expect(subject.endpoint()).to.eql(result);
     });
     context('with profileId', function() {
       beforeEach(function() {
@@ -141,7 +145,38 @@ describe('traffic', function() {
         };
       });
       it('returns correct profile Id in the endpoint path', function() {
-      expect(subject.endpoint()).to.eql('/realtime?ids=ga:Test&metrics=rt:pageViews&dimensions=ga:pageTitle,ga:pagePath,rt:source,rt:minutesAgo,rt:deviceCategory&sort=rt:minutesAgo&max-results=10000');
+      var result = '/realtime?ids=ga:Test&'+
+        'metrics=rt:pageViews&'+
+        'dimensions=rt:pagePath,rt:keyword,rt:minutesAgo,rt:deviceCategory&'+
+        'sort=rt:minutesAgo&max-results=10000';
+      expect(subject.endpoint()).to.eql(result);
+      });
+    });
+  });
+  describe("safeTerm", function() {
+    context("email address", function() {
+      it("is not safe", function() {
+        expect(subject.safeTerm("iw@jwi.de")).to.eq(false);
+      });
+    });
+    context("just numbers", function() {
+      it("is not safe", function() {
+        expect(subject.safeTerm("432913")).to.eq(false);
+      });
+    });
+    context("no search term", function() {
+      it("is not safe", function() {
+        expect(subject.safeTerm("(not set)")).to.eq(false);
+      });
+    });
+    context("search term secured by google", function() {
+      it("is not safe", function() {
+        expect(subject.safeTerm("(not provided)")).to.eq(false);
+      });
+    });
+    context("503 request", function() {
+      it("is not safe", function() {
+        expect(subject.safeTerm("Sorry, we are experiencing technical difficulties (503 error)")).to.eq(false);
       });
     });
   });
