@@ -4,7 +4,9 @@
   "description": "This is a display screen to show real time analytics of a given website.",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/karma/bin/karma start --single-run --browsers PhantomJS"
+    "test": "npm run test-phantom & npm run test-saucelabs",
+    "test-phantom": "./node_modules/karma/bin/karma start --single-run --browsers PhantomJS",
+    "test-saucelabs": "./node_modules/karma/bin/karma start karma.saucelabs.js --single-run"
   },
   "devDependencies": {
     "karma": "^0.13.2",
@@ -17,6 +19,7 @@
     "karma-json-fixtures-preprocessor": "0.0.4",
     "karma-mocha": "^0.1.10",
     "karma-phantomjs-launcher": "0.1.4",
+    "karma-sauce-launcher": "^0.2.14",
     "karma-sinon-chai": "0.3.0",
     "mocha": "^2.2.5"
   },
