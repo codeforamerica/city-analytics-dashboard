@@ -1,5 +1,6 @@
 # City Analytics Dashboard
 [![Build Status](https://travis-ci.org/codeforamerica/city-analytics-dashboard.svg?branch=master)](https://travis-ci.org/codeforamerica/city-analytics-dashboard) [![Coverage Status](https://coveralls.io/repos/codeforamerica/city-analytics-dashboard/badge.svg?branch=master&service=github)](https://coveralls.io/github/codeforamerica/city-analytics-dashboard?branch=master)
+[![Sauce Test Status](https://saucelabs.com/browser-matrix/milafrerichs.svg)](https://saucelabs.com/u/milafrerichs)
 
 This is a display screen to show real time analytics of a given website.
 
