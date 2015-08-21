@@ -7,6 +7,7 @@ module.exports = function(config) {
       'public/javascripts/vendor/handlebars-v3.0.3.js',
       'public/javascripts/helper/templateHelper.js',
       'public/javascripts/landing-pages.js',
+      'public/javascripts/search.js',
       'public/javascripts/traffic.js',
       'tests/**/*Spec.js',
       'tests/fixtures/**/*'
@@ -16,6 +17,7 @@ module.exports = function(config) {
     ],
     preprocessors: {
       'public/javascripts/*.js': ['coverage'],
+      'public/javascripts/helper/*.js': ['coverage'],
       'tests/**/*.json'   : ['json_fixtures']
     },
     jsonFixturesPreprocessor: {

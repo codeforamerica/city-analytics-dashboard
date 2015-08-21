@@ -103,6 +103,15 @@
       {{/pages}}
     </script>
 
+    <script type="template" id="search-result-items">
+      {{#pages}}
+      <li>
+        <div>
+          <a href="http://{{ url }}" target="_blank">{{ term }}</a>
+        </div>
+      </li>
+      {{/pages}}
+    </script>
     <script type="template" id="search-result-item">
       <li>
         <div>
