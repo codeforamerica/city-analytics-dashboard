@@ -1,5 +1,9 @@
 language: node_js
 node_js:
-  - "0.10"
+- '0.10'
 after_success:
-  - cat ./coverage/lcov-report/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+- cat ./coverage/lcov-report/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+env:
+  global:
+  - secure: m2jIHfm0Isdjpe+hoICAFkrRKvNsJhqgO45WhGVFIYOAfzYwCSM8G8XSuZemjVZKTaOYa1i6unjgKtQej18sPZw741oy0Gn9LvKP6VKJDKVDdA4Uj+29Ydl/FlrHEXopre4eqTFbtYc+Pxdkcg4ktGAhIcp7oixFRzjsoXgRrTw=
+  - secure: hJU3HK7BKwupw3NjKrksQ6XJkdrkO2m6CzbKUMYh2yRzL5hUxOe0w3M2wn9W9T/054MyKfrvo2/cjFlewmrq6oteIKjJmVbD7TBchXQ7CpjyWWrLfIIdWktLh7tsb30n38akAWqw3OoFESihtVebW+p9iJsGZSwFpI14Hrdj52A=
