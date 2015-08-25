@@ -7,14 +7,6 @@
     return (Math.random() * debugCountLimit) | 0;
   };
 
-  var today = new Date().toISOString();
-    today = today.split("T"[0]);
-  
-  var yesterday = new Date();
-  yesterday.setDate(yesterday.getDate() - 1);
-  yesterday = yesterday.toISOString();
-  yesterday = yesterday.split("T"[0]);
-
   var parseRows = function(rows) {
     var rowObj = {},
     length = rows.length;
