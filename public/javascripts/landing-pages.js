@@ -52,13 +52,13 @@
       termColumn = 0, urlColumn = 1, sourceColumn = 2,
       minutesAgoColumn = 3, countColumn = 5, maxMinutes = 2;
       for(i=0,_i=data.rows.length; i<_i; i++){
-        term = data.rows[i][termColumn].split(/ \u2013|\u2014 /);
+        term = data.rows[i][termColumn];
         url = data.rows[i][urlColumn];
         source = data.rows[i][sourceColumn];
         minutesAgo = root.parseInt(data.rows[i][minutesAgoColumn]);
         if(minutesAgo < maxMinutes) {
-          if(term[0] !== 'Search' && landing.safeTerm(term[0])){
-            landing.addTerm(term[0], root.parseInt(data.rows[i][countColumn], 10), url, source);
+          if(term !== 'Search' && landing.safeTerm(term)){
+            landing.addTerm(term, root.parseInt(data.rows[i][countColumn], 10), url, source);
           }
         }else {
           break;
