@@ -40,8 +40,8 @@
         var users = parseRows(data.rows);
         var activeUsers = parseInt(users['DESKTOP'], 10) | 0;
         var activeUsersMobile = parseInt(users['MOBILE'], 10) | 0;
-        traffic.el.innerText = activeUsers;
-        traffic.elMob.innerText = activeUsersMobile;
+        traffic.el.innerHTML = activeUsers;
+        traffic.elMob.innerHTML = activeUsersMobile;
 
         var dataArray = helper.arrayFromObject(traffic.counts);
         if(typeof traffic.chart === 'undefined'){
