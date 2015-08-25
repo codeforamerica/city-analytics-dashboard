@@ -55,9 +55,11 @@ module.exports = function(config) {
       recordVideo: true,
       recordScreenshots: true
     },
-    captureTimeout: 120000,
     customLaunchers: customLaunchers,
     browsers: Object.keys(customLaunchers),
-    browserDisconnectTimeout: 120000,
+    browserDisconnectTimeout : 10000,
+    browserDisconnectTolerance : 1,
+    browserNoActivityTimeout : 4*60*1000,
+    captureTimeout : 4*60*1000
   });
 };
