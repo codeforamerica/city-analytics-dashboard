@@ -22,6 +22,8 @@ mid teal: 78BFBF
 teal: 60BFB6
 */
 
+$desktop-color: #1b406d;
+$mobile-color: #265c8d;
 
 html {
   width: 100%;
@@ -253,6 +255,21 @@ h2{
   .label {
     fill: $secondary;
     font-size: 16px;
+  }
+  #traffic {
+    float: left;
+    .visitor-count {
+      width: 90px;
+      height: 90px;
+      margin: 0 auto;
+      &#mobile-count{
+        background: $mobile-color;
+      }
+      &#desktop-count{
+        background: $desktop-color;
+        margin-bottom: 5px;
+      }
+    }
   }
 }
 .sparkline path{
