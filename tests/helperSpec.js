@@ -48,7 +48,7 @@ describe("helper", function() {
     beforeEach(function() {
       clock = sinon.useFakeTimers(Date.now());
       var timeZoneOffSet = 7;
-      var yesterday = -(1000*60*60*24)
+      var yesterday = -(1000*60*60*24);
       endDate = new Date();
       var currentTimeZoneOffSet = endDate.getTimezoneOffset()/60;
       currentTimeZoneOffsetMidnight = timeZoneOffSet-currentTimeZoneOffSet;
@@ -61,7 +61,7 @@ describe("helper", function() {
     });
     context("every 30 minutes", function() {
       it("returns results for 30 minutes", function() {
-        expect(Object.keys(subject.deviceMinuteIntervalResults(resultsMinuteDate, 30, startDate, endDate)).length).to.eql(49);
+        expect(Object.keys(subject.deviceMinuteIntervalResults(resultsMinuteDate, 30, startDate, endDate)).length).to.eql(48);
       });
       it("returns zero for results not in google results", function() {
         var oneOClock = currentTimeZoneOffsetMidnight+1;
