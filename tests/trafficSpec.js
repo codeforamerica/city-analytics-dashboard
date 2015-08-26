@@ -152,7 +152,7 @@ describe('traffic', function() {
   });
   describe('#loadHistory', function() {
     it('calls the historic endpoint', function() {
-      mock = sandbox.mock(subject).expects('historic').returns('');
+      mock = sandbox.mock(subject).expects('historic');
       subject.loadHistory();
       mock.verify();
     });
