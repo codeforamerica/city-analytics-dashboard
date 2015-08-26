@@ -137,7 +137,7 @@
     reload: function(){
       var endpoint = search.endpoint(root.matrix.settings.profileId);
       search.nextRefresh = Date.now() + 60e3;
-      d3.json(endpoint, search.parseResponse);
+      xhr.json(endpoint, search.parseResponse);
     }
   };
 

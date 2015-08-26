@@ -56,7 +56,7 @@
             hideHover: 'always',
             xLabelMargin: 100,
             xLabelFormat: function(data){
-              return time.format("%I %p")(data.label);
+              return timeFormat.format("%I %p")(data.label);
             },
           });
         }
