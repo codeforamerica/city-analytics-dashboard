@@ -56,7 +56,7 @@ describe("helper", function() {
       startDate = new Date();
       startDate.setHours(currentTimeZoneOffsetMidnight, 0,0);
       endDate.setHours(currentTimeZoneOffsetMidnight, 0,0);
-      f = d3.time.format("%Y%m%d");
+      f = timeFormat.format("%Y%m%d");
       resultsMinuteDate = [["desktop",f(startDate),"00","02","1"],["desktop",f(startDate),"00","25","1"],["desktop",f(startDate),"00","29","2"],["desktop",f(startDate),"01","30","1"],["desktop",f(startDate),"01","31","1"]];
     });
     context("every 30 minutes", function() {
