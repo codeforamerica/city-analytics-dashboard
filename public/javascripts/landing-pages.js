@@ -142,7 +142,7 @@
     reload: function(){
       var endpoint = landing.endpoint(root.matrix.settings.profileId);
       landing.nextRefresh = Date.now() + 60e3;
-      d3.json(endpoint, landing.parseResponse);
+      xhr.json(endpoint, landing.parseResponse);
     }
   };
 
