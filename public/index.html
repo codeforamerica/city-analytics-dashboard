@@ -13,14 +13,19 @@
       </div>
       <p>This is an experiment from Code for America. You can log issues and find out more from our <a href="https://github.com/codeforamerica/display-screen">GitHub repository</a>. You must use <a href="https://www.google.com/intl/en_us/chrome/browser/">Chrome</a> to view this dashboard.</p>
         <div style="width:75%;overflow:hidden" class="small-box traffic">
-          <span id="traffic" class="count" style="float:left">
-            <span class="text-feature" id="traffic-count">&nbsp;</span>
-            visitors online
-          </span>
           <div class="graph box-in">
             <div id="traffic-count-graph" class="box-inner">
             </div>
+            <div id="graph-text">visitors over the last 48 hours (30 minute interval)</div>
           </div>
+          <span id="traffic" class="count" style="float:left">
+            <span class="text-feature" id="traffic-count-mobile">&nbsp;</span>
+            mobile
+            <span class="text-feature" id="traffic-count">&nbsp;</span>
+            desktop
+            <br/>
+            visitors online
+          </span>
         </div>
 
     </div>
@@ -50,19 +55,22 @@
           <div class="box-inner">
             <ul id="content"></ul>
           </div>
-          </div>
         </div>
       </li>
     </ul>
 
 
     <script src="javascripts/vendor/d3.v3.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
     <script src="javascripts/vendor/mustache.js"></script>
     <script src="javascripts/vendor/handlebars-v3.0.3.js"></script>
     <script src="javascripts/vendor/pretty.js"></script>
     <script src="javascripts/vendor/bezier.js"></script>
 
     <script src="javascripts/helper/templateHelper.js"></script>
+    <script src="javascripts/helpers/helper.js"></script>
     <script src="javascripts/sparkline.js"></script>
     <script src="javascripts/landing-pages.js"></script>
     <script src="javascripts/search.js"></script>

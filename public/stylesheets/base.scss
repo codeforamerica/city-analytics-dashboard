@@ -235,12 +235,15 @@ h2{
       width: 50%;
     }
   }
+  #traffic-count-graph {
+    height: 200px;
+  }
+  #graph-text {
+    text-align: right;
+  }
   .graph {
     float: left;
     width: 80%;
-    /*.tall & {
-      width: 50%;
-    }*/
   }
   path, line.axis {
     stroke: $main-font;
