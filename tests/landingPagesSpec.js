@@ -128,6 +128,9 @@ describe('traffic', function() {
     it("shows all terms", function() {
     });
     it("calls handlebars template", function() {
+      mock = sandbox.mock(templateHelper).expects('prependTemplate').once();
+      subject.refreshResults();
+      mock.verify();
     });
   });
   describe('#endpoint', function() {
@@ -142,6 +145,23 @@ describe('traffic', function() {
       });
       it('returns correct profile Id in the endpoint path', function() {
       expect(subject.endpoint()).to.eql('/realtime?ids=ga:Test&metrics=rt:pageViews&dimensions=ga:pageTitle,ga:pagePath,rt:source,rt:minutesAgo,rt:deviceCategory&sort=rt:minutesAgo&max-results=10000');
+      });
+    });
+  });
+  describe("safeTerm", function() {
+    context("email address", function() {
+      it("is not safe", function() {
+        expect(subject.safeTerm("iw@jwi.de")).to.eq(false);
+      });
+    });
+    context("just numbers", function() {
+      it("is not safe", function() {
+        expect(subject.safeTerm("432913")).to.eq(false);
+      });
+    });
+    context("503 request", function() {
+      it("is not safe", function() {
+        expect(subject.safeTerm("Sorry, we are experiencing technical difficulties (503 error)")).to.eq(false);
       });
     });
   });
