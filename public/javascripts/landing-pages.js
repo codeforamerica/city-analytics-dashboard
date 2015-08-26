@@ -85,7 +85,7 @@
       window.setInterval(landing.reload, 60e3);
     },
     reload: function(){
-      d3.json(landing.endpoint(), landing.parseResponse);
+      xhr.json(landing.endpoint(), landing.parseResponse);
     }
   };
 

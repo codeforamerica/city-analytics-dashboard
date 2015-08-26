@@ -3,7 +3,9 @@ module.exports = function(config) {
     basePath: '',
     frameworks: ['mocha', 'chai-jquery', 'jquery-1.11.0', 'sinon-chai', 'chai', 'fixture'],
     files: [
-      'public/javascripts/vendor/d3.v3.min.js',
+      'public/javascripts/vendor/xhr.min.js',
+      'public/javascripts/vendor/time.min.js',
+      'public/javascripts/vendor/timeFormat.min.js',
       'public/javascripts/vendor/handlebars-v3.0.3.js',
       'public/javascripts/vendor/raphael-min.js',
       'public/javascripts/vendor/morris.min.js',

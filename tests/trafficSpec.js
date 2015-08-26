@@ -158,7 +158,7 @@ describe('traffic', function() {
     });
     context('no json returned', function() {
       beforeEach(function() {
-        stub = sandbox.stub(d3, 'json');
+        stub = sandbox.stub(xhr, 'json');
       });
       it('returns without reloading', function() {
         mock = sandbox.mock(subject).expects('reload').never();
@@ -169,7 +169,7 @@ describe('traffic', function() {
     });
     context('returns json', function() {
       beforeEach(function() {
-        stub = sandbox.stub(d3, 'json');
+        stub = sandbox.stub(xhr, 'json');
         subject.points = 1;
       });
       it('calls deviceMinuteIntervalResults from helper', function() {
