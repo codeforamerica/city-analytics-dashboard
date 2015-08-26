@@ -48,7 +48,12 @@ h2{
 .brick.badge-heading{
   background-image:none;
 }
-
+.lt-ie9 {
+  .brick {
+    float: left;
+    display: block;
+  }
+}
 .bricks{
   margin:0;
   padding:0;
@@ -73,7 +78,13 @@ h2{
     border-radius: 3px;
     border: 1px solid $background;
     overflow: hidden;
-    padding: 1em;
+
+    h2, div.box {
+      padding: 0 16px;
+    }
+    h2.brick-heading {
+      padding-top: 1em;
+    }
 
     ul, li {
       margin: 0;

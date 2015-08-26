@@ -33,6 +33,10 @@ h2 {
 .brick.badge-heading {
   background-image: none; }
 
+.lt-ie9 .brick {
+  float: left;
+  display: block; }
+
 .bricks {
   margin: 0;
   padding: 0;
@@ -55,8 +59,11 @@ h2 {
     background-color: #00010D;
     border-radius: 3px;
     border: 1px solid #4B9990;
-    overflow: hidden;
-    padding: 1em; }
+    overflow: hidden; }
+    .bricks .brick h2, .bricks .brick div.box {
+      padding: 0 16px; }
+    .bricks .brick h2.brick-heading {
+      padding-top: 1em; }
     .bricks .brick ul, .bricks .brick li {
       margin: 0;
       padding: 0;
