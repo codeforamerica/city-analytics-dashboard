@@ -102,7 +102,7 @@ describe('traffic', function() {
     });
     context('Search Term', function() {
       beforeEach(function(){
-        data = { rows: [["Search", "url", "source", "10"]]};
+        data = { rows: [["Search", "url", "source", "DESKTOP", "10"]]};
       });
       it("does not call addTerm for the row", function() {
         mock = sandbox.mock(subject).expects("addTerm").never();
@@ -116,8 +116,8 @@ describe('traffic', function() {
       subject.terms = [];
     });
     it("adds new items to terms", function() {
-      result = { term: 'Test', total: 1, url: 'url', source: 'source', has_url: true, has_source: true }
-      subject.addTerm("Test", 1, "url", "source");
+      result = { term: 'Test', total: 1, url: 'url', source: 'source', has_url: true, has_source: true, deviceCategory: "device" }
+      subject.addTerm("Test", 1, "url", "source", "device");
       expect(subject.terms[0]).to.eql(result);
     });
   });
