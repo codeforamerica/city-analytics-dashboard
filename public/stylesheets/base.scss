@@ -30,7 +30,7 @@ html {
 }
 
 body {
-  background-color:$background;
+  background-color: #000;
   padding:0;
   margin:0;
   color:$main-font;
@@ -48,12 +48,6 @@ h2{
 .brick.badge-heading{
   background-image:none;
 }
-.lt-ie9 {
-  .brick {
-    float: left;
-    display: block;
-  }
-}
 .bricks{
   margin:0;
   padding:0;
@@ -67,6 +61,7 @@ h2{
   -webkit-justify-content: space-between;
 
   .brick {
+    float: left;
     order: auto;
     width: 32%;
     flex: 1 1 auto;
