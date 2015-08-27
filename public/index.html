@@ -126,7 +126,8 @@
     <script type="template" id="landing-pages-items">
       {{#each pages}}
       <li>
-        <div>
+        <div class="device-type {{deviceCategory}}"></div>
+        <div class="link">
           {{#has_url}}<a href="http://{{ url }}" target="_blank">{{/has_url}}
           {{ term }}
           {{#has_url}}</a>{{/has_url}}
