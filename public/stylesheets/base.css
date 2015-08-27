@@ -111,7 +111,7 @@ h2 {
       background: #fff;
       display: block;
       position: absolute; }
-      .bricks .searches ul li .device-type.mobile {
+      .bricks .searches ul li .device-type.mobile, .bricks .searches ul li .device-type.tablet {
         background: #265c8d; }
       .bricks .searches ul li .device-type.desktop {
         background: #1b406d; }
