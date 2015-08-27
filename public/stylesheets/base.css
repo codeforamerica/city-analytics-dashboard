@@ -197,6 +197,17 @@ h2 {
   .traffic .label {
     fill: #78BFBF;
     font-size: 16px; }
+  .traffic #traffic {
+    float: left; }
+    .traffic #traffic .visitor-count {
+      width: 90px;
+      height: 90px;
+      margin: 0 auto; }
+      .traffic #traffic .visitor-count#mobile-count {
+        background: #265c8d; }
+      .traffic #traffic .visitor-count#desktop-count {
+        background: #1b406d;
+        margin-bottom: 5px; }
 
 .sparkline path {
   stroke: white;
