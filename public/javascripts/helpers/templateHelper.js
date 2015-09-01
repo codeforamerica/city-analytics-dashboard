@@ -1,7 +1,17 @@
 window.templateHelper = {
   templates: [],
+  deviceClasses: {
+    'mobile': 'icon-mobile-phone',
+    'desktop': 'icon-desktop'
+  },
   compileTemplate: function(sourceHtml) {
     return Handlebars.compile(sourceHtml);
+  },
+  registerHelpers: function() {
+    var deviceClasses = this.deviceClasses;
+    Handlebars.registerHelper('deviceClass', function(deviceCategory) {
+      return deviceClasses[deviceCategory];
+    });
   },
   getTemplate: function(id) {
     var templ = this.templates[id];

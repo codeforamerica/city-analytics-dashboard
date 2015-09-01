@@ -46,28 +46,30 @@
       }
       return true;
     },
-    addTerm: function(term, count, url){
+    addTerm: function(term, count, url, deviceCategory){
       var i;
       for(i=0;i<count;i++) {
         search.terms.push({
           term: term,
           total: count,
-          url: url
+          url: url,
+          deviceCategory: deviceCategory
         });
       }
     },
     parseData: function(data) {
-      var i, _i, term, url, source, minutesAgo,
+      var i, _i, term, url, source, minutesAgo, deviceCategory,
       termColumn = 1, urlColumn = 0,
-      minutesAgoColumn = 2, countColumn = 4, maxMinutes = 2;
+      minutesAgoColumn = 2, deviceCategoryColumn = 3, countColumn = 4, maxMinutes = 2;
 
       for(i=0,_i=data.rows.length; i<_i; i++){
         term = data.rows[i][termColumn];
         url = data.rows[i][urlColumn];
+        deviceCategory = data.rows[i][deviceCategoryColumn].toLowerCase();
         minutesAgo = root.parseInt(data.rows[i][minutesAgoColumn]);
         if(minutesAgo < maxMinutes) {
           if(term !== 'Search' && search.safeTerm(term)){
-            search.addTerm(term, root.parseInt(data.rows[i][countColumn], 10), url);
+            search.addTerm(term, root.parseInt(data.rows[i][countColumn], 10), url, deviceCategory);
           }
         }else {
           break;

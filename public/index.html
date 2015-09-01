@@ -2,9 +2,14 @@
   <head>
     <title>Data Screen</title>
     <link rel="stylesheet" href="./stylesheets/base.css" />
+    <link rel="stylesheet" href="./stylesheets/font-awesome/css/font-awesome.min.css">
+    <!--[if IE 7]>
+      <link rel="stylesheet" href="./stylesheets/font-awesome/css/font-awesome-ie7.min.css">
+    <![endif]-->
     <link href='http://fonts.googleapis.com/css?family=Bitter:400,700,400italic' rel='stylesheet' type='text/css' />
     <meta name="viewport"
      content="width=device-width, minimum-scale=1.0,initial-scale=1.0, user-scalable=yes" />
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   </head>
   <body>
     <div class="top-bar">
@@ -21,10 +26,12 @@
           <span id="traffic" class="count">
             <div class="visitor-count" id="mobile-count">
               <span class="text-feature" id="traffic-count-mobile">&nbsp;</span>
+              <i class="icon-mobile-phone"></i>
               mobile
             </div>
             <div class="visitor-count" id="desktop-count">
               <span class="text-feature" id="traffic-count">&nbsp;</span>
+              <i class="icon-desktop"></i>
               desktop
             </div>
             <span>visitors online</span>
@@ -94,7 +101,7 @@
         titlefilter: ' ~ '
       };
 
-      window.addEventListener("load", matrix.manager.init);
+      addEvent("load", window, matrix.manager.init);
     </script>
 
 
@@ -111,8 +118,14 @@
         <li>
           <a href="http://{{ url }}" target="_blank">{{ title }}</a>
           <em>
-          mobile: {{ visits.mobile }}
-          desktop: {{ visits.desktop }}
+          <div class="visitor-types">
+            <div class="device-type mobile"></div>
+            <i class="icon mobile icon-mobile-phone"></i> {{ visits.mobile }}
+          </div>
+          <div class="visitor-types">
+            <div class="device-type desktop"></div>
+            <i class="icon desktop icon-desktop"></i> {{ visits.desktop }}
+          </div>
           </em>
         </li>
       {{/pages}}
@@ -121,7 +134,9 @@
     <script type="template" id="search-result-items">
       {{#pages}}
       <li>
-        <div>
+        <div class="device-type {{deviceCategory}}"></div>
+        <div class="link">
+          <i class="{{deviceClass deviceCategory}}"></i>
           <a href="http://{{ url }}" target="_blank">{{ term }}</a>
         </div>
       </li>
@@ -129,7 +144,9 @@
     </script>
     <script type="template" id="search-result-item">
       <li>
+        <div class="device-type {{deviceCategory}}"></div>
         <div>
+          <i class="{{deviceClass deviceCategory}}"></i>
           <a href="http://{{ url }}" target="_blank">{{ term }}</a>
         </div>
       </li>
@@ -138,7 +155,9 @@
     <script type="template" id="landing-pages-items">
       {{#each pages}}
       <li>
-        <div>
+        <div class="device-type {{deviceCategory}}"></div>
+        <div class="link">
+          <i class="{{deviceClass deviceCategory}}"></i>
           {{#has_url}}<a href="http://{{ url }}" target="_blank">{{/has_url}}
           {{ term }}
           {{#has_url}}</a>{{/has_url}}
