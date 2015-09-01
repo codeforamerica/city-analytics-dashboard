@@ -116,8 +116,8 @@ describe('traffic', function() {
       subject.terms = [];
     });
     it("adds new items to terms", function() {
-      result = { term: 'Test', total: 1, url: 'url' }
-      subject.addTerm("Test", 1, "url", "source");
+      result = { term: 'Test', total: 1, url: 'url', deviceCategory: 'desktop' }
+      subject.addTerm("Test", 1, "url", "desktop");
       expect(subject.terms[0]).to.eql(result);
     });
   });
