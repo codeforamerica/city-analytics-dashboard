@@ -10,7 +10,7 @@ module.exports = function(config) {
       'public/javascripts/vendor/raphael-min.js',
       'public/javascripts/vendor/morris.min.js',
       'public/javascripts/helpers/helper.js',
-      'public/javascripts/helper/templateHelper.js',
+      'public/javascripts/helpers/templateHelper.js',
       'public/javascripts/landing-pages.js',
       'public/javascripts/traffic.js',
       'tests/**/*Spec.js',
@@ -21,6 +21,7 @@ module.exports = function(config) {
     ],
     preprocessors: {
       'public/javascripts/*.js': ['coverage'],
+      'public/javascripts/helpers/*.js': ['coverage'],
       'tests/**/*.json'   : ['json_fixtures']
     },
     jsonFixturesPreprocessor: {
