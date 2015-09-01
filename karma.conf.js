@@ -21,6 +21,7 @@ module.exports = function(config) {
     ],
     preprocessors: {
       'public/javascripts/*.js': ['coverage'],
+      'public/javascripts/helpers/*.js': ['coverage'],
       'tests/**/*.json'   : ['json_fixtures']
     },
     jsonFixturesPreprocessor: {
