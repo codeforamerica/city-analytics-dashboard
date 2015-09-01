@@ -5,6 +5,7 @@
     <link href='http://fonts.googleapis.com/css?family=Bitter:400,700,400italic' rel='stylesheet' type='text/css' />
     <meta name="viewport"
      content="width=device-width, minimum-scale=1.0,initial-scale=1.0, user-scalable=yes" />
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   </head>
   <body>
     <div class="top-bar">
@@ -90,7 +91,7 @@
         titlefilter: ' ~ '
       };
 
-      window.addEventListener("load", matrix.manager.init);
+      addEvent("load", window, matrix.manager.init);
     </script>
 
 

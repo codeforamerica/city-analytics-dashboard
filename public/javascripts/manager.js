@@ -118,6 +118,16 @@
     window.requestAnimationFrame(_animateDownBy);
   };
 
+  root.addEvent = function(evnt, elem, myfunc) {
+    if (elem.addEventListener){
+        elem.addEventListener(evnt, myfunc);
+    } else if (elem.attachEvent){
+       elem.attachEvent("on"+ev, myfunc);
+    } else {
+      elem["on"+evnt] = myfunc;
+    }
+  }
+
   var manager =
   root.matrix.manager = {
     animationDuration: 500,
