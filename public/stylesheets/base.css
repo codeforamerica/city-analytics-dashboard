@@ -18,10 +18,10 @@ html {
   -webkit-font-smoothing: antialiased; }
 
 body {
-  background-color: #4b9990;
+  background-color: #000;
   padding: 0;
   margin: 0;
-  color: #f2f2f2;
+  color: #F2F2F2;
   font-family: 'Bitter', serif; }
 
 h1 {
@@ -36,27 +36,44 @@ h2 {
 .bricks {
   margin: 0;
   padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   display: -webkit-flex;
-  flex-flow: row nowrap;
+  -ms-flex-flow: row nowrap;
+      flex-flow: row nowrap;
   -webkit-flex-flow: row nowrap;
-  flex-grow: 1;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
   -webkit-flex-grow: 1;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-justify-content: space-between; }
   .bricks .brick {
-    order: auto;
+    float: left;
+    -webkit-box-ordinal-group: NaN;
+    -webkit-order: auto;
+        -ms-flex-order: auto;
+            order: auto;
     width: 32%;
-    flex: 1 1 auto;
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
     -webkit-flex: 1 1 auto;
-    align-self: auto;
+    -ms-flex-item-align: auto;
+        align-self: auto;
     -webkit-align-self: auto;
     min-height: 100%;
-    background-color: #00010d;
+    background-color: #00010D;
     border-radius: 3px;
-    border: 1px solid #4b9990;
-    overflow: hidden;
-    padding: 1em; }
+    border: 1px solid #4B9990;
+    overflow: hidden; }
+    .bricks .brick h2, .bricks .brick div.box {
+      padding: 0 16px; }
+    .bricks .brick h2.brick-heading {
+      padding-top: 1em; }
     .bricks .brick ul, .bricks .brick li {
       margin: 0;
       padding: 0;
@@ -79,7 +96,7 @@ h2 {
       list-style: none;
       font-size: 25px;
       line-height: 1;
-      color: #b4d9d9;
+      color: #B4D9D9;
       opacity: 0.5; }
       .bricks .brick .search-terms ul li:nth-child(1) {
         opacity: 1.0; }
@@ -99,26 +116,38 @@ h2 {
     -webkit-transform: translateZ(0);
     transition: opacity 0.5s;
     -webkit-transition: opacity 0.5s;
-    color: #b4d9d9;
+    color: #B4D9D9;
     opacity: 0.5; }
     .bricks .searches ul li:nth-child(1) {
       opacity: 1.0; }
     .bricks .searches ul li:nth-child(2) {
       opacity: 0.7; }
+    .bricks .searches ul li .device-type {
+      width: 5px;
+      height: 80%;
+      background: #fff;
+      display: block;
+      position: absolute; }
+      .bricks .searches ul li .device-type.mobile, .bricks .searches ul li .device-type.tablet {
+        background: #265c8d; }
+      .bricks .searches ul li .device-type.desktop {
+        background: #1b406d; }
+    .bricks .searches ul li .link {
+      padding-left: 1em; }
 
 .top-bar {
-  background: #00010d;
+  background: #00010D;
   padding: 10px 20px;
-  border: 1px solid #4b9990;
+  border: 1px solid #4B9990;
   border-radius: 3px;
   color: #000;
   clear: both;
   overflow: hidden; }
   .top-bar p {
-    color: #b4d9d9;
+    color: #B4D9D9;
     font-size: 0.6em; }
     .top-bar p a {
-      color: #b4d9d9; }
+      color: #B4D9D9; }
   .top-bar .inner {
     position: relative;
     width: 105px;
@@ -146,7 +175,7 @@ h2 {
   -webkit-transform: translateZ(0);
   transition: opacity 0.5s;
   -webkit-transition: opacity 0.5s;
-  color: #b4d9d9;
+  color: #B4D9D9;
   opacity: 0.5; }
   .searches ul li a {
     color: inherit;
@@ -166,10 +195,10 @@ h2 {
 
 .traffic {
   color: black;
-  color: #b4d9d9;
+  color: #B4D9D9;
   text-align: center; }
   .traffic .text-feature {
-    color: #f2f2f2;
+    color: #F2F2F2;
     display: block;
     font-weight: bold;
     font-size: 300%; }
@@ -183,19 +212,31 @@ h2 {
     width: 20%; }
     .tall .traffic .count {
       width: 50%; }
+  .traffic #traffic-count-graph {
+    height: 200px; }
+  .traffic #graph-text {
+    text-align: right; }
   .traffic .graph {
     float: left;
-    width: 80%;
-    /*.tall & {
-      width: 50%;
-    }*/ }
+    width: 80%; }
   .traffic path, .traffic line.axis {
-    stroke: #f2f2f2;
+    stroke: #F2F2F2;
     stroke-width: 0.4;
     fill: none; }
   .traffic .label {
-    fill: #78bfbf;
+    fill: #78BFBF;
     font-size: 16px; }
+  .traffic #traffic {
+    float: left; }
+    .traffic #traffic .visitor-count {
+      width: 90px;
+      height: 90px;
+      margin: 0 auto; }
+      .traffic #traffic .visitor-count#mobile-count {
+        background: #265c8d; }
+      .traffic #traffic .visitor-count#desktop-count {
+        background: #1b406d;
+        margin-bottom: 5px; }
 
 .sparkline path {
   stroke: white;
@@ -214,7 +255,7 @@ h2 {
   margin: 0;
   padding-bottom: 10px;
   list-style: none;
-  color: #b4d9d9; }
+  color: #B4D9D9; }
   .content li em {
     font-style: normal;
     display: block;
@@ -229,3 +270,5 @@ h2 {
         color: #006435; }
 .content li:nth-child(1) {
   font-size: 160%; }
+
+/*# sourceMappingURL=base.css.map */

@@ -42,7 +42,7 @@
       // refresh every 30 minutes
       window.setInterval(content.reload, 1800000);
     },
-    reload: function(){ d3.json(content.endpoint(), content.parseResponse); }
+    reload: function(){ xhr.json(content.endpoint(), content.parseResponse); }
   };
 
   root.matrix.content = content;

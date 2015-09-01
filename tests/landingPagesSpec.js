@@ -32,14 +32,14 @@ describe('traffic', function() {
   });
   describe('#reload', function() {
     it("calls endpoint", function() {
-      sandbox.stub(d3, "json");
+      sandbox.stub(xhr, "json");
       mock = sandbox.mock(subject).expects("endpoint").once();
       subject.reload();
       mock.verify();
     });
     context('json returned', function(){
       beforeEach(function() {
-        stub = sandbox.stub(d3, 'json');
+        stub = sandbox.stub(xhr, 'json');
       });
       it("calls parseResponse", function() {
         mock = sandbox.mock(subject).expects("parseResponse").once();
@@ -102,7 +102,7 @@ describe('traffic', function() {
     });
     context('Search Term', function() {
       beforeEach(function(){
-        data = { rows: [["Search", "url", "source", "10"]]};
+        data = { rows: [["Search", "url", "source", "DESKTOP", "10"]]};
       });
       it("does not call addTerm for the row", function() {
         mock = sandbox.mock(subject).expects("addTerm").never();
@@ -116,8 +116,8 @@ describe('traffic', function() {
       subject.terms = [];
     });
     it("adds new items to terms", function() {
-      result = { term: 'Test', total: 1, url: 'url', source: 'source', has_url: true, has_source: true }
-      subject.addTerm("Test", 1, "url", "source");
+      result = { term: 'Test', total: 1, url: 'url', source: 'source', has_url: true, has_source: true, deviceCategory: "device" }
+      subject.addTerm("Test", 1, "url", "source", "device");
       expect(subject.terms[0]).to.eql(result);
     });
   });
@@ -128,6 +128,9 @@ describe('traffic', function() {
     it("shows all terms", function() {
     });
     it("calls handlebars template", function() {
+      mock = sandbox.mock(templateHelper).expects('prependTemplate').once();
+      subject.refreshResults();
+      mock.verify();
     });
   });
   describe('#endpoint', function() {
@@ -142,6 +145,23 @@ describe('traffic', function() {
       });
       it('returns correct profile Id in the endpoint path', function() {
       expect(subject.endpoint()).to.eql('/realtime?ids=ga:Test&metrics=rt:pageViews&dimensions=ga:pageTitle,ga:pagePath,rt:source,rt:minutesAgo,rt:deviceCategory&sort=rt:minutesAgo&max-results=10000');
+      });
+    });
+  });
+  describe("safeTerm", function() {
+    context("email address", function() {
+      it("is not safe", function() {
+        expect(subject.safeTerm("iw@jwi.de")).to.eq(false);
+      });
+    });
+    context("just numbers", function() {
+      it("is not safe", function() {
+        expect(subject.safeTerm("432913")).to.eq(false);
+      });
+    });
+    context("503 request", function() {
+      it("is not safe", function() {
+        expect(subject.safeTerm("Sorry, we are experiencing technical difficulties (503 error)")).to.eq(false);
       });
     });
   });

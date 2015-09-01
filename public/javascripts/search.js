@@ -94,7 +94,7 @@
       window.setInterval(search.reload, 60e3);
     },
     reload: function(){
-      d3.json(search.endpoint(), search.parseResponse);
+      xhr.json(search.endpoint(), search.parseResponse);
     }
   };
 
