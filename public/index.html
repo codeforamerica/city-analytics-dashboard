@@ -2,6 +2,10 @@
   <head>
     <title>Data Screen</title>
     <link rel="stylesheet" href="./stylesheets/base.css" />
+    <link rel="stylesheet" href="./stylesheets/font-awesome/css/font-awesome.min.css">
+    <!--[if IE 7]>
+      <link rel="stylesheet" href="./stylesheets/font-awesome/css/font-awesome-ie7.min.css">
+    <![endif]-->
     <link href='http://fonts.googleapis.com/css?family=Bitter:400,700,400italic' rel='stylesheet' type='text/css' />
     <meta name="viewport"
      content="width=device-width, minimum-scale=1.0,initial-scale=1.0, user-scalable=yes" />
@@ -22,10 +26,12 @@
           <span id="traffic" class="count">
             <div class="visitor-count" id="mobile-count">
               <span class="text-feature" id="traffic-count-mobile">&nbsp;</span>
+              <i class="icon-mobile-phone"></i>
               mobile
             </div>
             <div class="visitor-count" id="desktop-count">
               <span class="text-feature" id="traffic-count">&nbsp;</span>
+              <i class="icon-desktop"></i>
               desktop
             </div>
             <span>visitors online</span>
@@ -71,9 +77,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
     <script src="javascripts/vendor/mustache.js"></script>
+    <script src="javascripts/vendor/handlebars-v3.0.3.js"></script>
     <script src="javascripts/vendor/pretty.js"></script>
     <script src="javascripts/vendor/bezier.js"></script>
 
+    <script src="javascripts/helper/templateHelper.js"></script>
     <script src="javascripts/helpers/helper.js"></script>
     <script src="javascripts/landing-pages.js"></script>
     <script src="javascripts/search.js"></script>
@@ -122,19 +130,21 @@
       </li>
     </script>
 
-    <script type="template" id="landing-pages-item">
+    <script type="template" id="landing-pages-items">
+      {{#each pages}}
       <li>
-        <div>
+        <div class="device-type {{deviceCategory}}"></div>
+        <div class="link">
+          <i class="{{deviceClass deviceCategory}}"></i>
           {{#has_url}}<a href="http://{{ url }}" target="_blank">{{/has_url}}
           {{ term }}
           {{#has_url}}</a>{{/has_url}}
-          
           {{#has_source}}
             <em>via: {{ source }}</em>
           {{/has_source}}
         </div>
       </li>
+      {{/each}}
     </script>
-
   </body>
 </html>
