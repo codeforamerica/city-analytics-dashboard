@@ -12,6 +12,7 @@ module.exports = function(config) {
       'public/javascripts/helpers/helper.js',
       'public/javascripts/helpers/templateHelper.js',
       'public/javascripts/landing-pages.js',
+      'public/javascripts/search.js',
       'public/javascripts/traffic.js',
       'tests/**/*Spec.js',
       'tests/fixtures/**/*'

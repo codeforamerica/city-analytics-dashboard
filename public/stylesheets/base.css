@@ -105,6 +105,21 @@ h2 {
       .bricks .brick .search-terms ul li a {
         color: inherit;
         text-decoration: none; }
+  .bricks .device-type {
+    width: 5px;
+    height: 80%;
+    background: #fff;
+    display: block;
+    position: absolute; }
+    .bricks .device-type.mobile, .bricks .device-type.tablet {
+      background: #265c8d; }
+    .bricks .device-type.desktop {
+      background: #1b406d; }
+  .bricks .link {
+    padding-left: 1em; }
+    .bricks .link i {
+      color: #717171;
+      font-size: 0.75em; }
   .bricks .searches ul li {
     margin: 0;
     padding: 0.5em 0;
@@ -122,18 +137,6 @@ h2 {
       opacity: 1.0; }
     .bricks .searches ul li:nth-child(2) {
       opacity: 0.7; }
-    .bricks .searches ul li .device-type {
-      width: 5px;
-      height: 80%;
-      background: #fff;
-      display: block;
-      position: absolute; }
-      .bricks .searches ul li .device-type.mobile, .bricks .searches ul li .device-type.tablet {
-        background: #265c8d; }
-      .bricks .searches ul li .device-type.desktop {
-        background: #1b406d; }
-    .bricks .searches ul li .link {
-      padding-left: 1em; }
 
 .top-bar {
   background: #00010D;
