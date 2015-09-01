@@ -117,8 +117,14 @@
         <li>
           <a href="http://{{ url }}" target="_blank">{{ title }}</a>
           <em>
-          mobile: {{ visits.mobile }}
-          desktop: {{ visits.desktop }}
+          <div class="visitor-types">
+            <div class="device-type mobile"></div>
+            <i class="icon mobile icon-mobile-phone"></i> {{ visits.mobile }}
+          </div>
+          <div class="visitor-types">
+            <div class="device-type desktop"></div>
+            <i class="icon desktop icon-desktop"></i> {{ visits.desktop }}
+          </div>
           </em>
         </li>
       {{/pages}}
