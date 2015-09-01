@@ -128,6 +128,9 @@ describe('traffic', function() {
     it("shows all terms", function() {
     });
     it("calls handlebars template", function() {
+      mock = sandbox.mock(templateHelper).expects("prependTemplate").once();
+      subject.refreshResults();
+      mock.verify();
     });
   });
   describe('#endpoint', function() {
