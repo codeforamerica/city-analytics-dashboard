@@ -40,4 +40,33 @@ describe("templateHelper", function() {
       expect(element.innerHTML).to.eq("test");
     });
   });
+  describe("#prependTemplate", function() {
+    beforeEach(function() {
+      element = { innerHTML: "Test" };
+      templateFunction = function(e) { return "test" };
+    });
+    it("sets the innerHTML to contents of the template", function() {
+      sandbox.stub(subject, "getTemplate").returns(templateFunction);
+      subject.prependTemplate(element, "", {});
+      expect(element.innerHTML).to.eq("testTest");
+    });
+  });
+  describe("#appendTemplate", function() {
+    beforeEach(function() {
+      element = { innerHTML: "Test" };
+      templateFunction = function(e) { return "test" };
+    });
+    it("sets the innerHTML to contents of the template", function() {
+      sandbox.stub(subject, "getTemplate").returns(templateFunction);
+      subject.appendTemplate(element, "", {});
+      expect(element.innerHTML).to.eq("Testtest");
+    });
+  });
+  describe("#registerHelpers", function() {
+    it("registers helper with Handlebars", function() {
+      mock = sandbox.mock(Handlebars).expects("registerHelper").once();
+      subject.registerHelpers();
+      mock.verify();
+    });
+  });
 });
