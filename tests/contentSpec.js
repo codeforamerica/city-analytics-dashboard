@@ -31,14 +31,14 @@ describe('traffic', function() {
   });
   describe('#reload', function() {
     it("calls endpoint", function() {
-      sandbox.stub(d3, "json");
+      sandbox.stub(xhr, "json");
       mock = sandbox.mock(subject).expects("endpoint").once();
       subject.reload();
       mock.verify();
     });
     context('json returned', function(){
       beforeEach(function() {
-        stub = sandbox.stub(d3, 'json');
+        stub = sandbox.stub(xhr, 'json');
       });
       it("calls parseResponse", function() {
         mock = sandbox.mock(subject).expects("parseResponse").once();
