@@ -22,6 +22,8 @@ mid teal: 78BFBF
 teal: 60BFB6
 */
 
+$desktop-color: #1b406d;
+$mobile-color: #265c8d;
 
 html {
   width: 100%;
@@ -30,7 +32,7 @@ html {
 }
 
 body {
-  background-color:$background;
+  background-color: #000;
   padding:0;
   margin:0;
   color:$main-font;
@@ -48,7 +50,6 @@ h2{
 .brick.badge-heading{
   background-image:none;
 }
-
 .bricks{
   margin:0;
   padding:0;
@@ -62,6 +63,7 @@ h2{
   -webkit-justify-content: space-between;
 
   .brick {
+    float: left;
     order: auto;
     width: 32%;
     flex: 1 1 auto;
@@ -73,7 +75,13 @@ h2{
     border-radius: 3px;
     border: 1px solid $background;
     overflow: hidden;
-    padding: 1em;
+
+    h2, div.box {
+      padding: 0 16px;
+    }
+    h2.brick-heading {
+      padding-top: 1em;
+    }
 
     ul, li {
       margin: 0;
@@ -253,6 +261,21 @@ h2{
   .label {
     fill: $secondary;
     font-size: 16px;
+  }
+  #traffic {
+    float: left;
+    .visitor-count {
+      width: 90px;
+      height: 90px;
+      margin: 0 auto;
+      &#mobile-count{
+        background: $mobile-color;
+      }
+      &#desktop-count{
+        background: $desktop-color;
+        margin-bottom: 5px;
+      }
+    }
   }
 }
 .sparkline path{

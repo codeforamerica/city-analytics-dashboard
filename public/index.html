@@ -18,13 +18,16 @@
             </div>
             <div id="graph-text">visitors over the last 48 hours (30 minute interval)</div>
           </div>
-          <span id="traffic" class="count" style="float:left">
-            <span class="text-feature" id="traffic-count-mobile">&nbsp;</span>
-            mobile
-            <span class="text-feature" id="traffic-count">&nbsp;</span>
-            desktop
-            <br/>
-            visitors online
+          <span id="traffic" class="count">
+            <div class="visitor-count" id="mobile-count">
+              <span class="text-feature" id="traffic-count-mobile">&nbsp;</span>
+              mobile
+            </div>
+            <div class="visitor-count" id="desktop-count">
+              <span class="text-feature" id="traffic-count">&nbsp;</span>
+              desktop
+            </div>
+            <span>visitors online</span>
           </span>
         </div>
 
@@ -49,19 +52,20 @@
         </div>
       </li>
 
-      <li class="brick">
+      <li class="brick last">
         <h2 class="brick-heading">Most popular pages</h2>
         <div class="box popular content">
           <div class="box-inner">
             <ul id="content"></ul>
-          </div>
           </div>
         </div>
       </li>
     </ul>
 
 
-    <script src="javascripts/vendor/d3.v3.min.js"></script>
+    <script src="javascripts/vendor/xhr.min.js"></script>
+    <script src="javascripts/vendor/time.min.js"></script>
+    <script src="javascripts/vendor/timeFormat.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>

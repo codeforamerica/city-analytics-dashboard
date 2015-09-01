@@ -7,14 +7,6 @@
     return (Math.random() * debugCountLimit) | 0;
   };
 
-  var today = new Date().toISOString();
-    today = today.split("T"[0]);
-  
-  var yesterday = new Date();
-  yesterday.setDate(yesterday.getDate() - 1);
-  yesterday = yesterday.toISOString();
-  yesterday = yesterday.split("T"[0]);
-
   var parseRows = function(rows) {
     var rowObj = {},
     length = rows.length;
@@ -48,8 +40,8 @@
         var users = parseRows(data.rows);
         var activeUsers = parseInt(users['DESKTOP'], 10) | 0;
         var activeUsersMobile = parseInt(users['MOBILE'], 10) | 0;
-        traffic.el.innerText = activeUsers;
-        traffic.elMob.innerText = activeUsersMobile;
+        traffic.el.innerHTML = activeUsers;
+        traffic.elMob.innerHTML = activeUsersMobile;
 
         var dataArray = helper.arrayFromObject(traffic.counts);
         if(typeof traffic.chart === 'undefined'){
@@ -64,7 +56,7 @@
             hideHover: 'always',
             xLabelMargin: 100,
             xLabelFormat: function(data){
-              return d3.time.format("%I %p")(data.label);
+              return timeFormat.format("%I %p")(data.label);
             },
           });
         }
@@ -83,10 +75,10 @@
       window.setInterval(traffic.reload, traffic.interval);
     },
     loadHistory: function() {
-      d3.json(traffic.historic(), function(error, json) {
+      xhr.json(traffic.historic(), function(error, json) {
         if (error) return console.warn(error);
         var endDate = new Date();
-        var startDate = d3.time.day.offset(endDate, -2);
+        var startDate = time.day.offset(endDate, -2);
         traffic.counts = window.helper.deviceMinuteIntervalResults(json.rows, 30, startDate, endDate);
         traffic.reload();
       });
@@ -102,7 +94,7 @@
         });
         return;
       }
-      d3.json(endpoint, traffic.parseResponse);
+      xhr.json(endpoint, traffic.parseResponse);
 
     }
   };

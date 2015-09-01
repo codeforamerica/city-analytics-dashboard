@@ -14,15 +14,26 @@ module.exports = function(config) {
     sl_ie_11: {
       base: 'SauceLabs',
       browserName: 'internet explorer',
-      platform: 'Windows 8.1',
-      version: '11'
+      platform: 'Windows 8',
+      version: '10'
+    },
+    sl_ie_9: {
+      base: 'SauceLabs',
+      browserName: 'internet explorer',
+      platform: 'Windows 7',
+      version: '9'
     }
   };
   config.set({
     basePath: '',
-    frameworks: ['mocha', 'chai-jquery', 'jquery-2.1.0', 'chai', 'sinon-chai', 'fixture'],
+    frameworks: ['mocha', 'chai-jquery', 'jquery-1.11.0', 'sinon-chai', 'chai', 'fixture'],
     files: [
-      'public/javascripts/vendor/d3.v3.min.js',
+      'public/javascripts/vendor/xhr.min.js',
+      'public/javascripts/vendor/time.min.js',
+      'public/javascripts/vendor/timeFormat.min.js',
+      'public/javascripts/vendor/raphael-min.js',
+      'public/javascripts/vendor/morris.min.js',
+      'public/javascripts/helpers/helper.js',
       'public/javascripts/traffic.js',
       'tests/**/*Spec.js',
       'tests/fixtures/**/*'
@@ -52,8 +63,11 @@ module.exports = function(config) {
       recordVideo: true,
       recordScreenshots: true
     },
-    captureTimeout: 120000,
     customLaunchers: customLaunchers,
     browsers: Object.keys(customLaunchers),
+    browserDisconnectTimeout : 10000,
+    browserDisconnectTolerance : 1,
+    browserNoActivityTimeout : 4*60*1000,
+    captureTimeout : 4*60*1000
   });
 };
