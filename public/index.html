@@ -82,7 +82,7 @@
     <script src="javascripts/vendor/bezier.js"></script>
 
     <script src="javascripts/helper/dataHelper.js"></script>
-    <script src="javascripts/helper/templateHelper.js"></script>
+    <script src="javascripts/helpers/templateHelper.js"></script>
     <script src="javascripts/helpers/helper.js"></script>
     <script src="javascripts/landing-pages.js"></script>
     <script src="javascripts/search.js"></script>
@@ -130,9 +130,22 @@
       {{/pages}}
     </script>
 
+    <script type="template" id="search-result-items">
+      {{#pages}}
+      <li>
+        <div class="device-type {{deviceCategory}}"></div>
+        <div class="link">
+          <i class="{{deviceClass deviceCategory}}"></i>
+          <a href="http://{{ url }}" target="_blank">{{ term }}</a>
+        </div>
+      </li>
+      {{/pages}}
+    </script>
     <script type="template" id="search-result-item">
       <li>
+        <div class="device-type {{deviceCategory}}"></div>
         <div>
+          <i class="{{deviceClass deviceCategory}}"></i>
           <a href="http://{{ url }}" target="_blank">{{ term }}</a>
         </div>
       </li>
