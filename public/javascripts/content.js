@@ -58,7 +58,7 @@
       content.displayResults();
     },
     displayResults: function(){
-      matrix.template(content.el,
+      window.templateHelper.renderTemplate(content.el,
                       'content-results',
                       { pages: content.pages.slice(0,10) }
       );

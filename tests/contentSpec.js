@@ -94,10 +94,9 @@ describe('traffic', function() {
       });
     });
     it("calls the template rendering", function() {
-      templateSpy = sandbox.spy();
-      window.matrix.template = templateSpy;
+      mock = sandbox.mock(window.templateHelper).expects("renderTemplate").once();
       subject.displayResults();
-      expect(templateSpy).to.have.been.calledOnce
+      mock.verify();
     });
   });
   describe('#parseData', function() {
