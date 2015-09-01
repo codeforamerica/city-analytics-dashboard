@@ -126,6 +126,26 @@ h2{
     }
 
   }
+  .device-type {
+    width: 5px;
+    height: 80%;
+    background: #fff;
+    display: block;
+    position: absolute;
+    &.mobile, &.tablet {
+      background: $mobile-color;
+    }
+    &.desktop {
+      background: $desktop-color;
+    }
+  }
+  .link {
+    padding-left: 1em ;
+    i {
+      color: #717171;
+      font-size: 0.75em;
+    }
+  }
 
   .searches ul li {
     margin: 0;
@@ -145,22 +165,6 @@ h2{
 
     &:nth-child(1) { opacity: 1.0; }
     &:nth-child(2) { opacity: 0.7; }
-    .device-type {
-      width: 5px;
-      height: 80%;
-      background: #fff;
-      display: block;
-      position: absolute;
-      &.mobile, &.tablet {
-        background: $mobile-color;
-      }
-      &.desktop {
-        background: $desktop-color;
-      }
-    }
-    .link {
-      padding-left: 1em ;
-    }
   }
 }
 

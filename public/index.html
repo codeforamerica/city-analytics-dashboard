@@ -125,7 +125,9 @@
     <script type="template" id="search-result-items">
       {{#pages}}
       <li>
-        <div>
+        <div class="device-type {{deviceCategory}}"></div>
+        <div class="link">
+          <i class="{{deviceClass deviceCategory}}"></i>
           <a href="http://{{ url }}" target="_blank">{{ term }}</a>
         </div>
       </li>
@@ -133,7 +135,9 @@
     </script>
     <script type="template" id="search-result-item">
       <li>
+        <div class="device-type {{deviceCategory}}"></div>
         <div>
+          <i class="{{deviceClass deviceCategory}}"></i>
           <a href="http://{{ url }}" target="_blank">{{ term }}</a>
         </div>
       </li>
