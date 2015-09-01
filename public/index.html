@@ -2,9 +2,14 @@
   <head>
     <title>Data Screen</title>
     <link rel="stylesheet" href="./stylesheets/base.css" />
+    <link rel="stylesheet" href="./stylesheets/font-awesome/css/font-awesome.min.css">
+    <!--[if IE 7]>
+      <link rel="stylesheet" href="./stylesheets/font-awesome/css/font-awesome-ie7.min.css">
+    <![endif]-->
     <link href='http://fonts.googleapis.com/css?family=Bitter:400,700,400italic' rel='stylesheet' type='text/css' />
     <meta name="viewport"
      content="width=device-width, minimum-scale=1.0,initial-scale=1.0, user-scalable=yes" />
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   </head>
   <body>
     <div class="top-bar">
@@ -13,14 +18,24 @@
       </div>
       <p>This is an experiment from Code for America. You can log issues and find out more from our <a href="https://github.com/codeforamerica/display-screen">GitHub repository</a>. You must use <a href="https://www.google.com/intl/en_us/chrome/browser/">Chrome</a> to view this dashboard.</p>
         <div style="width:75%;overflow:hidden" class="small-box traffic">
-          <span id="traffic" class="count" style="float:left">
-            <span class="text-feature" id="traffic-count">&nbsp;</span>
-            visitors online
-          </span>
           <div class="graph box-in">
             <div id="traffic-count-graph" class="box-inner">
             </div>
+            <div id="graph-text">visitors over the last 48 hours (30 minute interval)</div>
           </div>
+          <span id="traffic" class="count">
+            <div class="visitor-count" id="mobile-count">
+              <span class="text-feature" id="traffic-count-mobile">&nbsp;</span>
+              <i class="icon-mobile-phone"></i>
+              mobile
+            </div>
+            <div class="visitor-count" id="desktop-count">
+              <span class="text-feature" id="traffic-count">&nbsp;</span>
+              <i class="icon-desktop"></i>
+              desktop
+            </div>
+            <span>visitors online</span>
+          </span>
         </div>
 
     </div>
@@ -44,25 +59,31 @@
         </div>
       </li>
 
-      <li class="brick">
+      <li class="brick last">
         <h2 class="brick-heading">Most popular pages</h2>
         <div class="box popular content">
           <div class="box-inner">
             <ul id="content"></ul>
-          </div>
           </div>
         </div>
       </li>
     </ul>
 
 
-    <script src="javascripts/vendor/d3.v3.min.js"></script>
+    <script src="javascripts/vendor/xhr.min.js"></script>
+    <script src="javascripts/vendor/time.min.js"></script>
+    <script src="javascripts/vendor/timeFormat.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
     <script src="javascripts/vendor/mustache.js"></script>
+    <script src="javascripts/vendor/handlebars-v3.0.3.js"></script>
     <script src="javascripts/vendor/pretty.js"></script>
     <script src="javascripts/vendor/bezier.js"></script>
 
     <script src="javascripts/helper/dataHelper.js"></script>
-    <script src="javascripts/sparkline.js"></script>
+    <script src="javascripts/helper/templateHelper.js"></script>
+    <script src="javascripts/helpers/helper.js"></script>
     <script src="javascripts/landing-pages.js"></script>
     <script src="javascripts/search.js"></script>
     <script src="javascripts/traffic.js"></script>
@@ -79,7 +100,7 @@
         titlefilter: ' ~ '
       };
 
-      window.addEventListener("load", matrix.manager.init);
+      addEvent("load", window, matrix.manager.init);
     </script>
 
 
@@ -111,19 +132,21 @@
       </li>
     </script>
 
-    <script type="template" id="landing-pages-item">
+    <script type="template" id="landing-pages-items">
+      {{#each pages}}
       <li>
-        <div>
+        <div class="device-type {{deviceCategory}}"></div>
+        <div class="link">
+          <i class="{{deviceClass deviceCategory}}"></i>
           {{#has_url}}<a href="http://{{ url }}" target="_blank">{{/has_url}}
           {{ term }}
           {{#has_url}}</a>{{/has_url}}
-          
           {{#has_source}}
             <em>via: {{ source }}</em>
           {{/has_source}}
         </div>
       </li>
+      {{/each}}
     </script>
-
   </body>
 </html>

@@ -7,13 +7,14 @@
     return (Math.random() * debugCountLimit) | 0;
   };
 
-  var today = new Date().toISOString();
-    today = today.split("T"[0]);
-  
-  var yesterday = new Date();
-  yesterday.setDate(yesterday.getDate() - 1);
-  yesterday = yesterday.toISOString();
-  yesterday = yesterday.split("T"[0]);
+  var parseRows = function(rows) {
+    var rowObj = {},
+    length = rows.length;
+    for(var i=0;i<length;i++){
+      rowObj[rows[i][0]] = rows[i][1];
+    }
+    return rowObj;
+  }
 
   if(typeof root.matrix === 'undefined'){ root.matrix = {} }
 
@@ -29,64 +30,58 @@
     interval: (debug) ? 500 : 2 * 60 * 1000,
 
     endpoint: function(){
-      return "/realtime?ids=ga:"+matrix.settings.profileId+"&metrics=rt:activeUsers&max-results=10"
+      return "/realtime?ids=ga:"+matrix.settings.profileId+"&metrics=rt:activeUsers&dimensions=rt:deviceCategory&max-results=10"
     },
     historic: function(){
-      return "/historic?ids=ga:"+matrix.settings.profileId+"&dimensions=ga%3AnthMinute&metrics=ga%3Asessions&start-date="+yesterday[0]+"&end-date="+today[0]+"&max-results=1000"
+      return "/historic?ids=ga:"+matrix.settings.profileId+"&dimensions=ga%3AdeviceCategory,ga%3Adate,ga%3Ahour,ga%3Aminute&metrics=ga%3Asessions&start-date=2daysAgo&end-date=today&max-results=10000"
     },
     parseResponse: function(data){
+      if(data && data.hasOwnProperty('rows')){
+        var users = parseRows(data.rows);
+        var activeUsers = parseInt(users['DESKTOP'], 10) | 0;
+        var activeUsersMobile = parseInt(users['MOBILE'], 10) | 0;
+        traffic.el.innerHTML = activeUsers;
+        traffic.elMob.innerHTML = activeUsersMobile;
 
-      var counts = traffic.counts;
-      var activeUsers = parseInt(data.totalsForAllResults['rt:activeUsers'], 10);
-      traffic.el.innerText = activeUsers;
-
-      counts.unshift(activeUsers);
-      counts.length = traffic.points;
-      if(typeof traffic.sparkline === 'undefined'){
-     
-        traffic.sparkline = root.matrix.sparklineGraph(
-          '#traffic-count-graph',
-          { data: counts,
-            points: traffic.points,
-            height: 120,
-            width: traffic.graphEl.offsetWidth
-          }
-        );
+        var dataArray = helper.arrayFromObject(traffic.counts);
+        if(typeof traffic.chart === 'undefined'){
+          traffic.chart = new Morris.Bar({
+            data: dataArray,
+            element: 'traffic-count-graph',
+            xkey: 'date',
+            ykeys: ['desktop', 'mobile'],
+            labels: ['Desktop', 'Mobile'],
+            stacked: true,
+            barColors: ["#1B406D", "#265C8D"],
+            hideHover: 'always',
+            xLabelMargin: 100,
+            xLabelFormat: function(data){
+              return timeFormat.format("%I %p")(data.label);
+            },
+          });
+        }
+        traffic.chart.setData(dataArray);
       }
-      traffic.sparkline.update(counts,
-        "Traffic over the past " + (Math.round(traffic.points/30)) + " hours");
     },
     init: function(){
       traffic.el = document.getElementById('traffic-count');
+      traffic.elMob = document.getElementById('traffic-count-mobile');
       traffic.graphEl = document.getElementById('traffic-count-graph');
       traffic.counts.length = traffic.points;
-      
-      
 
-      // Zero fill the points
-      for (var i = 0; i < traffic.points; i++) {
-        traffic.counts[i] = 0;
-        // Dummy data in debug mode
-        if (debug) { traffic.counts[i] = debugRand(); }
-      }
-
-       d3.json(traffic.historic(), function(error, json) {
-          if (error) return console.warn(error);
-
-          // going over each historic item
-          var i = traffic.points;
-          var j = 0;
-          while(i--) {
-            traffic.counts[j] = json.rows[i][1];
-            j++;
-          }
-          traffic.reload();
-        });
-       
-      
-      
       // Check the traffic intermittently
+      traffic.loadHistory();
+      window.setInterval(traffic.loadHistory, traffic.interval*4);
       window.setInterval(traffic.reload, traffic.interval);
+    },
+    loadHistory: function() {
+      xhr.json(traffic.historic(), function(error, json) {
+        if (error) return console.warn(error);
+        var endDate = new Date();
+        var startDate = time.day.offset(endDate, -2);
+        traffic.counts = window.helper.deviceMinuteIntervalResults(json.rows, 30, startDate, endDate);
+        traffic.reload();
+      });
     },
     reload: function(){
       var endpoint = traffic.endpoint();
@@ -99,7 +94,7 @@
         });
         return;
       }
-      d3.json(endpoint, traffic.parseResponse);
+      xhr.json(endpoint, traffic.parseResponse);
 
     }
   };
