@@ -137,9 +137,11 @@ h2 {
         float: left;
         margin: 0 0.4em 0 0; }
         .bricks .popular li em .device-type.mobile {
-          background: #265c8d; }
+          background: #B26E00; }
         .bricks .popular li em .device-type.desktop {
-          background: #1b406d; }
+          background: #265c8d; }
+      .bricks .popular li em .icon {
+        margin-left: 0.5em; }
 
 .top-bar {
   background: #00010D;
