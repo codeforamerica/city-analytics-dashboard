@@ -6,10 +6,12 @@ describe('traffic', function() {
     subject =  window.matrix.landing;
     sandbox = sinon.sandbox.create();
     server = sinon.fakeServer.create();
+    clock = sinon.useFakeTimers();
   });
   afterEach(function() {
     sandbox.restore();
     server.restore();
+    clock.restore();
   });
   describe('#init', function() {
     beforeEach(function() {
@@ -130,7 +132,37 @@ describe('traffic', function() {
     it("calls handlebars template", function() {
       mock = sandbox.mock(templateHelper).expects('prependTemplate').once();
       subject.refreshResults();
+      clock.tick(1);
       mock.verify();
+    });
+  });
+  describe('#dribbleOut', function() {
+    beforeEach(function() {
+      term = { term: 'Test', total: 1, url: 'url', source: 'source' };
+      subject.terms = [];
+      mock = sandbox.mock(templateHelper).expects('prependTemplate');
+    });
+    context("60 elements", function() {
+      beforeEach(function() {
+        for(var i=0;i<60;i++) { subject.terms.push(term); }
+      });
+      it("adds an element every second", function() {
+        mock.exactly(60);
+        subject.dribbleOut(subject.terms);
+        clock.tick(60000);
+        mock.verify();
+      });
+    });
+    context("30 elements", function() {
+      beforeEach(function() {
+        for(var i=0;i<30;i++) { subject.terms.push(term); }
+      });
+      it("adds an element every two seconds", function() {
+        mock.exactly(30);
+        subject.dribbleOut(subject.terms);
+        clock.tick(60000);
+        mock.verify();
+      });
     });
   });
   describe('#endpoint', function() {
