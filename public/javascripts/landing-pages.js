@@ -78,15 +78,13 @@
       }
     },
     refreshResults: function() {
-      landing.dribbleOut(landing.terms);
+      landing.showOneByOne(landing.terms);
     },
-    dribbleOut: function(data) {
+    showOneByOne: function(data) {
       var i, dataLength = data.length;
       for(i=0;i<dataLength;i++) {
         var term = data[i];
-        var smallValueAdjustment = 1;
-        //if(dataLength < 15) { smallValueAdjustment = dataLength*2; }
-        var timeOut = 60/dataLength*i*1000/smallValueAdjustment;
+        var timeOut = 60/dataLength*i*1000;
         setTimeout((function(term) {
           return function() {
             landing.showTerm(term);

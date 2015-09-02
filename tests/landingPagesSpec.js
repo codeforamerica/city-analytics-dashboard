@@ -136,7 +136,7 @@ describe('traffic', function() {
       mock.verify();
     });
   });
-  describe('#dribbleOut', function() {
+  describe('#showOneByOne', function() {
     beforeEach(function() {
       term = { term: 'Test', total: 1, url: 'url', source: 'source' };
       subject.terms = [];
@@ -148,7 +148,7 @@ describe('traffic', function() {
       });
       it("adds an element every second", function() {
         mock.exactly(60);
-        subject.dribbleOut(subject.terms);
+        subject.showOneByOne(subject.terms);
         clock.tick(60000);
         mock.verify();
       });
@@ -159,7 +159,7 @@ describe('traffic', function() {
       });
       it("adds an element every two seconds", function() {
         mock.exactly(30);
-        subject.dribbleOut(subject.terms);
+        subject.showOneByOne(subject.terms);
         clock.tick(60000);
         mock.verify();
       });
