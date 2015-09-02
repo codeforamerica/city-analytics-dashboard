@@ -78,7 +78,22 @@
       }
     },
     refreshResults: function() {
-      templateHelper.prependTemplate(landing.el, "landing-pages-items", {pages: landing.terms });
+      landing.showOneByOne(landing.terms);
+    },
+    showOneByOne: function(data) {
+      var i, dataLength = data.length;
+      for(i=0;i<dataLength;i++) {
+        var term = data[i];
+        var timeOut = 60/dataLength*i*1000;
+        setTimeout((function(term) {
+          return function() {
+            landing.showTerm(term);
+          };
+        })(term), timeOut);
+      }
+    },
+    showTerm: function(term) {
+      templateHelper.prependTemplate(landing.el, "landing-pages-items", {pages: [term ]});
     },
     init: function(){
       var source;
