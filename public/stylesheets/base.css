@@ -99,9 +99,9 @@ h2 {
     display: block;
     position: absolute; }
     .bricks .device-type.mobile, .bricks .device-type.tablet {
-      background: #265c8d; }
+      background: #B26E00; }
     .bricks .device-type.desktop {
-      background: #1b406d; }
+      background: #265c8d; }
   .bricks .link {
     padding-left: 1em; }
     .bricks .link i {
@@ -137,9 +137,11 @@ h2 {
         float: left;
         margin: 0 0.4em 0 0; }
         .bricks .popular li em .device-type.mobile {
-          background: #265c8d; }
+          background: #B26E00; }
         .bricks .popular li em .device-type.desktop {
-          background: #1b406d; }
+          background: #265c8d; }
+      .bricks .popular li em .icon {
+        margin-left: 0.5em; }
 
 .top-bar {
   background: #00010D;
@@ -239,9 +241,9 @@ h2 {
       height: 90px;
       margin: 0 auto; }
       .traffic #traffic .visitor-count#mobile-count {
-        background: #265c8d; }
+        background: #B26E00; }
       .traffic #traffic .visitor-count#desktop-count {
-        background: #1b406d;
+        background: #265c8d;
         margin-bottom: 5px; }
 
 .sparkline path {
