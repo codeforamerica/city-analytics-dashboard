@@ -76,11 +76,11 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-    <script src="javascripts/vendor/mustache.js"></script>
     <script src="javascripts/vendor/handlebars-v3.0.3.js"></script>
     <script src="javascripts/vendor/pretty.js"></script>
     <script src="javascripts/vendor/bezier.js"></script>
 
+    <script src="javascripts/helpers/dataHelper.js"></script>
     <script src="javascripts/helpers/templateHelper.js"></script>
     <script src="javascripts/helpers/helper.js"></script>
     <script src="javascripts/landing-pages.js"></script>
@@ -116,7 +116,12 @@
         <li>
           <a href="http://{{ url }}" target="_blank">{{ title }}</a>
           <em>
-          visits: {{ visits }}
+          <div class="visitor-types mobile">
+            <i class="icon mobile icon-mobile-phone"></i> {{ numberFormat visits.mobile }}
+          </div>
+          <div class="visitor-types desktop">
+            <i class="icon desktop icon-desktop"></i> {{ numberFormat visits.desktop }}
+          </div>
           </em>
         </li>
       {{/pages}}

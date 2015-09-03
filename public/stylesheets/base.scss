@@ -73,7 +73,6 @@ h2{
     min-height: 100%;
     background-color: $secondary-background;
     border-radius: 3px;
-    border: 1px solid $background;
     overflow: hidden;
 
     h2, div.box {
@@ -166,12 +165,37 @@ h2{
     &:nth-child(1) { opacity: 1.0; }
     &:nth-child(2) { opacity: 0.7; }
   }
+  .popular {
+    li {
+      clear: both;
+      em {
+        margin-top: 5px;
+        .visitor-types {
+          float: left;
+          color: #fff;
+          padding: 0.3em;
+          margin: 0 0.4em 0 0;
+          &.mobile {
+            background: $mobile-color;
+          }
+          &.desktop{
+            background: $desktop-color;
+          }
+        }
+        .device-type {
+          width: 5px;
+          height: 1em;
+          float: left;
+          margin: 0 0.4em 0 0;
+        }
+      }
+    }
+  }
 }
 
 .top-bar {
   background: $secondary-background;
   padding: 10px 20px;
-  border:1px solid $background;
   border-radius: 3px;
   color:#000;
   clear:both; 
@@ -257,7 +281,7 @@ h2{
   }
   .count {
     float: left;
-    width: 20%;
+    margin-left: 1em;
 
     .tall & {
       width: 50%;
@@ -285,9 +309,8 @@ h2{
   #traffic {
     float: left;
     .visitor-count {
-      width: 90px;
-      height: 90px;
       margin: 0 auto;
+      padding: 0.3em 1em;
       &#mobile-count{
         background: $mobile-color;
       }
