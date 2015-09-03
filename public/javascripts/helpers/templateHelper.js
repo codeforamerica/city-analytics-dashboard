@@ -4,14 +4,18 @@ window.templateHelper = {
     'mobile': 'icon-mobile-phone',
     'desktop': 'icon-desktop'
   },
+  deviceCategoryClass: function(deviceCategory) {
+    return this.deviceClasses[deviceCategory];
+  },
   compileTemplate: function(sourceHtml) {
     return Handlebars.compile(sourceHtml);
   },
+  numberFormat: function(number) {
+    return number.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,').split(".")[0];
+  },
   registerHelpers: function() {
-    var deviceClasses = this.deviceClasses;
-    Handlebars.registerHelper('deviceClass', function(deviceCategory) {
-      return deviceClasses[deviceCategory];
-    });
+    Handlebars.registerHelper('deviceClass', this.deviceCategoryClass);
+    Handlebars.registerHelper('numberFormat', this.numberFormat);
   },
   getTemplate: function(id) {
     var templ = this.templates[id];

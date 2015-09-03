@@ -36,34 +36,21 @@ h2 {
 .bricks {
   margin: 0;
   padding: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   display: -webkit-flex;
-  -ms-flex-flow: row nowrap;
-      flex-flow: row nowrap;
+  flex-flow: row nowrap;
   -webkit-flex-flow: row nowrap;
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
+  flex-grow: 1;
   -webkit-flex-grow: 1;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
   -webkit-justify-content: space-between; }
   .bricks .brick {
     float: left;
-    -webkit-box-ordinal-group: NaN;
-    -webkit-order: auto;
-        -ms-flex-order: auto;
-            order: auto;
+    order: auto;
     width: 32%;
-    -webkit-box-flex: 1;
-        -ms-flex: 1 1 auto;
-            flex: 1 1 auto;
+    flex: 1 1 auto;
     -webkit-flex: 1 1 auto;
-    -ms-flex-item-align: auto;
-        align-self: auto;
+    align-self: auto;
     -webkit-align-self: auto;
     min-height: 100%;
     background-color: #00010D;
@@ -137,6 +124,24 @@ h2 {
       opacity: 1.0; }
     .bricks .searches ul li:nth-child(2) {
       opacity: 0.7; }
+  .bricks .popular li {
+    clear: both; }
+    .bricks .popular li em {
+      margin-top: 5px; }
+      .bricks .popular li em .visitor-types {
+        float: left;
+        color: #fff;
+        padding: 0.3em;
+        margin: 0 0.4em 0 0; }
+        .bricks .popular li em .visitor-types.mobile {
+          background: #B26E00; }
+        .bricks .popular li em .visitor-types.desktop {
+          background: #265c8d; }
+      .bricks .popular li em .device-type {
+        width: 5px;
+        height: 1em;
+        float: left;
+        margin: 0 0.4em 0 0; }
 
 .top-bar {
   background: #00010D;
