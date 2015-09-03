@@ -80,4 +80,12 @@ describe("templateHelper", function() {
       expect(subject.numberFormat(5000000)).to.eq("5,000,000");
     });
   });
+  describe("deviceCategoryClass", function() {
+    it("returns icon-mobile-phone for mobile", function() {
+      expect(subject.deviceCategoryClass("mobile")).to.eq("icon-mobile-phone");
+    });
+    it("returns icon-desktop for desktop", function() {
+      expect(subject.deviceCategoryClass("desktop")).to.eq("icon-desktop");
+    });
+  });
 });
