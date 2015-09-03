@@ -69,4 +69,15 @@ describe("templateHelper", function() {
       mock.verify();
     });
   });
+  describe("numberFormat", function() {
+    it("returns string with thousand seperator", function() {
+      expect(subject.numberFormat(5000)).to.eq("5,000");
+    });
+    it("always returns integers", function() {
+      expect(subject.numberFormat(5000.01)).to.eq("5,000");
+    });
+    it("has multiple thousand seperators in big numbers", function() {
+      expect(subject.numberFormat(5000000)).to.eq("5,000,000");
+    });
+  });
 });
