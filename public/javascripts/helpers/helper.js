@@ -97,9 +97,9 @@ window.helper = {
       row = data[dataLength - 1 - i];
       date = row.src.date;
       if(date.getHours() % 6 === 0 && date.getMinutes() === 0) {
-        label = timeFormat.format("%I %p")(date);
+        label = timeFormat.format("%-I %p")(date);
         if(date.getHours() === 0) {
-          label = timeFormat.format("%a %I %p")(date);
+          label = timeFormat.format("%a %-I %p")(date);
         }
         chart.raphael.text(row._x, pos, label)
         .attr('font-size', options.gridTextSize)
