@@ -54,13 +54,13 @@
             stacked: true,
             barColors: ["#265C8D", "#B26E00"],
             hideHover: 'always',
-            xLabelMargin: 100,
             xLabelFormat: function(data){
-              return timeFormat.format("%I %p")(data.label);
+              return "";
             },
           });
         }
         traffic.chart.setData(dataArray);
+        helper.redrawChartLabels(traffic.chart);
       }
     },
     init: function(){
