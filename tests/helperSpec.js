@@ -99,5 +99,27 @@ describe("helper", function() {
       expect(subject.arrayFromObject(dataObject)[0]).to.eql({test: 'Test'});
     });
   });
+  describe("redrawChartLabels", function() {
+    beforeEach(function() {
+      options = { gridTextSize: 0, gridTextFamily: '', gridTextWeight: 0, padding: 0 };
+      data = [];
+      raphael = sandbox.stub();
+      chart = { data: data, options: options, elementHeight: 0, raphael: raphael };
+    });
+    context("no data from 6-12", function() {
+      it("calls raphael never", function() {
+        subject.redrawChartLabels(chart);
+        expect(raphael).to.not.have.been.called;
+      });
+    });
+    context("data at 6", function() {
+      beforeEach(function() {
+        date = new Date();
+        date.setHours(6,0,0);
+        data = [{src: { date: date}, _x: 0}];
+        chart = { data: data, options: options, elementHeight: 0, raphael: raphael };
+      });
+    });
+  });
 });
 
