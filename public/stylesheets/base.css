@@ -212,7 +212,7 @@ h2 {
     margin: 0; }
   .traffic .count {
     float: left;
-    width: 20%; }
+    margin-left: 1em; }
     .tall .traffic .count {
       width: 50%; }
   .traffic #traffic-count-graph {
@@ -232,9 +232,8 @@ h2 {
   .traffic #traffic {
     float: left; }
     .traffic #traffic .visitor-count {
-      width: 90px;
-      height: 90px;
-      margin: 0 auto; }
+      margin: 0 auto;
+      padding: 0.3em 1em; }
       .traffic #traffic .visitor-count#mobile-count {
         background: #B26E00; }
       .traffic #traffic .visitor-count#desktop-count {
