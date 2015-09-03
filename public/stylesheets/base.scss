@@ -283,7 +283,7 @@ h2{
   }
   .count {
     float: left;
-    width: 20%;
+    margin-left: 1em;
 
     .tall & {
       width: 50%;
@@ -311,9 +311,8 @@ h2{
   #traffic {
     float: left;
     .visitor-count {
-      width: 90px;
-      height: 90px;
       margin: 0 auto;
+      padding: 0.3em 1em;
       &#mobile-count{
         background: $mobile-color;
       }
