@@ -10,6 +10,9 @@ require 'active_support/core_ext/object'
 use Rack::Cache
 set :public_folder, 'public'
 set :bind, '0.0.0.0'
+configure do
+  set :views, ['public']
+end
 
 if ENV['USERNAME'] && ENV['PASSWORD']
   use Rack::Auth::Basic, 'Demo area' do |user, pass|
@@ -18,10 +21,11 @@ if ENV['USERNAME'] && ENV['PASSWORD']
 end
 
 get '/' do
-  html = File.read(File.join('public', 'index.html'))
-  html.sub!('$PROFILE_ID', JSON.dump(ENV['GA_VIEW_ID']))
-  html.sub!('$DOMAIN_URL', JSON.dump(ENV['GA_WEBSITE_URL']))
-  return html
+  @PROFILE_ID = JSON.dump(ENV['GA_VIEW_ID'])
+  @DOMAIN_URL = JSON.dump(ENV['GA_WEBSITE_URL'])
+  @banner_text = ENV['BANNER_TEXT'] || "Code for America - City Analytics Dashboard"
+  @banner_logo = ENV['LOGO_URL'] || "http://style.codeforamerica.org/media/images/logo-colored.png"
+  erb :index
 end
 
 get '/realtime' do
