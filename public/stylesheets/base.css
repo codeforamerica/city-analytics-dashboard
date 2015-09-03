@@ -68,7 +68,6 @@ h2 {
     min-height: 100%;
     background-color: #00010D;
     border-radius: 3px;
-    border: 1px solid #4B9990;
     overflow: hidden; }
     .bricks .brick h2, .bricks .brick div.box {
       padding: 0 16px; }
@@ -141,7 +140,6 @@ h2 {
 .top-bar {
   background: #00010D;
   padding: 10px 20px;
-  border: 1px solid #4B9990;
   border-radius: 3px;
   color: #000;
   clear: both;
