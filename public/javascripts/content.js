@@ -58,10 +58,7 @@
       content.displayResults();
     },
     displayResults: function(){
-      window.templateHelper.renderTemplate(content.el,
-                      'content-results',
-                      { pages: content.pages.slice(0,10) }
-      );
+      window.templateHelper.renderTemplate(content.el, 'content-results', { pages: content.pages.slice(0,10) });
     },
     init: function(){
       content.el = document.getElementById('content');

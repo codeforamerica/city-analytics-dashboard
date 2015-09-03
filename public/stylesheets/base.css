@@ -130,18 +130,18 @@ h2 {
       margin-top: 5px; }
       .bricks .popular li em .visitor-types {
         float: left;
-        margin: 0 1em 0 0; }
+        color: #fff;
+        padding: 0.3em;
+        margin: 0 0.4em 0 0; }
+        .bricks .popular li em .visitor-types.mobile {
+          background: #B26E00; }
+        .bricks .popular li em .visitor-types.desktop {
+          background: #265c8d; }
       .bricks .popular li em .device-type {
         width: 5px;
         height: 1em;
         float: left;
         margin: 0 0.4em 0 0; }
-        .bricks .popular li em .device-type.mobile {
-          background: #B26E00; }
-        .bricks .popular li em .device-type.desktop {
-          background: #265c8d; }
-      .bricks .popular li em .icon {
-        margin-left: 0.5em; }
 
 .top-bar {
   background: #00010D;
