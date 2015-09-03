@@ -12,6 +12,9 @@ window.templateHelper = {
     Handlebars.registerHelper('deviceClass', function(deviceCategory) {
       return deviceClasses[deviceCategory];
     });
+    Handlebars.registerHelper('numberFormat', function(number) {
+      return number.toLocaleString();
+    });
   },
   getTemplate: function(id) {
     var templ = this.templates[id];

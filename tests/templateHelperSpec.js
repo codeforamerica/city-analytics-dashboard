@@ -64,7 +64,7 @@ describe("templateHelper", function() {
   });
   describe("#registerHelpers", function() {
     it("registers helper with Handlebars", function() {
-      mock = sandbox.mock(Handlebars).expects("registerHelper").once();
+      mock = sandbox.mock(Handlebars).expects("registerHelper").twice();
       subject.registerHelpers();
       mock.verify();
     });
