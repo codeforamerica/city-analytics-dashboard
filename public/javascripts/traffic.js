@@ -60,7 +60,9 @@
           });
         }
         traffic.chart.setData(dataArray);
-        helper.redrawChartLabels(traffic.chart);
+        var chartHelper = window.raphaelHelper();
+        chartHelper(traffic.chart);
+        chartHelper.redrawAllLabels();
       }
     },
     init: function(){

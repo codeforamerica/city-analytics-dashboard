@@ -86,27 +86,5 @@ window.helper = {
         dataArray.push(transformObject[o]);
     }
     return dataArray;
-  },
-  redrawChartLabels: function(chart) {
-    var i, data, dataLength, row, pos, date, label, options;
-    data = chart.data;
-    options = chart.options;
-    dataLength = data.length;
-    pos = chart.elementHeight - options.padding;
-    for(i=0;i<dataLength;i++) {
-      row = data[dataLength - 1 - i];
-      date = row.src.date;
-      if(date.getHours() % 6 === 0 && date.getMinutes() === 0) {
-        label = timeFormat.format("%-I %p")(date);
-        if(date.getHours() === 0) {
-          label = timeFormat.format("%a %-I %p")(date);
-        }
-        chart.raphael.text(row._x, pos, label)
-        .attr('font-size', options.gridTextSize)
-        .attr('font-family', options.gridTextFamily)
-        .attr('font-weight', options.gridTextWeight)
-        .attr('fill', options.gridTextColor)
-      }
-    }
   }
 }
