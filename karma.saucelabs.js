@@ -36,6 +36,7 @@ module.exports = function(config) {
       'public/javascripts/vendor/morris.min.js',
       'public/javascripts/helpers/helper.js',
       'public/javascripts/helpers/templateHelper.js',
+      'public/javascripts/helpers/raphaelHelper.js',
       'public/javascripts/helpers/dataHelper.js',
       'public/javascripts/landing-pages.js',
       'public/javascripts/search.js',
