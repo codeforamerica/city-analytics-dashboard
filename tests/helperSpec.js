@@ -46,6 +46,7 @@ describe("helper", function() {
   });
   describe("deviceMinuteIntervalResults", function() {
     beforeEach(function() {
+      window.matrix.settings.timezoneOffset = "-7";
       clock = sinon.useFakeTimers(Date.now());
       var timeZoneOffSet = 7;
       var yesterday = -(1000*60*60*24);
@@ -73,6 +74,24 @@ describe("helper", function() {
         var d = new Date();
         d.setHours(currentTimeZoneOffsetMidnight,0,0);
         expect(subject.deviceMinuteIntervalResults(resultsMinuteDate, 30, startDate, endDate)[d].desktop).to.eq(4);
+      });
+    });
+  });
+  describe("#timeZoneZeors", function() {
+    context("single digit", function() {
+      it("returns the number with leading and trailing zeros zero", function() {
+        expect(subject.timeZoneZeros(1)).to.eql("+0100")
+      });
+      it("returns the number with leading and trailing zeros zero", function() {
+        expect(subject.timeZoneZeros(-1)).to.eql("-0100")
+      });
+    });
+    context("double digit", function() {
+      it("returns the number with trailing zeros", function() {
+        expect(subject.timeZoneZeros(10)).to.eql("+1000")
+      });
+      it("returns the number with trailing zeros", function() {
+        expect(subject.timeZoneZeros(-10)).to.eql("-1000")
       });
     });
   });
