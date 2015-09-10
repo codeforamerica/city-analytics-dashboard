@@ -1,0 +1,7 @@
+languages:
+  JavaScript: true
+exclude_paths:
+  - "public/javascripts/vendor/*"
+  - "tests/*"
+  - "karma.conf.js"
+  - "karma.saucelabs.js"
