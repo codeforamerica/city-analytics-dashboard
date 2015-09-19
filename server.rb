@@ -18,9 +18,13 @@ if ENV['USERNAME'] && ENV['PASSWORD']
 end
 
 get '/' do
+  @banner_text= ENV['BANNER_TEXT'] || "Code for America - City Analytics Dashboard"
+  @banner_logo = ENV['LOGO_URL'] || "http://style.codeforamerica.org/media/images/logo-colored.png"
   html = File.read(File.join('public', 'index.html'))
   html.sub!('$PROFILE_ID', JSON.dump(ENV['GA_VIEW_ID']))
   html.sub!('$DOMAIN_URL', JSON.dump(ENV['GA_WEBSITE_URL']))
+  html.sub!('$BANNER_TEXT', @banner_text)
+  html.sub!('$LOGO_URL', @banner_logo)
   return html
 end
 
