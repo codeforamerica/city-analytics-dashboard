@@ -1,8 +1,14 @@
+// Neat Variables
+$max-width: none;
+$gutter: 3em;
+@import 'bourbon/bourbon';
+@import 'neat/neat';
+
 $background: #4B9990;
 $secondary-background: #00010D;
 $tertiary: #60BFB6;
 $secondary: #78BFBF;
-$primary: #B4D9D9;
+$primary: #cccccc;
 $main-font: #F2F2F2;
 $animation-time: 0.5s;
 
@@ -23,68 +29,77 @@ teal: 60BFB6
 */
 
 $desktop-color: #265c8d;
-$mobile-color: #B26E00;
+$mobile-color: #B96425;
 
 html {
+  @include box-sizing(border-box);
   width: 100%;
   height: 100%;
   -webkit-font-smoothing: antialiased;
 }
 
 body {
-  background-color: #000;
+  background-color: #111;
   padding:0;
   margin:0;
   color:$main-font;
-  font-family: 'Bitter', serif;
+  font-family: 'Source Sans Pro', serif;
 }
 
 h1{
   font-size:2em !important;
 }
 
-h2{
+.top-bar {
+  padding: 1em 40px;
+  border-bottom: 1px solid #222;
+}
+
+.colophon {
+  font-size: 14px;
+}
+
+.traffic-stats {
+  @include outer-container();
+  border-bottom: 1px solid #222;
+  padding: 1.5em 40px;
+}
+
+.stat-header, .brick-heading {
+  font-size: 24px;
+  text-align: left;
   margin:0;
+  margin-bottom: 1em;
+  color: #eee;
+}
+
+.count {
+  @include span-columns(4);
+}
+
+
+.traffic {
+  @include span-columns(8);
 }
 
 .brick.badge-heading{
   background-image:none;
 }
-.bricks{
-  margin:0;
-  padding:0;
-  display:flex;
-  display:-webkit-flex;
-  flex-flow: row nowrap;
-  -webkit-flex-flow: row nowrap;
-  flex-grow:1;
-  -webkit-flex-grow:1;
-  justify-content: space-between;
-  -webkit-justify-content: space-between;
+
+.bricks {
+  @include outer-container();
+  padding: 1.5em 40px;
+  margin-top: 0;
 
   .brick {
-    float: left;
-    order: auto;
-    width: 32%;
-    flex: 1 1 auto;
-    -webkit-flex: 1 1 auto;
-    align-self: auto;
-    -webkit-align-self: auto;
-    min-height: 100%;
-    background-color: $secondary-background;
+    @include span-columns(4);
     border-radius: 3px;
     overflow: hidden;
 
-    h2, div.box {
-      padding: 0 16px;
-    }
-    h2.brick-heading {
-      padding-top: 1em;
-    }
-
-    ul, li {
+    ul {
       margin: 0;
       padding: 0;
+    
 
       /* promote to a GPU layer */
       transform: translateZ(0);
@@ -94,11 +109,17 @@ h2{
       -webkit-animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    li {
+      margin: .5em 0;
+      padding: 0;
+      overflow: auto;
+      line-height: 1.2em;
+      padding: .25em 0;
+      font-size: 20px;
+      position: relative;
+    }
+
     .content ul li {
-      margin: 0;
-      padding: 0.5em 0;
-      list-style: none;
-      line-height: 1;
       a{
         color:inherit;
         text-decoration:none;
@@ -106,12 +127,6 @@ h2{
     }
 
     .search-terms ul li {
-      margin: 0;
-      padding: 0.5em 0;
-      list-style: none;
-      font-size: 25px;
-      line-height: 1;
-
       color: $primary;
       opacity: 0.5;
 
@@ -127,7 +142,9 @@ h2{
   }
   .device-type {
     width: 5px;
-    height: 80%;
+    top: 0;
+    bottom: 0;
+    left: 0;
     background: #fff;
     display: block;
     position: absolute;
@@ -147,11 +164,6 @@ h2{
   }
 
   .searches ul li {
-    margin: 0;
-    padding: 0.5em 0;
-    list-style: none;
-    font-size: 25px;
-    line-height: 1;
 
     /* promote to a GPU layer */
     transform: translateZ(0);
@@ -165,21 +177,27 @@ h2{
     &:nth-child(1) { opacity: 1.0; }
     &:nth-child(2) { opacity: 0.7; }
   }
+
   .popular {
     li {
-      clear: both;
       em {
         margin-top: 5px;
         .visitor-types {
           float: left;
           color: #fff;
-          padding: 0.3em;
-          margin: 0 0.4em 0 0;
+          padding: 0.3em .8em;
+          margin: 0 1em 0 0;
+          i {
+            display: inline-block;
+            margin-left: .5em;
+          }
           &.mobile {
-            background: $mobile-color;
+            border-left: 5px solid $mobile-color;
+            color: $mobile-color;
           }
           &.desktop{
-            background: $desktop-color;
+            border-left: 5px solid $desktop-color;
+            color: $desktop-color;
           }
         }
         .device-type {
@@ -194,23 +212,21 @@ h2{
 }
 
 .top-bar {
-  background: $secondary-background;
-  padding: 10px 20px;
-  border-radius: 3px;
   color:#000;
   clear:both; 
   overflow:hidden;
+
   p{
-    color:$primary;
-    font-size:0.6em;
-    a{
-      color:$primary;
+    color: #666;
+    margin: .6em 0;
+    a {
+      color: #888;
     }
   }
   .inner {
     position: relative;
     width: 105px;
-    height: 42px;
+    height: 35px;
     overflow: hidden;
     float:left;
     img {
@@ -227,11 +243,6 @@ h2{
 }
 
 .searches ul li {
-  margin: 0;
-  padding: 5px 0;
-  list-style: none;
-  font-size: 25px;
-  line-height: 1;
   /* promote to a GPU layer */
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
@@ -265,62 +276,76 @@ h2{
   color: black;
   color: $primary;
   text-align: center;
+}
 
-  .text-feature{
-    color: $main-font;
-    display:block;
-    font-weight:bold;
-    font-size:300%;
+.text-feature{
+  font-weight:bold;
+}
+h1 {
+  margin: 0em 0 0;
+  font-size: 100px;
+}
+p {
+  margin: 0;
+}
+.count {
+  .tall & {
+    width: 50%;
   }
-  h1 {
-    margin: 0em 0 0;
-    font-size: 100px;
-  }
-  p {
+}
+
+#traffic-count-graph {
+  height: 200px;
+}
+#graph-text {
+  text-align: left;
+}
+.graph {
+  width: 100%;
+}
+path, line.axis {
+  stroke: $main-font;
+  stroke-width: 0.4;
+  fill: none;
+}
+.label {
+  fill: $secondary;
+  font-size: 16px;
+}
+#traffic {
+  float: left;
+  .visitor-count {
+    padding: .5em;
     margin: 0;
-  }
-  .count {
-    float: left;
-    margin-left: 1em;
+    font-size: 2em;
+    font-weight: 300;
+    position: relative;
 
-    .tall & {
-      width: 50%;
+    i {
+      width: 1em;
+      font-size: 28px;
+      display: inline-block;
+      position: absolute;
+      text-align: center;
+      top: 50%;
+      margin-top: -.5em;
+      right: .5em;
+      margin-right: .3em;
     }
-  }
-  #traffic-count-graph {
-    height: 200px;
-  }
-  #graph-text {
-    text-align: right;
-  }
-  .graph {
-    float: left;
-    width: 80%;
-  }
-  path, line.axis {
-    stroke: $main-font;
-    stroke-width: 0.4;
-    fill: none;
-  }
-  .label {
-    fill: $secondary;
-    font-size: 16px;
-  }
-  #traffic {
-    float: left;
-    .visitor-count {
-      margin: 0 auto;
-      padding: 0.3em 1em;
-      &#mobile-count{
-        background: $mobile-color;
-      }
-      &#desktop-count{
-        background: $desktop-color;
-        margin-bottom: 5px;
-      }
+    &#mobile-count{
+      border-left: 5px solid $mobile-color;
+      background-color: fade_out($mobile-color, .8);
+      color: #fff;
+    }
+    &#desktop-count{
+      border-left: 5px solid $desktop-color;
+      background-color: fade_out($desktop-color, .8);
+      color: #fff;
+      margin-bottom: 5px;
     }
   }
 }
+
 .sparkline path{
   stroke:white;
   stroke-width:2;
@@ -338,10 +363,6 @@ h2{
     margin: 10px 0;
   }
   li {
-    font-size: 22px;
-    margin: 0;
-    padding-bottom: 10px;
-    list-style: none;
     color: $primary;
     em {
       font-style: normal;
@@ -362,5 +383,13 @@ h2{
       }
     }
   }
-  li:nth-child(1){ font-size: 160%; }
+  li:nth-child(1){
+    font-weight: bold;
+  }
+}
+
+svg {
+  path {
+    stroke: #666;
+  }
 }
