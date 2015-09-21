@@ -52,7 +52,7 @@
             ykeys: ['desktop', 'mobile'],
             labels: ['Desktop', 'Mobile'],
             stacked: true,
-            barColors: ["#265C8D", "#B26E00"],
+            barColors: ["#265c8d", "#B96425"],
             hideHover: 'always',
             xLabelFormat: function(data){
               return "";
