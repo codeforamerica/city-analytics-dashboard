@@ -42,7 +42,7 @@ window.helper = {
     var results = this.deviceDateResult(dates);
     var resultLength = result.length;
     var timeFormatGoogle = timeFormat.format('%Y%m%d%H%M%Z');
-    var timeZone = "-0700"
+    var timeZone = this.timeZoneZeros(window.matrix.settings.timezoneOffset);
     for(var j=0;j<resultLength;j++) {
       var currentResult = result[j];
       var hour = currentResult[hourColumn],
@@ -86,5 +86,13 @@ window.helper = {
         dataArray.push(transformObject[o]);
     }
     return dataArray;
+  },
+  timeZoneZeros: function(timezoneOffset) {
+    var pad = function(num) {
+      var norm = Math.abs(Math.floor(num));
+      return (norm < 10 ? '0' : '') + norm;
+    };
+    var dif = timezoneOffset >= 0 ? '+' : '-';
+    return dif + pad(timezoneOffset)+pad(timezoneOffset*60 % 60);
   }
 }

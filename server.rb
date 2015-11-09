@@ -21,6 +21,7 @@ get '/' do
   html = File.read(File.join('public', 'index.html'))
   html.sub!('$PROFILE_ID', JSON.dump(ENV['GA_VIEW_ID']))
   html.sub!('$DOMAIN_URL', JSON.dump(ENV['GA_WEBSITE_URL']))
+  html.sub!('$TIMEZONE_OFFSET', JSON.dump(ENV['GA_TIMEZONE_OFFSET']))
   return html
 end
 
